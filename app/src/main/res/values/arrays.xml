@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="follow">
+        <item>@string/fragment_setting_txt_follow_500_m</item>
+        <item>@string/fragment_setting_txt_follow_1_km</item>
+        <item>@string/fragment_setting_txt_follow_2_km</item>
+    </array>
+
+</resources>

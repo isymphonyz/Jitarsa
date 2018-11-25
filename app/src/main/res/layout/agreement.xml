@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LandingPage">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_title_02">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/txtSkip">
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                android:id="@+id/txtAgreementTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:padding="8dp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/agreement_txt_title"/>
+
+            <!--
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/txtAgreementTitle"
+                android:layout_above="@+id/layoutButton"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical">
+
+                <ScrollView
+                    android:id="@+id/scrollView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@android:color/white">
+
+                        <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                            android:id="@+id/txtAgreement"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="8dp"
+                            android:layout_gravity="top|left"
+                            android:text="@string/app_name"/>
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+            </LinearLayout>
+            -->
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                android:id="@+id/txtAgreement"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/txtAgreementTitle"
+                android:layout_above="@+id/layoutButton"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:layout_gravity="top|left"
+                android:padding="8dp"
+                android:scrollbars="vertical"
+                android:text="@string/dummy_long_text"
+                android:background="@android:color/white"/>
+
+            <LinearLayout
+                android:id="@+id/layoutButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="16dp"
+                android:orientation="horizontal">
+
+                <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                    android:id="@+id/btnAccept"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="5"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:text="@string/agreement_btn_accept"
+                    android:background="@color/register_btn_send"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"></View>
+
+                <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                    android:id="@+id/btnCancel"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="5"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:text="@string/agreement_btn_cancel"
+                    android:background="@color/register_btn_send"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+            android:id="@+id/txtSkip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            android:textColor="@android:color/white"
+            android:text="@string/agreement_txt_skip"/>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

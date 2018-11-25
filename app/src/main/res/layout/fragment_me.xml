@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/layoutHeaderMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layoutDirection="ltr">
+
+            <LinearLayout
+                android:id="@+id/layoutPost"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@color/fragment_me_bg_menu_header">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/comment_textbox_gray"/>
+
+                <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/fragment_me_txt_post"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutHistory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/history_gray"/>
+
+                <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/fragment_me_txt_history"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutImage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/post_add_picture"/>
+
+                <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/fragment_me_txt_image"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutFriend"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/friend_add"/>
+
+                <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/fragment_me_txt_friend"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/layoutContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/layoutHeaderMenu"
+            android:animateLayoutChanges="true">
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

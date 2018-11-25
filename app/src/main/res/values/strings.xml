@@ -1,0 +1,191 @@
+<resources>
+    <string name="app_name">Jitarsa</string>
+    <string name="context_menu">Context menu</string>
+
+    <!-- Facebook -->
+    <string name="facebook_app_id">295405711078206</string>
+    <string name="fb_login_protocol_scheme">fb295405711078206</string>
+
+    <!-- Menu -->
+    <string name="menu_home">หน้าแรก</string>
+    <string name="menu_post">โพสต์</string>
+    <string name="menu_save">รายการโปรด</string>
+    <string name="menu_me">ฉัน</string>
+    <string name="menu_volunteer">จิตอาสา</string>
+    <string name="menu_information">ประกาศ</string>
+    <string name="menu_activity">ตารางกิจกรรม</string>
+    <string name="menu_news">คลังข่าวสาร</string>
+    <string name="menu_qr">สแกน QR Code</string>
+    <string name="menu_disaster">ภัยพิบัติ</string>
+    <string name="menu_setting">การตั้งค่า</string>
+    <string name="menu_how_to_play">วิธีการใช้งาน</string>
+    <string name="menu_change_password">เปลี่ยนรหัสผ่าน</string>
+    <string name="menu_about">เกี่ยวกับแอปพลิเคชัน</string>
+    <string name="menu_sign_in">เข้าสู่ระบบ</string>
+    <string name="menu_sign_out">ออกจากระบบ</string>
+
+    <!-- Splash Screen -->
+    <string name="landing_page_txt_skip">ข้าม</string>
+
+    <!-- Login -->
+    <string name="login_txt_sign_in">เข้าสู่ระบบ</string>
+    <string name="login_hint_username"><font size="12">อีเมล/รหัสประจำตัวประชาชน/เบอร์โทรศัพท์</font></string>
+    <string name="login_hint_password"><font size="12">รหัสผ่าน</font></string>
+    <string name="login_btn_sign_in">ล็อกอิน</string>
+    <string name="login_txt_forget_password">คุณลืมรหัสผ่าน?</string>
+    <string name="login_txt_register">สมัครสมาชิกใหม่</string>
+
+    <!-- Forget Password -->
+    <string name="forget_password_txt_title">ลืมรหัสผ่าน</string>
+    <string name="forget_password_hint_email"><font size="12">อีเมลหรือเบอร์โทรศัพท์</font></string>
+    <string name="forget_password_hint_otp"><font size="12">รหัส OTP</font></string>
+    <string name="forget_password_hint_new_password"><font size="12">รหัสผ่านใหม่</font></string>
+    <string name="forget_password_hint_confirm_password"><font size="12">ยืนยันรหัสผ่านใหม่</font></string>
+    <string name="forget_password_btn_send">ส่ง</string>
+    <string name="forget_password_txt_sign_up">สมัครสมาชิกใหม่</string>
+
+    <!-- Register -->
+    <string name="register_txt_title">@string/forget_password_txt_sign_up</string>
+    <string name="register_hint_email">@string/login_hint_username</string>
+    <string name="register_hint_name"><font size="12">ชื่อ - นามสกุล</font></string>
+    <string name="register_hint_username"><font size="12">ชื่อผู้ใช้</font></string>
+    <string name="register_hint_password">@string/login_hint_password</string>
+    <string name="register_hint_confirm_password"><font size="12">รหัสผ่านอีกครั้ง</font></string>
+    <string name="register_btn_send">@string/forget_password_btn_send</string>
+    <string name="register_alert_password_miss_match">ยืนยันรหัสผ่านไม่ถูกต้อง</string>
+    <string name="register_alert_donot_accept_agreement">กรุณายอมรับเงื่อนไขการใช้งาน</string>
+    <string name="register_checkbox_agreement">I agree to all the <a href='' >คุณได้อ่านและยอมรับเงื่อนไขการใช้งาน</a></string>
+
+    <!-- Agreement -->
+    <string name="agreement_txt_title">ตรวจสอบข้อมูลจิตอาสา</string>
+    <string name="agreement_btn_accept">ยอมรับ</string>
+    <string name="agreement_btn_cancel">ยกเลิก</string>
+    <string name="agreement_txt_skip">@string/landing_page_txt_skip</string>
+
+    <!-- Approve -->
+    <string name="approve_post_record">ข้อความของคุณได้ถูกบันทึกแล้ว และจะแสดงต่อสาธาณะหลังจากได้รับการตรวจสอบ</string>
+    <string name="approve_profile_record">ข้อมูลจิตอาสาของคุณถูกบันทึกเรียบร้อยแล้ว</string>
+
+    <!-- Verify User -->
+    <string name="verify_user_txt_title">@string/agreement_txt_title</string>
+    <string name="verify_user_hint_citizen_id"><font size="12">รหัสประจำตัวประชาชน</font></string>
+    <string name="verify_user_hint_laser_code"><font size="12">Laser Code</font></string>
+    <string name="verify_user_btn_verify">ตรวจสอบ</string>
+    <string name="verify_user_txt_skip">@string/landing_page_txt_skip</string>
+
+    <!-- Verify Data -->
+    <string name="verify_data_txt_title">@string/agreement_txt_title</string>
+    <string name="verify_data_hint_citizen_id">@string/verify_user_hint_citizen_id</string>
+    <string name="verify_data_hint_laser_code">@string/verify_user_hint_laser_code</string>
+    <string name="verify_data_hint_name">@string/register_hint_name</string>
+    <string name="verify_data_hint_age"><font size="12">อายุ</font></string>
+    <string name="verify_data_hint_birth_date">ว<font size="12">ัน เดือน ปีเกิด</font></string>
+    <string name="verify_data_hint_registed_date">ว<font size="12">ันที่สมัครจิตอาสา</font></string>
+    <string name="verify_data_hint_email"><font size="12">อีเมล</font></string>
+    <string name="verify_data_hint_tel"><font size="12">เบอร์โทรศัพท์</font></string>
+    <string name="verify_data_btn_save">บันทึกข้อมูล</string>
+
+    <!-- Fragment Setting -->
+    <string name="fragment_setting_txt_title">การตั้งค่า</string>
+    <string name="fragment_setting_txt_alert_format_title">รูปแบบการแจ้งเตือน</string>
+    <string name="fragment_setting_txt_alert_format_sound">แจ้งเตือนด้วยระบบเสียง</string>
+    <string name="fragment_setting_txt_alert_format_vibration">แจ้งเตือนด้วยระบบสั่น</string>
+    <string name="fragment_setting_txt_alert_title">การแจ้งเตือน</string>
+    <string name="fragment_setting_txt_location_title">การบอกตำแหน่ง</string>
+    <string name="fragment_setting_txt_follow_title">การค้นหากิจกรรมใกล้เคียง (รัศมี)</string>
+    <string name="fragment_setting_txt_schedule_title">แจ้งเตือนตารางกิจกรรม</string>
+    <string name="fragment_setting_txt_near_by_title">แจ้งเตือนกิจกรรมใกล้เคียง</string>
+    <string name="fragment_setting_txt_share_title">ตั้งค่าการแชร์</string>
+    <string name="fragment_setting_txt_share_facebook">Facebook</string>
+    <string name="fragment_setting_txt_share_twitter">Twitter</string>
+    <string name="fragment_setting_txt_language_title">ภาษาที่ใช้แสดงผล</string>
+    <string name="fragment_setting_txt_language_thai">ภาษาไทย</string>
+    <string name="fragment_setting_txt_language_english">English</string>
+    <string name="fragment_setting_txt_follow_500_m">500 เมตร</string>
+    <string name="fragment_setting_txt_follow_1_km">1 กิโลเมตร</string>
+    <string name="fragment_setting_txt_follow_2_km">2 กิโลเมตร</string>
+
+    <!-- Fragment Jitarsa -->
+    <string name="fragment_jitarsa_txt_title">ความเป็นมาของจิตอาสา</string>
+
+    <!-- Fragment Announcement -->
+    <string name="fragment_announcement_txt_title">ประกาศ</string>
+
+    <!-- Fragment Activity -->
+    <string name="fragment_activity_txt_title">กิจกรรมทั้งหมด</string>
+    <string name="fragment_activity_txt_filter">การกรอง</string>
+    <string name="fragment_activity_hint_search">ค้นหา</string>
+    <string name="fragment_activity_btn_share">แชร์</string>
+    <string name="fragment_activity_txt_province">จังหวัด :\u00A0</string>
+    <string name="fragment_activity_txt_place">สถานที่ :\u00A0</string>
+
+    <!-- Fragment Activity Detail -->
+    <string name="fragment_activity_detail_txt_title">กิจกรรม</string>
+
+    <!-- Fragment News -->
+    <string name="fragment_news_txt_title">คลังข่าวสาร</string>
+
+    <!-- Fragment Disaster -->
+    <string name="fragment_disaster_txt_title">ภัยพิบัติทั้งหมด</string>
+
+    <!-- Fragment Save -->
+    <string name="fragment_save_txt_title">บันทึก</string>
+
+    <!-- Fragment Search -->
+    <string name="fragment_search_txt_title">ค้นหาล่าสุด</string>
+
+    <!-- Fragment Me -->
+    <string name="fragment_me_txt_post">โพสต์</string>
+    <string name="fragment_me_txt_history">ประวัติ</string>
+    <string name="fragment_me_txt_image">รูปภาพ</string>
+    <string name="fragment_me_txt_friend">เพื่อน</string>
+
+    <!-- Fragment Me History -->
+    <string name="fragment_me_history_txt_age">อายุ</string>
+    <string name="fragment_me_history_txt_year">ปี</string>
+    <string name="fragment_me_history_btn_edit_profile"><font size="12">แก้ไขข้อมูลส่วนตัว</font></string>
+    <string name="fragment_me_history_btn_proof_jitarsa"><font size="12">ตรวจสอบข้อมูลจิตอาสา</font></string>
+    <string name="fragment_me_history_txt_skill">ความสามารถ</string>
+    <string name="fragment_me_history_txt_skill_civil"><font size="9">ความสามารถงานโยธา</font></string>
+    <string name="fragment_me_history_txt_skill_language"><font size="9">ความสามารถทางภาษา</font></string>
+    <string name="fragment_me_history_txt_skill_food"><font size="9">ความสามารถทำอาหาร</font></string>
+    <string name="fragment_me_history_txt_skill_medical"><font size="9">ความสามารถปฐมพยาบาล</font></string>
+    <string name="fragment_me_history_txt_skill_argiculture"><font size="9">ความสามารถงานเกษตร</font></string>
+    <string name="fragment_me_history_txt_history_jitarsa">ประวัติจิตอาสา</string>
+
+    <string name="fragment_me_history_txt_edit_user_data">แก้ไขข้อมูลส่วนตัว</string>
+    <string name="fragment_me_history_btn_edit_user_data">แก้ไข</string>
+    <string name="fragment_me_history_btn_save_user_data">บันทึก</string>
+
+    <!-- Fragment Me Friend -->
+    <string name="fragment_me_friend_txt_friend">เพื่อน</string>
+    <string name="fragment_me_friend_txt_add_friend">เพิ่มเพื่อน</string>
+
+    <!-- Fragment Me Friend Add Friend -->
+    <string name="fragment_me_friend_add_friend_txt_title">เพิ่มรายชื่อเพื่อน</string>
+    <string name="fragment_me_friend_add_friend_hint_email">อีเมล/เบอร์โทรศัพท์</string>
+    <string name="fragment_me_friend_add_friend_btn_add_friend">เพิ่มเพื่อน</string>
+    <string name="fragment_me_friend_add_friend_btn_qr">QR code</string>
+    <string name="fragment_me_friend_add_friend_btn_scan">สแกน</string>
+    <string name="fragment_me_friend_add_friend_btn_invite">เชิญเพื่อน</string>
+    <string name="fragment_me_friend_add_friend_txt_facebook_invite">เชิญเพื่อนจากเฟสบุ๊ค</string>
+
+    <!-- Fragment Me Friend Add Friend Response -->
+    <string name="fragment_me_friend_add_friend_response_txt_title">แจ้งเตือน</string>
+
+    <!-- Fragment Me Album -->
+    <string name="fragment_me_friend_txt_album">อัลบั้ม</string>
+    <string name="fragment_me_friend_txt_create_album">สร้างอัลบั้ม</string>
+
+    <!-- Dialog -->
+    <string name="dialog_logout_txt_title">คุณต้องการออกจากระบบ?</string>
+    <string name="dialog_logout_btn_confirm">ยืนยัน</string>
+    <string name="dialog_logout_btn_cancel">ยกเลิก</string>
+
+    <!-- Under Construction -->
+    <string name="under_construction_txt_title">อยู่ในระหว่างรอให้บริการ</string>
+
+    <!-- Dummy Long Text -->
+    <string name="dummy_long_text">Making textview text is scrollable is very easy with the use of android:scrollbars=”vertical” attribute inside textview text widget this attribute will enable scrollbar display as vertically format and now we have to add setMovementMethod(new ScrollingMovementMethod()); on textview through MainActivity.java programming file. This method will enable scrolling on TextView. So here is the complete step by step tutorial for Make textview scrollable in android programmatically.Making textview text is scrollable is very easy with the use of android:scrollbars=”vertical” attribute inside textview text widget this attribute will enable scrollbar display as vertically format and now we have to add setMovementMethod(new ScrollingMovementMethod()); on textview through MainActivity.java programming file. This method will enable scrolling on TextView. So here is the complete step by step tutorial for Make textview scrollable in android programmatically.Making textview text is scrollable is very easy with the use of android:scrollbars=”vertical” attribute inside textview text widget this attribute will enable scrollbar display as vertically format and now we have to add setMovementMethod(new ScrollingMovementMethod()); on textview through MainActivity.java programming file. This method will enable scrolling on TextView. So here is the complete step by step tutorial for Make textview scrollable in android programmatically. Making textview text is scrollable is very easy with the use of android:scrollbars=”vertical” attribute inside textview text widget this attribute will enable scrollbar display as vertically format and now we have to add setMovementMethod(new ScrollingMovementMethod()); on textview through MainActivity.java programming file. This method will enable scrolling on TextView. So here is the complete step by step tutorial for Make textview scrollable in android programmatically. Making textview text is scrollable is very easy with the use of android:scrollbars=”vertical” attribute inside textview text widget this attribute will enable scrollbar display as vertically format and now we have to add setMovementMethod(new ScrollingMovementMethod()); on textview through MainActivity.java programming file. This method will enable scrolling on TextView. So here is the complete step by step tutorial for Make textview scrollable in android programmatically.</string>
+
+</resources>

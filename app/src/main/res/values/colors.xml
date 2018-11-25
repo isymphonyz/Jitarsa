@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    -->
+    <color name="colorPrimary">@color/bg_title_02</color>
+    <color name="colorPrimaryDark">@color/bg_title_02</color>
+    <color name="colorAccent">@color/bg_title_02</color>
+    <color name="bg_color">#f4fafe</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="white_trans">#99FFFFFF</color>
+    <color name="light_red">#FFA07A</color>
+
+    <color name="hint">#D6D6D6</color>
+
+    <!-- Splash Screen -->
+    <color name="bg_title_01">#FFF200</color>
+    <color name="bg_title_02">#2A8ABC</color>
+
+    <!-- Register -->
+    <color name="register_btn_send">#2375A0</color>
+
+    <!-- Approve -->
+    <color name="approve_bg">#2ABC89</color>
+
+    <!-- Fragment Me -->
+    <color name="fragment_me_bg_menu_header">#f7f9f9</color>
+
+    <!-- Fragment QR Code -->
+    <color name="fragment_qr_code_bg">#000000</color>
+
+</resources>

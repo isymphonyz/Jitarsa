@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/fragment_setting_txt_title"/>
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/txtTitle"
+            android:scrollbars="none">
+
+            <RelativeLayout
+                android:id="@+id/layoutSetting"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:id="@+id/layoutAlertFormat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp">
+                    
+                    <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                        android:id="@+id/txtAlertFormatTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/fragment_setting_txt_alert_format_title"/>
+
+                    <ImageView
+                        android:id="@+id/imgAlertFormat"
+                        android:layout_width="8dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="8dp"
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/arrow_right_01"/>
+                    
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutAlert"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutAlertFormat"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                        android:id="@+id/txtAlertTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/fragment_setting_txt_alert_title"/>
+
+                    <th.or.dga.royaljitarsa.customview.SwitchButton
+                        android:id="@+id/switchAlert"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        app:sb_show_indicator="false"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutAlert"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                        android:id="@+id/txtLocationTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/fragment_setting_txt_location_title"/>
+
+                    <th.or.dga.royaljitarsa.customview.SwitchButton
+                        android:id="@+id/switchLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        app:sb_show_indicator="false"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutFollow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutLocation"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                        android:id="@+id/txtFollowTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/fragment_setting_txt_follow_title"/>
+
+                    <com.warkiz.widget.IndicatorSeekBar
+                        android:id="@+id/seekBarFollow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtFollowTitle"
+                        android:layout_marginTop="8dp"
+                        app:isb_progress="50"
+                        app:isb_seek_smoothly="true"
+                        app:isb_show_indicator="none"
+                        app:isb_show_tick_marks_type="oval"
+                        app:isb_show_tick_texts="true"
+                        app:isb_tick_texts_array="@array/follow"
+                        app:isb_ticks_count="3"
+                        app:isb_track_progress_color="@color/bg_title_02"
+                        app:isb_track_progress_size="3dp"
+                        app:isb_thumb_color="@color/white"
+                        app:isb_thumb_size="20dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutSchedule"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutFollow"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                        android:id="@+id/txtScheduleTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/fragment_setting_txt_schedule_title"/>
+
+                    <th.or.dga.royaljitarsa.customview.SwitchButton
+                        android:id="@+id/switchSchedule"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        app:sb_show_indicator="false"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutNearBy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutSchedule"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                        android:id="@+id/txtNearByTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/fragment_setting_txt_near_by_title"/>
+
+                    <th.or.dga.royaljitarsa.customview.SwitchButton
+                        android:id="@+id/switchNearBy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        app:sb_show_indicator="false"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutShare"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutNearBy"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                        android:id="@+id/txtShareTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/fragment_setting_txt_share_title"/>
+
+                    <ImageView
+                        android:id="@+id/imgShare"
+                        android:layout_width="8dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/arrow_right_01"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutLanguage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutShare"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                        android:id="@+id/txtLanguageTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/fragment_setting_txt_language_title"/>
+
+                    <ImageView
+                        android:id="@+id/imgLanguage"
+                        android:layout_width="8dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/arrow_right_01"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+            android:id="@+id/txtAddFriend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/fragment_me_friend_add_friend_txt_title"/>
+
+        <th.or.dga.royaljitarsa.customview.SukhumvitEditText
+            android:id="@+id/inputEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtAddFriend"
+            android:padding="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:lines="1"
+            android:maxLines="1"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/hint"
+            android:hint="@string/fragment_me_friend_add_friend_hint_email"
+            android:background="@android:color/white"/>
+
+        <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+            android:id="@+id/btnAddFriend"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="16dp"
+            android:layout_below="@+id/inputEmail"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:text="@string/register_btn_send"
+            android:background="@color/register_btn_send"/>
+
+        <View
+            android:id="@+id/layoutLine"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/btnAddFriend"
+            android:layout_margin="16dp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/hint"></View>
+        
+        <LinearLayout
+            android:id="@+id/layoutButtonAddFriend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutLine"
+            android:layout_margin="8dp"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/layoutQRCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/friend_qr"/>
+
+                <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                    android:id="@+id/txtQRCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/fragment_me_friend_add_friend_btn_qr"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutScan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/friend_scan"/>
+
+                <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                    android:id="@+id/txtScan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/fragment_me_friend_add_friend_btn_scan"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutInvite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/friend_facebook"/>
+
+                <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                    android:id="@+id/txtInvite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/fragment_me_friend_add_friend_btn_invite"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutMyQRCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutLine"
+            android:layout_margin="8dp"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/fragment_me_friend_add_friend_btn_qr"/>
+
+            <ImageView
+                android:id="@+id/imgQRCode"
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/friend_qr"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutScanQRCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutLine"
+            android:layout_margin="8dp"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <com.budiyev.android.codescanner.CodeScannerView
+                android:id="@+id/scanner_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:autoFocusButtonColor="@android:color/white"
+                app:autoFocusButtonVisible="true"
+                app:flashButtonColor="@android:color/white"
+                app:flashButtonVisible="true"
+                app:frameColor="@android:color/white"
+                app:frameCornersSize="50dp"
+                app:frameAspectRatioWidth="1"
+                app:frameAspectRatioHeight="1"
+                app:frameSize="0.75"
+                app:frameThickness="2dp"
+                app:maskColor="#77000000"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

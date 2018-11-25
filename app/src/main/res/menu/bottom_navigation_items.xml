@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuHome"
+        android:icon="@mipmap/home"
+        android:title="@string/menu_home"/>
+    <item
+        android:id="@+id/menuPost"
+        android:icon="@mipmap/post"
+        android:title="@string/menu_post"
+        android:visible="false"/>
+    <item
+        android:id="@+id/menuSave"
+        android:icon="@mipmap/save"
+        android:title="@string/menu_save"
+        android:visible="false"/>
+    <item
+        android:id="@+id/menuMe"
+        android:icon="@mipmap/me"
+        android:title="@string/menu_me"/>
+</menu>

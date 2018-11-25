@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LandingPage">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_title_02">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                android:id="@+id/txtVerifyTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:padding="8dp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/agreement_txt_title"/>
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitEditText
+                android:id="@+id/inputCitizenID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtVerifyTitle"
+                android:padding="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="4dp"
+                android:lines="1"
+                android:maxLines="1"
+                android:inputType="numberDecimal"
+                android:textColorHint="@color/hint"
+                android:hint="@string/verify_user_hint_citizen_id"
+                android:background="@android:color/white"/>
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitEditText
+                android:id="@+id/inputLaserCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/inputCitizenID"
+                android:padding="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="4dp"
+                android:lines="1"
+                android:maxLines="1"
+                android:inputType="text"
+                android:textColorHint="@color/hint"
+                android:hint="@string/verify_user_hint_laser_code"
+                android:background="@android:color/white"/>
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                android:id="@+id/btnVerify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:padding="8dp"
+                android:layout_below="@+id/inputLaserCode"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/verify_user_btn_verify"
+                android:background="@color/register_btn_send"/>
+
+        </RelativeLayout>
+
+        <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+            android:id="@+id/txtSkip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="32dp"
+            android:textColor="@android:color/white"
+            android:text="@string/verify_user_txt_skip"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:indeterminate="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

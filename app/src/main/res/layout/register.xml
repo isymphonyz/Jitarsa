@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LandingPage">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_title_02">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                android:id="@+id/txtRegisterTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:padding="8dp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/register_txt_title"/>
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitEditText
+                android:id="@+id/inputEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtRegisterTitle"
+                android:padding="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="4dp"
+                android:lines="1"
+                android:maxLines="1"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/hint"
+                android:hint="@string/register_hint_email"
+                android:background="@android:color/white"/>
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitEditText
+                android:id="@+id/inputName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/inputEmail"
+                android:padding="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="4dp"
+                android:lines="1"
+                android:maxLines="1"
+                android:inputType="text"
+                android:textColorHint="@color/hint"
+                android:hint="@string/register_hint_name"
+                android:background="@android:color/white"/>
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitEditText
+                android:id="@+id/inputUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/inputName"
+                android:padding="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="4dp"
+                android:lines="1"
+                android:maxLines="1"
+                android:inputType="text"
+                android:textColorHint="@color/hint"
+                android:hint="@string/register_hint_username"
+                android:background="@android:color/white"/>
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitEditText
+                android:id="@+id/inputPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/inputUsername"
+                android:padding="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="4dp"
+                android:lines="1"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                android:textColorHint="@color/hint"
+                android:hint="@string/register_hint_password"
+                android:background="@android:color/white"/>
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitEditText
+                android:id="@+id/inputConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/inputPassword"
+                android:padding="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="4dp"
+                android:lines="1"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                android:textColorHint="@color/hint"
+                android:hint="@string/register_hint_confirm_password"
+                android:background="@android:color/white"/>
+
+            <CheckBox
+                android:id="@+id/btnAgreement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_below="@+id/inputConfirmPassword" />
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                android:id="@+id/txtAgreement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_toRightOf="@+id/btnAgreement"
+                android:layout_below="@+id/inputConfirmPassword"
+                android:text="@string/register_checkbox_agreement"/>
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                android:id="@+id/btnSend"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="16dp"
+                android:layout_below="@+id/btnAgreement"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/forget_password_txt_sign_up"
+                android:background="@color/register_btn_send"/>
+
+        </RelativeLayout>
+
+        <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+            android:id="@+id/txtSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="32dp"
+            android:textColor="@android:color/white"
+            android:text="@string/forget_password_txt_sign_up"
+            android:visibility="gone"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:indeterminate="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

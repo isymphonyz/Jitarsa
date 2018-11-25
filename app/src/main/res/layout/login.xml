@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LandingPage">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_title_02">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                android:id="@+id/txtSignIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_centerHorizontal="true"
+                android:textColor="@android:color/white"
+                android:text="@string/login_txt_sign_in"/>
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitEditText
+                android:id="@+id/inputUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtSignIn"
+                android:padding="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:lines="1"
+                android:maxLines="1"
+                android:inputType="text"
+                android:textColorHint="@color/hint"
+                android:hint="@string/login_hint_username"
+                android:background="@android:color/white"/>
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitEditText
+                android:id="@+id/inputPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/inputUsername"
+                android:padding="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:inputType="textPassword"
+                android:lines="1"
+                android:maxLines="1"
+                android:textColorHint="@color/hint"
+                android:hint="@string/login_hint_password"
+                android:background="@android:color/white"/>
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                android:id="@+id/btnSignIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:padding="8dp"
+                android:layout_below="@+id/inputPassword"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/login_btn_sign_in"
+                android:background="@color/register_btn_send"/>
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/btnFacebook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:layout_below="@+id/btnSignIn"/>
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                android:id="@+id/txtForgetPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="24dp"
+                android:layout_below="@+id/btnFacebook"
+                android:textColor="@android:color/white"
+                android:text="@string/login_txt_forget_password"/>
+
+            <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                android:id="@+id/txtRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="24dp"
+                android:layout_below="@+id/btnFacebook"
+                android:textColor="@android:color/white"
+                android:text="@string/login_txt_register"/>
+
+        </RelativeLayout>
+
+        <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+            android:id="@+id/txtSkip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="32dp"
+            android:textColor="@android:color/white"
+            android:text="@string/landing_page_txt_skip"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:indeterminate="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
