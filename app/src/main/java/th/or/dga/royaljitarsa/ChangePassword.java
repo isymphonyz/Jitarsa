@@ -15,22 +15,24 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import th.or.dga.royaljitarsa.connection.ForgetPasswordAPI;
-import th.or.dga.royaljitarsa.connection.ForgetPasswordAPI;
+import th.or.dga.royaljitarsa.connection.ResetPasswordAPI;
 import th.or.dga.royaljitarsa.customview.SukhumvitEditText;
 import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
 import th.or.dga.royaljitarsa.utils.FirebaseLogTracking;
 
-public class ForgetPassword extends AppCompatActivity {
+public class ChangePassword extends AppCompatActivity {
 
-    private String TAG = ForgetPassword.class.getSimpleName();
+    private String TAG = ChangePassword.class.getSimpleName();
 
     private ProgressBar progressBar;
     private SukhumvitEditText inputEmail;
+    private SukhumvitEditText inputOTP;
+    private SukhumvitEditText inputNewPassword;
+    private SukhumvitEditText inputConfirmPassword;
     private SukhumvitTextView btnSend;
     private SukhumvitTextView txtSignUp;
 
-    private ForgetPasswordAPI forgetPasswordAPI;
+    private ResetPasswordAPI resetPasswordAPI;
 
     private Bundle extras;
     private boolean isFromHome = false;
@@ -38,7 +40,7 @@ public class ForgetPassword extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.forget_password);
+        setContentView(R.layout.change_password);
 
         addLog();
         initUI();
@@ -49,7 +51,7 @@ public class ForgetPassword extends AppCompatActivity {
     private void addLog() {
         FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         FirebaseLogTracking firebaseLogTracking = new FirebaseLogTracking(mFirebaseAnalytics);
-        firebaseLogTracking.addLogActivity(getText(R.string.log_param_forget_password).toString());
+        firebaseLogTracking.addLogActivity(getText(R.string.log_param_change_password).toString());
     }
 
     private void initValue() {
@@ -60,6 +62,9 @@ public class ForgetPassword extends AppCompatActivity {
     private void initUI() {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         inputEmail = (SukhumvitEditText) findViewById(R.id.inputEmail);
+        inputOTP = (SukhumvitEditText) findViewById(R.id.inputOTP);
+        inputNewPassword = (SukhumvitEditText) findViewById(R.id.inputNewPassword);
+        inputConfirmPassword = (SukhumvitEditText) findViewById(R.id.inputConfirmPassword);
         btnSend = (SukhumvitTextView) findViewById(R.id.btnSend);
         txtSignUp = (SukhumvitTextView) findViewById(R.id.txtSignUp);
     }
@@ -69,17 +74,28 @@ public class ForgetPassword extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String email = inputEmail.getText().toString();
+                String otp = inputOTP.getText().toString();
+                String newPassword = inputNewPassword.getText().toString();
+                String confirmPassword = inputConfirmPassword.getText().toString();
 
-                forgetPasswordAPI = new ForgetPasswordAPI();
-                forgetPasswordAPI.setEmail(email);
-                forgetPasswordAPI.setListener(new ForgetPasswordAPI.ForgetPasswordAPIListener() {
+                //username = "aaa@gmail.com";
+                //password = "aaa";
+
+                //executeLogin(username, password);
+                //new LoginAPI().execute("");
+
+                resetPasswordAPI = new ResetPasswordAPI();
+                resetPasswordAPI.setEmail(email);
+                resetPasswordAPI.setPassword(newPassword);
+                resetPasswordAPI.setOTP(otp);
+                resetPasswordAPI.setListener(new ResetPasswordAPI.ResetPasswordAPIListener() {
                     @Override
-                    public void onForgetPasswordAPIPreExecuteConcluded() {
+                    public void onResetPasswordAPIPreExecuteConcluded() {
                         progressBar.setVisibility(View.VISIBLE);
                     }
 
                     @Override
-                    public void onForgetPasswordAPIPostExecuteConcluded(String result) {
+                    public void onResetPasswordAPIPostExecuteConcluded(String result) {
                         progressBar.setVisibility(View.GONE);
                         try {
                             JSONObject jObj = new JSONObject(result);
@@ -99,7 +115,7 @@ public class ForgetPassword extends AppCompatActivity {
                         }
                     }
                 });
-                forgetPasswordAPI.execute("");
+                resetPasswordAPI.execute("");
             }
         });
 

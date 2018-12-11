@@ -87,6 +87,11 @@
             android:screenOrientation="portrait"
             android:hardwareAccelerated="true">
         </activity>
+        <activity android:name=".ChangePassword"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:hardwareAccelerated="true">
+        </activity>
         <activity android:name=".ForgetPassword"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"

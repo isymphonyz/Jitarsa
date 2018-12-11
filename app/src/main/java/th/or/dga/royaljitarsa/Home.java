@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -294,7 +293,7 @@ public class Home extends AppCompatActivity {
                                 selectedFragment = FragmentChangePassword.newInstance();
                                 isCallFragment = false;
 
-                                Intent intentChangePassword = new Intent(getApplicationContext(), ForgetPassword.class);
+                                Intent intentChangePassword = new Intent(getApplicationContext(), ChangePassword.class);
                                 intentChangePassword.putExtra("isFromHome", true);
                                 startActivity(intentChangePassword);
 

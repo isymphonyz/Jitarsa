@@ -7,6 +7,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,6 +17,7 @@ import me.relex.circleindicator.CircleIndicator;
 import th.or.dga.royaljitarsa.adapter.ImageSlidePagerAdapter;
 import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
 import th.or.dga.royaljitarsa.utils.AppPreference;
+import th.or.dga.royaljitarsa.utils.FirebaseLogTracking;
 
 public class HowToPlay extends AppCompatActivity {
 
@@ -34,6 +37,7 @@ public class HowToPlay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.how_to_play);
 
+        addLog();
         initUI();
         initValue();
         setListener();
@@ -44,6 +48,12 @@ public class HowToPlay extends AppCompatActivity {
     protected void onStop() {
         swipeTimer.cancel();
         super.onStop();
+    }
+
+    private void addLog() {
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        FirebaseLogTracking firebaseLogTracking = new FirebaseLogTracking(mFirebaseAnalytics);
+        firebaseLogTracking.addLogActivity(getText(R.string.log_param_how_to_play).toString());
     }
 
     private void initValue() {

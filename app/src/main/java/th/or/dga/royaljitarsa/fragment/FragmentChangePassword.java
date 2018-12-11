@@ -21,7 +21,7 @@ public class FragmentChangePassword extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.forget_password, container, false);
+        return inflater.inflate(R.layout.change_password, container, false);
     }
 
     private void addLog() {
