@@ -11,8 +11,8 @@ android {
         applicationId "th.or.dga.royaljitarsa"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0.9"
+        versionCode 11
+        versionName "1.0.11"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -50,6 +50,8 @@ dependencies {
 
     implementation 'com.facebook.android:facebook-login:[4,5)'
 
+    //implementation 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
+    //implementation "com.android.support:design:26.+"
     implementation 'com.android.support:design:27.1.0'
     implementation 'com.android.support:support-v4:26.1.0'
 
@@ -74,4 +76,10 @@ dependencies {
     }
 
     implementation 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
+
+    implementation 'com.google.firebase:firebase-core:16.0.6'
+
 }
+
+// Add to the bottom of the file
+apply plugin: 'com.google.gms.google-services'

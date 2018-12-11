@@ -27,6 +27,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,6 +41,7 @@ import th.or.dga.royaljitarsa.connection.ProjectAPI;
 import th.or.dga.royaljitarsa.customview.SukhumvitEditText;
 import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
 import th.or.dga.royaljitarsa.utils.AppPreference;
+import th.or.dga.royaljitarsa.utils.FirebaseLogTracking;
 import th.or.dga.royaljitarsa.utils.MyConfiguration;
 
 public class FragmentDisaster extends Fragment {
@@ -79,6 +81,7 @@ public class FragmentDisaster extends Fragment {
 
         mMapView.onResume();// needed to get the map to display immediately
 
+        addLog();
         initValue();
         initUI(rootView);
         setUI();
@@ -88,6 +91,12 @@ public class FragmentDisaster extends Fragment {
         setListener();
 
         return rootView;
+    }
+
+    private void addLog() {
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
+        FirebaseLogTracking firebaseLogTracking = new FirebaseLogTracking(mFirebaseAnalytics);
+        firebaseLogTracking.addLogActivity(getText(R.string.log_param_disaster).toString());
     }
 
     private void initValue() {

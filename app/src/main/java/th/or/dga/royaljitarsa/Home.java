@@ -39,6 +39,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import th.or.dga.royaljitarsa.customview.SukhumvitEditText;
@@ -61,12 +62,16 @@ import th.or.dga.royaljitarsa.fragment.FragmentSetting;
 import th.or.dga.royaljitarsa.fragment.FragmentUnderConstruction;
 import th.or.dga.royaljitarsa.utils.AppPreference;
 import th.or.dga.royaljitarsa.utils.BottomNavigationViewHelper;
+import th.or.dga.royaljitarsa.utils.FirebaseLogTracking;
 
 import static com.bumptech.glide.request.RequestOptions.fitCenterTransform;
 
 public class Home extends AppCompatActivity {
 
     private String TAG = Home.this.getClass().getSimpleName();
+
+    private FirebaseAnalytics mFirebaseAnalytics;
+    FirebaseLogTracking firebaseLogTracking;
 
     public static Home instance;
 
@@ -105,7 +110,6 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
-
         initUI();
         initValue();
         setUI();
@@ -140,6 +144,9 @@ public class Home extends AppCompatActivity {
     }
 
     private void initValue() {
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        firebaseLogTracking = new FirebaseLogTracking(mFirebaseAnalytics);
+
         appPreference = new AppPreference(this);
         urlImageProfile = appPreference.getProfileImage();
         name = appPreference.getFullname();
@@ -174,7 +181,7 @@ public class Home extends AppCompatActivity {
         /*FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, FragmentHome.newInstance());
         transaction.commit();*/
-        displayFragment(FragmentUnderConstruction.newInstance());
+        displayFragment(FragmentHome.newInstance());
     }
 
     @Override
@@ -212,8 +219,8 @@ public class Home extends AppCompatActivity {
             iconView.setLayoutParams(layoutParams);
         }*/
 
-        BottomNavigationMenuView mMenuView = getBottomNavigationMenuView();
-        BottomNavigationItemView[] mButtons = getBottomNavigationItemViews();
+        //BottomNavigationMenuView mMenuView = getBottomNavigationMenuView();
+        //BottomNavigationItemView[] mButtons = getBottomNavigationItemViews();
 
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
 
@@ -354,15 +361,17 @@ public class Home extends AppCompatActivity {
                                 break;
                             case R.id.menuPost:
                                 selectedFragment = FragmentPost.newInstance();
+                                selectedFragment = FragmentUnderConstruction.newInstance();
                                 break;
                             case R.id.menuSave:
                                 selectedFragment = FragmentSave.newInstance();
+                                selectedFragment = FragmentUnderConstruction.newInstance();
                                 break;
                             case R.id.menuMe:
                                 selectedFragment = FragmentMe.newInstance();
                                 break;
                         }
-                        selectedFragment = FragmentUnderConstruction.newInstance();
+                        //selectedFragment = FragmentUnderConstruction.newInstance();
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_layout, selectedFragment);
                         transaction.commit();

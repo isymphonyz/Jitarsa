@@ -15,6 +15,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,6 +30,7 @@ import th.or.dga.royaljitarsa.adapter.FragmentJitarsaListAdapter;
 import th.or.dga.royaljitarsa.connection.ProjectAPI;
 import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
 import th.or.dga.royaljitarsa.utils.AppPreference;
+import th.or.dga.royaljitarsa.utils.FirebaseLogTracking;
 import th.or.dga.royaljitarsa.utils.MyConfiguration;
 
 public class FragmentJitarsa extends Fragment {
@@ -70,6 +73,7 @@ public class FragmentJitarsa extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_news, container, false);
 
+        addLog();
         initValue();
         initUI(rootView);
         setUI();
@@ -78,6 +82,12 @@ public class FragmentJitarsa extends Fragment {
         callProjectAPI();
 
         return rootView;
+    }
+
+    private void addLog() {
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
+        FirebaseLogTracking firebaseLogTracking = new FirebaseLogTracking(mFirebaseAnalytics);
+        firebaseLogTracking.addLogActivity(getText(R.string.log_param_jitarsa).toString());
     }
 
     private void initValue() {

@@ -8,10 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.util.ArrayList;
 
 import th.or.dga.royaljitarsa.R;
 import th.or.dga.royaljitarsa.adapter.FragmentSaveListAdapter;
+import th.or.dga.royaljitarsa.utils.FirebaseLogTracking;
 
 public class FragmentSave extends Fragment {
 
@@ -32,12 +35,19 @@ public class FragmentSave extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_save, container, false);
 
+        addLog();
         initValue();
         initUI(rootView);
         setUI();
         setListener();
 
         return rootView;
+    }
+
+    private void addLog() {
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
+        FirebaseLogTracking firebaseLogTracking = new FirebaseLogTracking(mFirebaseAnalytics);
+        firebaseLogTracking.addLogActivity(getText(R.string.log_param_save).toString());
     }
 
     private void initValue() {

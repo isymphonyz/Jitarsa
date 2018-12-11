@@ -33,10 +33,18 @@ public class MyConfiguration {
     public static String URL_SHARE_POST = "postjitasa/share_post";
     public static String URL_SHARE_PROJECT = "jitarsa/share_project";
     public static String URL_ABOUT = "about";
+    public static String URL_FORGET_PASSWORD = "user/forgot_password";
+    public static String URL_RESET_PASSWORD = "user/reset_password";
 
+    public static String CATEGORY_HOME_ID = "0";
     public static String CATEGORY_JITARSA_ID = "1";
     public static String CATEGORY_ANNOUNCEMENT_ID = "2";
     public static String CATEGORY_ACTIVITY_ID = "3";
     public static String CATEGORY_NEWS_ID = "4";
     public static String CATEGORY_DISASTER_ID = "5";
+
+    public static String FIREBASE_ANALYTIC_PARAM_CATEGORY_ID = "categoryID";
+    public static String FIREBASE_ANALYTIC_PARAM_CATEGORY_NAME = "categoryName";
+    public static String FIREBASE_ANALYTIC_PARAM_CONTENT_ID = "contentID";
+    public static String FIREBASE_ANALYTIC_PARAM_SCREEN = "screen";
 }

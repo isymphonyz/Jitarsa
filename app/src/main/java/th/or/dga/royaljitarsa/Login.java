@@ -187,7 +187,7 @@ public class Login extends AppCompatActivity implements LoginAPI.LoginAPIListene
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ForgetPassword.class);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
 

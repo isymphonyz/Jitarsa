@@ -10,13 +10,75 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/layoutTypePost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_margin="8dp"
+            android:orientation="horizontal"
+            android:gravity="center">
 
+            <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                android:id="@+id/txtAllPost"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/fragment_home_txt_all_post"/>
 
+            <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                android:id="@+id/txtFriendPost"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/fragment_home_txt_friend_post"/>
 
         </LinearLayout>
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutTypePost"
+            android:layout_margin="8dp"
+            android:scrollbars="none"
+            android:cacheColorHint="@android:color/transparent"
+            android:dividerHeight="12dp"
+            android:divider="@android:color/transparent"></ListView>
+
+        <ImageView
+            android:id="@+id/imgUp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/listView"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/arrow_up_01"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/imgDown"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/listView"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/arrow_down_01"
+            android:visibility="gone"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:indeterminate="true"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

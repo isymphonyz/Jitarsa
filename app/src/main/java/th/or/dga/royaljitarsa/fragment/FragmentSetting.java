@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.warkiz.widget.IndicatorSeekBar;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import th.or.dga.royaljitarsa.Home;
 import th.or.dga.royaljitarsa.R;
 import th.or.dga.royaljitarsa.customview.SwitchButton;
+import th.or.dga.royaljitarsa.utils.FirebaseLogTracking;
 
 public class FragmentSetting extends Fragment {
 
@@ -40,12 +42,19 @@ public class FragmentSetting extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_setting, container, false);
 
+        addLog();
         initValue();
         initUI(rootView);
         setUI();
         setListener();
 
         return rootView;
+    }
+
+    private void addLog() {
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
+        FirebaseLogTracking firebaseLogTracking = new FirebaseLogTracking(mFirebaseAnalytics);
+        firebaseLogTracking.addLogActivity(getText(R.string.log_param_setting).toString());
     }
 
     private void initValue() {

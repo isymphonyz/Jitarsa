@@ -3,8 +3,21 @@
     <string name="context_menu">Context menu</string>
 
     <!-- Facebook -->
-    <string name="facebook_app_id">295405711078206</string>
-    <string name="fb_login_protocol_scheme">fb295405711078206</string>
+    <string name="facebook_app_id">736233786739872</string>
+    <string name="fb_login_protocol">fb736233786739872</string>
+
+    <!-- Log Param -->
+    <string name="log_param_jitarsa">ความเป็นมา</string>
+    <string name="log_param_announcement">ประกาศ</string>
+    <string name="log_param_activity">กิจกรรม</string>
+    <string name="log_param_news">ข่าวสาร</string>
+    <string name="log_param_save">บันทึก</string>
+    <string name="log_param_disaster">ภัยพิบัติ</string>
+    <string name="log_param_scan_qr_code">QRCode</string>
+    <string name="log_param_setting">การตั้งค่า</string>
+    <string name="log_param_how_to_play">วิธีการใช้งาน</string>
+    <string name="log_param_change_password">เปลี่ยนรหัสผ่าน</string>
+    <string name="log_param_about">เกี่ยวกับแอปพลิเคชัน</string>
 
     <!-- Menu -->
     <string name="menu_home">หน้าแรก</string>
@@ -104,6 +117,10 @@
     <string name="fragment_setting_txt_follow_500_m">500 เมตร</string>
     <string name="fragment_setting_txt_follow_1_km">1 กิโลเมตร</string>
     <string name="fragment_setting_txt_follow_2_km">2 กิโลเมตร</string>
+
+    <!-- Fragment Home -->
+    <string name="fragment_home_txt_all_post">โพสต์ทั้งหมด</string>
+    <string name="fragment_home_txt_friend_post">โพสต์ทของเพื่อน</string>
 
     <!-- Fragment Jitarsa -->
     <string name="fragment_jitarsa_txt_title">ความเป็นมาของจิตอาสา</string>
