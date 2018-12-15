@@ -85,6 +85,7 @@ public class ProjectAPI extends AsyncTask<String, Void, String> {
                 .post(requestBody)
                 .build();*/
 
+        Log.d(TAG, "url: " + url);
         RequestBody body = RequestBody.create(JSON, setParameter());
         Request request = new Request.Builder()
                 .url(url)
@@ -133,6 +134,7 @@ public class ProjectAPI extends AsyncTask<String, Void, String> {
             jsonObject.accumulate("limit",  limit);
             jsonObject.accumulate("offset",  offset);
             jsonObject.accumulate("date",  date);
+            //jsonObject.accumulate("date",  "2018-11");
         } catch (Exception e) {
 
         }

@@ -19,6 +19,7 @@
     <string name="log_param_how_to_play">วิธีการใช้งาน</string>
     <string name="log_param_change_password">เปลี่ยนรหัสผ่าน</string>
     <string name="log_param_about">เกี่ยวกับแอปพลิเคชัน</string>
+    <string name="log_param_login">login</string>
     <string name="log_param_forget_password">ลืมรหัสผ่าน</string>
 
     <!-- Menu -->
@@ -123,7 +124,7 @@
 
     <!-- Fragment Home -->
     <string name="fragment_home_txt_all_post">โพสต์ทั้งหมด</string>
-    <string name="fragment_home_txt_friend_post">โพสต์ทของเพื่อน</string>
+    <string name="fragment_home_txt_friend_post">โพสต์ของเพื่อน</string>
 
     <!-- Fragment Jitarsa -->
     <string name="fragment_jitarsa_txt_title">ความเป็นมาของจิตอาสา</string>

@@ -39,7 +39,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:adjustViewBounds="true"
-                android:src="@mipmap/point_no"/>
+                android:src="@mipmap/point_no"
+                android:visibility="gone"/>
             
         </RelativeLayout>
 
@@ -90,7 +91,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
             <LinearLayout
                 android:id="@+id/layoutLike"

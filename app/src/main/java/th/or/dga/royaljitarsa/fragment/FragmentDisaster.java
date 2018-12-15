@@ -212,7 +212,7 @@ public class FragmentDisaster extends Fragment {
                         for(int x=0; x<jArrayContent.length(); x++) {
                             imageList.add(jArrayContent.optJSONObject(x).optJSONArray("detail").optJSONObject(0).optString("image"));
                             nameList.add(jArrayContent.optJSONObject(x).optString("title"));
-                            dateList.add(jArrayContent.optJSONObject(x).optString("schedule_date"));
+                            dateList.add(jArrayContent.optJSONObject(x).optString("project_date"));
                             provinceList.add(jArrayContent.optJSONObject(x).optJSONArray("province").optJSONObject(0).optString("province_name"));
                             placeList.add(jArrayContent.optJSONObject(x).optString("place"));
                             likeList.add(jArrayContent.optJSONObject(x).optString("like_count"));

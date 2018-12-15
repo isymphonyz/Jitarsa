@@ -121,8 +121,7 @@
                         android:id="@+id/txtFollowTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginBottom="8dp"
+                        android:layout_centerVertical="false"
                         android:text="@string/fragment_setting_txt_follow_title"/>
 
                     <com.warkiz.widget.IndicatorSeekBar
@@ -135,13 +134,42 @@
                         app:isb_seek_smoothly="true"
                         app:isb_show_indicator="none"
                         app:isb_show_tick_marks_type="oval"
-                        app:isb_show_tick_texts="true"
+                        app:isb_show_tick_texts="false"
                         app:isb_tick_texts_array="@array/follow"
                         app:isb_ticks_count="3"
                         app:isb_track_progress_color="@color/bg_title_02"
                         app:isb_track_progress_size="3dp"
                         app:isb_thumb_color="@color/white"
-                        app:isb_thumb_size="20dp"/>
+                        app:isb_thumb_size="20dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_below="@+id/seekBarFollow">
+
+                        <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="@string/fragment_setting_txt_follow_500_m"/>
+
+                        <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/fragment_setting_txt_follow_1_km"/>
+
+                        <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|right"
+                            android:text="@string/fragment_setting_txt_follow_2_km"/>
+
+                    </LinearLayout>
 
                 </RelativeLayout>
 
@@ -204,7 +232,8 @@
                     android:layout_below="@id/layoutNearBy"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginTop="8dp">
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone">
 
                     <th.or.dga.royaljitarsa.customview.SukhumvitTextView
                         android:id="@+id/txtShareTitle"
@@ -231,7 +260,8 @@
                     android:layout_below="@id/layoutShare"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginTop="8dp">
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone">
 
                     <th.or.dga.royaljitarsa.customview.SukhumvitTextView
                         android:id="@+id/txtLanguageTitle"

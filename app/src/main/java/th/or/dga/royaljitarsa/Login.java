@@ -20,6 +20,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,6 +43,7 @@ import th.or.dga.royaljitarsa.connection.RegisterFacebookAPI;
 import th.or.dga.royaljitarsa.customview.SukhumvitEditText;
 import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
 import th.or.dga.royaljitarsa.utils.AppPreference;
+import th.or.dga.royaljitarsa.utils.FirebaseLogTracking;
 
 public class Login extends AppCompatActivity implements LoginAPI.LoginAPIListener {
 
@@ -74,6 +76,7 @@ public class Login extends AppCompatActivity implements LoginAPI.LoginAPIListene
         //StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         //StrictMode.setThreadPolicy(policy);
 
+        addLog();
         initUI();
         initValue();
         setListener();
@@ -83,6 +86,12 @@ public class Login extends AppCompatActivity implements LoginAPI.LoginAPIListene
         aTask.setListener(this);
         aTask.execute();*/
 
+    }
+
+    private void addLog() {
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        FirebaseLogTracking firebaseLogTracking = new FirebaseLogTracking(mFirebaseAnalytics);
+        firebaseLogTracking.addLogActivity(getText(R.string.log_param_login).toString());
     }
 
     private void initValue() {

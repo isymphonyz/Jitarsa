@@ -141,6 +141,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:paddingTop="16dp"
         android:fitsSystemWindows="true"
         app:menu="@menu/menu_drawer"
         android:layoutDirection="ltr"

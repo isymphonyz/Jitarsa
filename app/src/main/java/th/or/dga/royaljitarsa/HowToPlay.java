@@ -61,8 +61,8 @@ public class HowToPlay extends AppCompatActivity {
         imageList.add(R.mipmap.title_01);
         imageList.add(R.mipmap.title_02);
         imageList.add(R.mipmap.title_03);
-        imageList.add(R.mipmap.title_04);
-        imageList.add(R.mipmap.title_05);
+        //imageList.add(R.mipmap.title_04);
+        //imageList.add(R.mipmap.title_05);
 
         NUM_PAGES = imageList.size();
 
@@ -81,7 +81,8 @@ public class HowToPlay extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(!isFromHome) {
-                    Intent intent = new Intent(getApplicationContext(), Login.class);
+                    //Intent intent = new Intent(getApplicationContext(), Login.class);
+                    Intent intent = new Intent(getApplicationContext(), Home.class);
                     startActivity(intent);
                 }
                 finish();

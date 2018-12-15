@@ -121,7 +121,8 @@ public class LandingPage extends AppCompatActivity implements BaseSliderView.OnS
                         startActivity(intent);
                         finish();
                     } else if(skipHowToPlay && loginStatus != 200) {
-                        Intent intent = new Intent(getApplicationContext(), Login.class);
+                        //Intent intent = new Intent(getApplicationContext(), Login.class);
+                        Intent intent = new Intent(getApplicationContext(), Home.class);
                         //intent.putExtra("fragmentNumber", 0);
                         startActivity(intent);
                         finish();

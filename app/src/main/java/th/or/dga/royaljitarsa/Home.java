@@ -109,6 +109,7 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+
         initUI();
         initValue();
         setUI();
@@ -124,13 +125,13 @@ public class Home extends AppCompatActivity {
         Log.d(TAG, "getLoginStatus: " + appPreference.getLoginStatus());
 
         Menu nav_Menu = navigationView.getMenu();
-        if(appPreference.getLoginStatus() == 200) {
+        /*if(appPreference.getLoginStatus() == 200) {
             nav_Menu.findItem(R.id.menuSignIn).setVisible(false);
             nav_Menu.findItem(R.id.menuSignOut).setVisible(true);
         } else {
             nav_Menu.findItem(R.id.menuSignIn).setVisible(true);
             nav_Menu.findItem(R.id.menuSignOut).setVisible(false);
-        }
+        }*/
 
         initValue();
         setUI();
@@ -173,6 +174,7 @@ public class Home extends AppCompatActivity {
         BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
 
         View hView =  navigationView.inflateHeaderView(R.layout.nav_header_main);
+        hView.setVisibility(View.GONE);
         imgProfile = (CircleImageView) hView.findViewById(R.id.imgProfile);
         txtName = (SukhumvitTextView) hView.findViewById(R.id.txtName);
 
@@ -222,7 +224,7 @@ public class Home extends AppCompatActivity {
         //BottomNavigationItemView[] mButtons = getBottomNavigationItemViews();
 
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
-
+        menuView.setVisibility(View.GONE);
     }
     
     private void setListener() {
@@ -268,8 +270,8 @@ public class Home extends AppCompatActivity {
                                 isCallFragment = true;
                                 break;
                             case R.id.menuQR:
-                                selectedFragment = FragmentQRCode.newInstance();
-                                isCallFragment = false;
+                                //selectedFragment = FragmentQRCode.newInstance();
+                                //isCallFragment = false;
 
                                 Intent intentQRCode = new Intent(getApplicationContext(), QRCode.class);
                                 intentQRCode.putExtra("isFromHome", true);

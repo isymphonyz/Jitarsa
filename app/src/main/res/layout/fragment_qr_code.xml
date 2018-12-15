@@ -8,8 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/fragment_qr_code_bg"
-        android:alpha="0.5">
+        android:background="@color/fragment_qr_code_bg">
 
         <ImageView
             android:id="@+id/imgQRCode"
@@ -18,23 +17,35 @@
             android:layout_centerInParent="true"
             android:adjustViewBounds="true"
             android:src="@mipmap/ic_launcher"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
-        <com.budiyev.android.codescanner.CodeScannerView
-            android:id="@+id/scanner_view"
+        <LinearLayout
+            android:id="@+id/layoutScanQRCode"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:autoFocusButtonColor="@android:color/white"
-            app:autoFocusButtonVisible="true"
-            app:flashButtonColor="@android:color/white"
-            app:flashButtonVisible="true"
-            app:frameColor="@android:color/white"
-            app:frameCornersSize="50dp"
-            app:frameAspectRatioWidth="1"
-            app:frameAspectRatioHeight="1"
-            app:frameSize="0.75"
-            app:frameThickness="2dp"
-            app:maskColor="#77000000"/>
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <com.budiyev.android.codescanner.CodeScannerView
+                android:id="@+id/scanner_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:autoFocusButtonColor="@android:color/white"
+                app:autoFocusButtonVisible="false"
+                app:flashButtonColor="@android:color/white"
+                app:flashButtonVisible="false"
+                app:frameColor="@android:color/white"
+                app:frameCornersSize="50dp"
+                app:frameAspectRatioWidth="1"
+                app:frameAspectRatioHeight="1"
+                app:frameSize="0.75"
+                app:frameThickness="2dp"
+                app:maskColor="#77000000"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
 
