@@ -67,17 +67,21 @@ public class FragmentHome extends Fragment {
         return fragment;
     }
 
+    View rootView;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        //View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        addLog();
-        initValue();
-        initUI(rootView);
-        setUI();
-        setListener();
+        if(rootView == null) {
+            rootView = inflater.inflate(R.layout.fragment_home, container, false);
+            addLog();
+            initValue();
+            initUI(rootView);
+            setUI();
+            setListener();
 
-        callProjectAPI();
+            callProjectAPI();
+        }
 
         return rootView;
     }

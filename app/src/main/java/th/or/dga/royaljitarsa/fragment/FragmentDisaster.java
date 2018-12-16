@@ -102,23 +102,28 @@ public class FragmentDisaster extends Fragment {
         return fragment;
     }
 
+    private View rootView;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_disaster, container, false);
+        //View rootView = inflater.inflate(R.layout.fragment_disaster, container, false);
 
-        mMapView = (MapView) rootView.findViewById(R.id.mapView);
-        mMapView.onCreate(savedInstanceState);
+        if(rootView == null) {
+            rootView = inflater.inflate(R.layout.fragment_disaster, container, false);
 
-        mMapView.onResume();// needed to get the map to display immediately
+            mMapView = (MapView) rootView.findViewById(R.id.mapView);
+            mMapView.onCreate(savedInstanceState);
 
-        addLog();
-        initValue();
-        initUI(rootView);
-        setUI();
+            mMapView.onResume();// needed to get the map to display immediately
 
-        callProjectAPI();
+            addLog();
+            initValue();
+            initUI(rootView);
+            setUI();
 
-        setListener();
+            callProjectAPI();
+
+            setListener();
+        }
 
         return rootView;
     }
