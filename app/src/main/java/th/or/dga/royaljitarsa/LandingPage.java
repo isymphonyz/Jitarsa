@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +17,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.glide.slider.library.SliderTypes.BaseSliderView;
 import com.glide.slider.library.SliderTypes.DefaultSliderView;
 import com.glide.slider.library.Tricks.ViewPagerEx;
+import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.vision.barcode.Barcode;
 
 import java.util.ArrayList;
 
@@ -38,6 +41,9 @@ public class LandingPage extends AppCompatActivity implements BaseSliderView.OnS
     private int loginStatus = 0;
 
     private String appVersion = "";
+
+    private static final int RC_BARCODE_CAPTURE = 9001;
+    private static final String TAG = "BarcodeMain";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +139,12 @@ public class LandingPage extends AppCompatActivity implements BaseSliderView.OnS
                         finish();
                     }
 
+                    Intent intent = new Intent(getApplicationContext(), BarcodeCaptureActivity.class);
+                    intent.putExtra(BarcodeCaptureActivity.AutoFocus, true);
+                    intent.putExtra(BarcodeCaptureActivity.UseFlash, false);
+
+                    //startActivityForResult(intent, RC_BARCODE_CAPTURE);
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -172,5 +184,28 @@ public class LandingPage extends AppCompatActivity implements BaseSliderView.OnS
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RC_BARCODE_CAPTURE) {
+            if (resultCode == CommonStatusCodes.SUCCESS) {
+                if (data != null) {
+                    Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
+                    //statusMessage.setText(R.string.barcode_success);
+                    //barcodeValue.setText(barcode.displayValue);
+                    Log.d(TAG, "Barcode read: " + barcode.displayValue);
+                } else {
+                    //statusMessage.setText(R.string.barcode_failure);
+                    Log.d(TAG, "No barcode captured, intent data is null");
+                }
+            } else {
+                //statusMessage.setText(String.format(getString(R.string.barcode_error), CommonStatusCodes.getStatusCodeString(resultCode)));
+            }
+        }
+        else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

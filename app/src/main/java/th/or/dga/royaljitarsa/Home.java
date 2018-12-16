@@ -273,7 +273,9 @@ public class Home extends AppCompatActivity {
                                 //selectedFragment = FragmentQRCode.newInstance();
                                 //isCallFragment = false;
 
-                                Intent intentQRCode = new Intent(getApplicationContext(), QRCode.class);
+                                Intent intentQRCode = new Intent(getApplicationContext(), QRCodeV2.class);
+                                intentQRCode.putExtra(BarcodeCaptureActivity.AutoFocus, true);
+                                intentQRCode.putExtra(BarcodeCaptureActivity.UseFlash, false);
                                 intentQRCode.putExtra("isFromHome", true);
                                 startActivity(intentQRCode);
 

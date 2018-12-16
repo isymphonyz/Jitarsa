@@ -2,13 +2,16 @@ package th.or.dga.royaljitarsa;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,8 +41,6 @@ public class QRCode extends AppCompatActivity {
 
     private static final int RC_PERMISSION = 10;
     private boolean mPermissionGranted;
-
-    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +75,6 @@ public class QRCode extends AppCompatActivity {
     }
 
     private void initValue() {
-
-        activity = new Activity();
-
         qrCode = AppPreference.getInstance(this).getQRCode();
     }
 
@@ -89,10 +87,30 @@ public class QRCode extends AppCompatActivity {
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
             public void onDecoded(@NonNull final Result result) {
-                activity.runOnUiThread(new Runnable() {
+                QRCode.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(activity, result.getText(), Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "result: " + result.getText());
+                        Toast.makeText(getApplicationContext(), result.getText(), Toast.LENGTH_SHORT).show();
+
+                        if(Patterns.WEB_URL.matcher(result.getText()).matches()) {
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setData(Uri.parse(result.getText()));
+                            startActivity(intent);
+                        } else if(Patterns.PHONE.matcher(result.getText()).matches()) {
+                            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse(result.getText()));
+                            startActivity(intent);
+                        } else if(Patterns.EMAIL_ADDRESS.matcher(result.getText()).matches()) {
+                            Intent intent = new Intent(Intent.ACTION_SENDTO)
+                                    .setType("plain/text")
+                                    .setData(Uri.parse(result.getText()))
+                                    .setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+                            startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setData(Uri.parse(result.getText()));
+                            startActivity(intent);
+                        }
                     }
                 });
             }
