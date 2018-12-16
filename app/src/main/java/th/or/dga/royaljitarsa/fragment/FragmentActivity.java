@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -133,6 +135,8 @@ public class FragmentActivity extends Fragment {
     }
 
     private void setListener() {
+        inputSearch.addTextChangedListener(myTextWatcher);
+
         layoutFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,7 +146,7 @@ public class FragmentActivity extends Fragment {
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int x, long l) {
                 Bundle bundle = new Bundle();
                 bundle.putString("title", getText(R.string.fragment_activity_detail_txt_title).toString());
                 bundle.putString("name", nameList.get(i));
@@ -234,6 +238,18 @@ public class FragmentActivity extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                adapter.setCategoryIDList(categoryIDList);
+                adapter.setIDList(idList);
+                adapter.setImageMap(imageMap);
+                adapter.setImageCoverMap(imageCoverMap);
+                //adapter.setImageList(imageCoverList);
+                adapter.setNameList(nameList);
+                adapter.setDateList(dateList);
+                adapter.setDescriptionList(shortDescriptionList);
+                adapter.setProvinceList(provinceList);
+                adapter.setPlaceList(placeList);
+                adapter.setLikeList(likeList);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -254,4 +270,48 @@ public class FragmentActivity extends Fragment {
                 i,
                 listView.getAdapter().getItemId(i));
     }
+
+    private int i;
+    public void goToDetail(int x, String name) {
+        i = nameList.indexOf(name);
+        listView.performItemClick(
+                listView.getAdapter().getView(x, null, null),
+                x,
+                listView.getAdapter().getItemId(x));
+    }
+
+    public TextWatcher myTextWatcher = new TextWatcher() {
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if(s.length() > 0) {
+                adapter.getFilter().filter(s);
+            } else {
+                adapter.setCategoryIDList(categoryIDList);
+                adapter.setIDList(idList);
+                adapter.setImageMap(imageMap);
+                adapter.setImageCoverMap(imageCoverMap);
+                //adapter.setImageList(imageCoverList);
+                adapter.setNameList(nameList);
+                adapter.setDateList(dateList);
+                adapter.setDescriptionList(shortDescriptionList);
+                adapter.setProvinceList(provinceList);
+                adapter.setPlaceList(placeList);
+                adapter.setLikeList(likeList);
+                adapter.notifyDataSetChanged();
+                listView.invalidate();
+            }
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count,
+                                      int after) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 }

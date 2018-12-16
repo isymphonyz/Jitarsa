@@ -148,6 +148,9 @@
 
     <!-- Fragment Disaster -->
     <string name="fragment_disaster_txt_title">ภัยพิบัติทั้งหมด</string>
+    <string name="fragment_disaster_txt_title_detail">ภัยพิบัติท</string>
+    <string name="fragment_disaster_btn_map">แผนที่</string>
+    <string name="fragment_disaster_btn_list">รายการ</string>
 
     <!-- Fragment Save -->
     <string name="fragment_save_txt_title">บันทึก</string>

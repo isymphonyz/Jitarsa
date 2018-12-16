@@ -3,16 +3,24 @@ package th.or.dga.royaljitarsa.fragment;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -35,8 +43,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import th.or.dga.royaljitarsa.R;
+import th.or.dga.royaljitarsa.adapter.FragmentDisasterListAdapter;
 import th.or.dga.royaljitarsa.connection.ProjectAPI;
 import th.or.dga.royaljitarsa.customview.SukhumvitEditText;
 import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
@@ -50,9 +60,27 @@ public class FragmentDisaster extends Fragment {
 
     private ProgressBar progressBar;
     private MapView mMapView;
+    private LinearLayout layoutMap;
+    private LinearLayout layoutList;
+    private ListView listView;
+    private FragmentDisasterListAdapter adapter;
     private GoogleMap googleMap;
     private SukhumvitTextView txtTitle;
     private SukhumvitEditText inputSearch;
+    private ImageView imgUp;
+    private ImageView imgDown;
+
+    private ArrayList<String> categoryIDList;
+    private ArrayList<String> idList;
+    //private ArrayList<String> imageCoverList;
+    private ArrayList<String> shortDescriptionList;
+
+    private HashMap<String, ArrayList<String>> imageCoverMap;
+    private HashMap<String, ArrayList<String>> imageMap;
+    private HashMap<String, ArrayList<String>> descriptionMap;
+    private HashMap<String, ArrayList<String>> youtubeMap;
+    private HashMap<String, ArrayList<String>> typeMap;
+    private HashMap<String, ArrayList<Integer>> typeIDMap;
 
     private ArrayList<String> imageList;
     private ArrayList<String> nameList;
@@ -63,6 +91,8 @@ public class FragmentDisaster extends Fragment {
     private ArrayList<String> latitudeList;
     private ArrayList<String> longitudeList;
     private ArrayList<String> descriptionList;
+
+    private ArrayList<Marker> markerArray;
 
     private ProjectAPI projectAPI;
     private String categoryID = MyConfiguration.CATEGORY_DISASTER_ID;
@@ -109,12 +139,32 @@ public class FragmentDisaster extends Fragment {
         latitudeList = new ArrayList<>();
         longitudeList = new ArrayList<>();
         descriptionList = new ArrayList<>();
+
+        categoryIDList = new ArrayList<>();
+        idList = new ArrayList<>();
+        //imageCoverList = new ArrayList<>();
+        shortDescriptionList = new ArrayList<>();
+
+        imageCoverMap = new HashMap<>();
+        imageMap = new HashMap<>();
+        descriptionMap = new HashMap<>();
+        youtubeMap = new HashMap<>();
+        typeIDMap = new HashMap<>();
+        typeMap = new HashMap<>();
+
+        markerArray = new ArrayList<Marker>();
     }
 
     private void initUI(View rootView) {
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         txtTitle = (SukhumvitTextView) rootView.findViewById(R.id.txtTitle);
+        layoutMap = (LinearLayout) rootView.findViewById(R.id.layoutMap);
+        layoutList = (LinearLayout) rootView.findViewById(R.id.layoutList);
+        listView = (ListView) rootView.findViewById(R.id.listView);
+        adapter = new FragmentDisasterListAdapter(getActivity());
         inputSearch = (SukhumvitEditText) rootView.findViewById(R.id.inputSearch);
+        imgUp = (ImageView) rootView.findViewById(R.id.imgUp);
+        imgDown = (ImageView) rootView.findViewById(R.id.imgDown);
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -154,11 +204,77 @@ public class FragmentDisaster extends Fragment {
     }
 
     private void setUI() {
+        adapter.setFragment(this);
+        adapter.setCategoryIDList(categoryIDList);
+        adapter.setIDList(idList);
+        adapter.setImageMap(imageMap);
+        adapter.setImageCoverMap(imageCoverMap);
+        //adapter.setImageList(imageCoverList);
+        adapter.setNameList(nameList);
+        adapter.setDateList(dateList);
+        adapter.setDescriptionList(shortDescriptionList);
+        adapter.setLikeList(likeList);
 
+        listView.setAdapter(adapter);
     }
 
     private void setListener() {
+        inputSearch.addTextChangedListener(myTextWatcher);
+        layoutMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMapView.setVisibility(View.VISIBLE);
+                listView.setVisibility(View.GONE);
+            }
+        });
 
+        layoutList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMapView.setVisibility(View.GONE);
+                listView.setVisibility(View.VISIBLE);
+            }
+        });
+
+        /*listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if(totalItemCount != listView.getLastVisiblePosition() + 1){
+                    imgUp.setVisibility(View.GONE);
+                    imgDown.setVisibility(View.VISIBLE);
+                }else{
+                    imgUp.setVisibility(View.VISIBLE);
+                    imgDown.setVisibility(View.GONE);
+                }
+            }
+        });*/
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Bundle bundle = new Bundle();
+                bundle.putString("title", getText(R.string.fragment_disaster_txt_title_detail).toString());
+                bundle.putString("name", nameList.get(i));
+                bundle.putString("date", dateList.get(i));
+                bundle.putString("like", likeList.get(i));
+                bundle.putStringArrayList("imageList", imageMap.get(idList.get(i)));
+                bundle.putStringArrayList("youtubeList", youtubeMap.get(idList.get(i)));
+                bundle.putStringArrayList("descriptionList", descriptionMap.get(idList.get(i)));
+                bundle.putIntegerArrayList("typeIDList", typeIDMap.get(idList.get(i)));
+                bundle.putStringArrayList("typeList", typeMap.get(idList.get(i)));
+                //displayFragment(FragmentSearch.newInstance(bundle));
+
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, FragmentActivityDetail.newInstance(bundle));
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
     }
 
     @Override
@@ -219,6 +335,41 @@ public class FragmentDisaster extends Fragment {
                             latitudeList.add(jArrayContent.optJSONObject(x).optString("latitude"));
                             longitudeList.add(jArrayContent.optJSONObject(x).optString("longitude"));
                             descriptionList.add(jArrayContent.optJSONObject(x).optJSONArray("detail").optJSONObject(0).optString("discription"));
+
+                            categoryIDList.add("" + jArrayContent.optJSONObject(x).optInt("category_id"));
+                            idList.add("" + jArrayContent.optJSONObject(x).optInt("id"));
+                            shortDescriptionList.add(jArrayContent.optJSONObject(x).optString("short_description"));
+
+                            ArrayList<String> imageCoverList = new ArrayList<>();
+                            JSONArray jArrayImageCover = jArrayContent.optJSONObject(x).optJSONArray("image_cover");
+                            for(int y=0; y<jArrayImageCover.length(); y++) {
+                                imageCoverList.add(jArrayImageCover.optJSONObject(y).optJSONObject("lg").optString("source"));
+                            }
+                            imageCoverMap.put(idList.get(x), imageCoverList);
+
+                            ArrayList<Integer> typeIDList = new ArrayList<>();
+                            ArrayList<String> typeList = new ArrayList<>();
+                            ArrayList<String> imageList = new ArrayList<>();
+                            ArrayList<String> youtubeList = new ArrayList<>();
+                            ArrayList<String> descriptionList = new ArrayList<>();
+                            JSONArray jArrayDetail = jArrayContent.optJSONObject(x).optJSONArray("detail");
+                            for(int z=0; z<jArrayDetail.length(); z++) {
+                                typeIDList.add(jArrayDetail.optJSONObject(z).optInt("type_id"));
+                                typeList.add(jArrayDetail.optJSONObject(z).optString("type"));
+                                try {
+                                    //imageList.add(jArrayDetail.optJSONObject(z).optJSONArray("image").optJSONObject(0).optJSONObject("lg").optString("source"));
+                                    imageList.add(jArrayDetail.optJSONObject(z).optJSONObject("image").optJSONObject("lg").optString("source"));
+                                } catch(Exception e) {
+                                    imageList.add("");
+                                }
+                                youtubeList.add(jArrayDetail.optJSONObject(z).optString("youtube"));
+                                descriptionList.add(jArrayDetail.optJSONObject(z).optString("discription"));
+                            }
+                            typeIDMap.put(idList.get(x), typeIDList);
+                            typeMap.put(idList.get(x), typeList);
+                            imageMap.put(idList.get(x), imageList);
+                            youtubeMap.put(idList.get(x), youtubeList);
+                            descriptionMap.put(idList.get(x), descriptionList);
                         }
                     } else {
                         Toast.makeText(getActivity(), statusDetail, Toast.LENGTH_SHORT).show();
@@ -227,6 +378,7 @@ public class FragmentDisaster extends Fragment {
                     e.printStackTrace();
                 }
                 setDisasterMarker();
+                adapter.notifyDataSetChanged();
             }
         });
         projectAPI.execute("");
@@ -251,7 +403,7 @@ public class FragmentDisaster extends Fragment {
         for(int x=0; x<latitudeList.size(); x++) {
             // For dropping a marker at a point on the Map
             LatLng disaster = new LatLng(Double.parseDouble(latitudeList.get(x)), Double.parseDouble(longitudeList.get(x)));
-            googleMap.addMarker(new MarkerOptions().position(disaster).title(nameList.get(x)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+            markerArray.add(googleMap.addMarker(new MarkerOptions().position(disaster).title(nameList.get(x)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker))));
 
             if(x == 0) {
                 // For zooming automatically to the location of the marker
@@ -266,7 +418,7 @@ public class FragmentDisaster extends Fragment {
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                int index = nameList.indexOf(marker.getTitle());
+                /*int index = nameList.indexOf(marker.getTitle());
                 Bundle bundle = new Bundle();
                 bundle.putString("name", nameList.get(index));
                 bundle.putString("date", dateList.get(index));
@@ -278,9 +430,70 @@ public class FragmentDisaster extends Fragment {
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, FragmentDisasterDetail.newInstance(bundle));
                 transaction.addToBackStack(null);
+                transaction.commit();*/
+
+                int i = nameList.indexOf(marker.getTitle());
+                Bundle bundle = new Bundle();
+                bundle.putString("title", getText(R.string.fragment_disaster_txt_title_detail).toString());
+                bundle.putString("name", nameList.get(i));
+                bundle.putString("date", dateList.get(i));
+                bundle.putString("like", likeList.get(i));
+                bundle.putStringArrayList("imageList", imageMap.get(idList.get(i)));
+                bundle.putStringArrayList("youtubeList", youtubeMap.get(idList.get(i)));
+                bundle.putStringArrayList("descriptionList", descriptionMap.get(idList.get(i)));
+                bundle.putIntegerArrayList("typeIDList", typeIDMap.get(idList.get(i)));
+                bundle.putStringArrayList("typeList", typeMap.get(idList.get(i)));
+                //displayFragment(FragmentSearch.newInstance(bundle));
+
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, FragmentActivityDetail.newInstance(bundle));
+                transaction.addToBackStack(null);
                 transaction.commit();
                 return false;
             }
         });
+    }
+
+    public void goToDetail(int i) {
+        listView.performItemClick(
+                listView.getAdapter().getView(i, null, null),
+                i,
+                listView.getAdapter().getItemId(i));
+    }
+
+    public TextWatcher myTextWatcher = new TextWatcher() {
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if(s.length() > 0) {
+                adapter.getFilter().filter(s);
+            } else {
+                adapter.setNameList(nameList);
+                adapter.notifyDataSetChanged();
+                listView.invalidate();
+            }
+            mapMarkerFilter(s);
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count,
+                                      int after) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    private void mapMarkerFilter(CharSequence s) {
+        for(int x=0; x<nameList.size(); x++) {
+            if(nameList.get(x).contains(s)) {
+                markerArray.get(x).setVisible(true);
+            } else {
+                markerArray.get(x).setVisible(false);
+            }
+        }
     }
 }
