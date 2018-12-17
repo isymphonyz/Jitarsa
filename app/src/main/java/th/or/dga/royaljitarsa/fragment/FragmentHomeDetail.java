@@ -1,11 +1,13 @@
 package th.or.dga.royaljitarsa.fragment;
 
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +40,7 @@ public class FragmentHomeDetail extends Fragment {
     private SukhumvitTextView txtName;
     private SukhumvitTextView txtDate;
     private SukhumvitTextView txtDescription;
+    private LinearLayout.LayoutParams params;
 
     private ArrayList<String> imageList;
     private ArrayList<String> youtubeList;
@@ -57,6 +60,8 @@ public class FragmentHomeDetail extends Fragment {
     
     private ProjectAPI projectAPI;
     private String categoryID = MyConfiguration.CATEGORY_JITARSA_ID;
+
+    private int margin8dp = 0;
 
     public static FragmentHomeDetail newInstance() {
         FragmentHomeDetail fragment = new FragmentHomeDetail();
@@ -82,6 +87,13 @@ public class FragmentHomeDetail extends Fragment {
     }
 
     private void initValue() {
+        Resources r = getActivity().getResources();
+        margin8dp = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                8,
+                r.getDisplayMetrics()
+        );
+
         imageList = new ArrayList<>();
         youtubeList = new ArrayList<>();
         nameList = new ArrayList<>();
@@ -110,6 +122,9 @@ public class FragmentHomeDetail extends Fragment {
         txtName = (SukhumvitTextView) rootView.findViewById(R.id.txtName);
         txtDate = (SukhumvitTextView) rootView.findViewById(R.id.txtDate);
         txtDescription = (SukhumvitTextView) rootView.findViewById(R.id.txtDescription);
+
+        params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(margin8dp, margin8dp, margin8dp, margin8dp);
     }
 
     private void setUI() {
@@ -122,7 +137,7 @@ public class FragmentHomeDetail extends Fragment {
         for(int y=0; y<typeIDList.size(); y++) {
             if(typeIDList.get(y) == 1) {
                 ImageView imageView = new ImageView(getActivity());
-                imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                imageView.setLayoutParams(params);
                 imageView.setAdjustViewBounds(true);
                 Glide.with(getActivity())
                         .load(imageList.get(y))
@@ -135,13 +150,13 @@ public class FragmentHomeDetail extends Fragment {
                 Log.d(TAG, "layoutContent.addView(imageView);");
             } else if(typeIDList.get(y) == 2) {
                 VideoView videoView = new VideoView(getActivity());
-                videoView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                videoView.setLayoutParams(params);
 
                 layoutContent.addView(videoView);
                 Log.d(TAG, "layoutContent.addView(videoView);");
             } else if(typeIDList.get(y) == 3) {
                 SukhumvitTextView textView = new SukhumvitTextView(getActivity());
-                textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                textView.setLayoutParams(params);
                 //textView.setText(descriptionList.get(y));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     textView.setText(Html.fromHtml(descriptionList.get(y), Html.FROM_HTML_MODE_LEGACY));

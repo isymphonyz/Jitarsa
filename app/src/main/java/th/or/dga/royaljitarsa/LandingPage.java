@@ -6,19 +6,24 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.glide.slider.library.SliderTypes.BaseSliderView;
 import com.glide.slider.library.SliderTypes.DefaultSliderView;
 import com.glide.slider.library.Tricks.ViewPagerEx;
 import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.gms.vision.barcode.Barcode;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 
@@ -26,6 +31,8 @@ import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
 import th.or.dga.royaljitarsa.utils.AppPreference;
 
 public class LandingPage extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener  {
+
+    private static final String TAG = LandingPage.class.getSimpleName();
 
     private RelativeLayout layoutImage;
     private ImageView imageView;
@@ -43,7 +50,6 @@ public class LandingPage extends AppCompatActivity implements BaseSliderView.OnS
     private String appVersion = "";
 
     private static final int RC_BARCODE_CAPTURE = 9001;
-    private static final String TAG = "BarcodeMain";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +71,25 @@ public class LandingPage extends AppCompatActivity implements BaseSliderView.OnS
         AppPreference.getInstance(this).setScreenWidth(width);
         AppPreference.getInstance(this).setScreenHeight(height);
 
+        firebaseSubscriptTopic();
         initUI();
         initValue();
         setListener();
         launchSplashScreen();
+    }
+
+    private void firebaseSubscriptTopic() {
+        FirebaseMessaging.getInstance().subscribeToTopic(getText(R.string.firebase_messaging_subscribe_topic).toString())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "Success to Subscript Topic : Android";
+                        if (!task.isSuccessful()) {
+                            msg = "Fail to Subscript Topic : Android";
+                        }
+                        Log.d(TAG, msg);
+                    }
+                });
     }
 
     private void initValue() {

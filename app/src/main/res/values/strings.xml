@@ -6,6 +6,9 @@
     <string name="facebook_app_id">736233786739872</string>
     <string name="fb_login_protocol">fb736233786739872</string>
 
+    <!-- Firebase Messaging -->
+    <string name="firebase_messaging_subscribe_topic">android</string>
+
     <!-- Log Param -->
     <string name="log_param_home">หน้าแรก</string>
     <string name="log_param_jitarsa">ความเป็นมา</string>

@@ -1,11 +1,13 @@
 package th.or.dga.royaljitarsa.fragment;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,12 +32,15 @@ public class FragmentDisasterDetail extends Fragment {
     private SukhumvitTextView btnShare;
     private ImageView btnSave;
     private LinearLayout layoutLike;
+    private LinearLayout.LayoutParams params;
 
     private String image = "";
     private String name = "";
     private String date = "";
     private String description = "";
     private String like = "";
+
+    private int margin8dp = 0;
 
     public static FragmentDisasterDetail newInstance() {
         FragmentDisasterDetail fragment = new FragmentDisasterDetail();
@@ -62,6 +67,13 @@ public class FragmentDisasterDetail extends Fragment {
     }
 
     private void initValue() {
+        Resources r = getActivity().getResources();
+        margin8dp = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                8,
+                r.getDisplayMetrics()
+        );
+
         image = getArguments().getString("image");
         name = getArguments().getString("name");
         date = getArguments().getString("date");
@@ -79,6 +91,9 @@ public class FragmentDisasterDetail extends Fragment {
         btnShare = (SukhumvitTextView) rootView.findViewById(R.id.btnShare);
         btnSave = (ImageView) rootView.findViewById(R.id.btnSave);
         layoutLike = (LinearLayout) rootView.findViewById(R.id.layoutLike);
+
+        params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(margin8dp, margin8dp, margin8dp, margin8dp);
     }
 
     private void setUI() {
