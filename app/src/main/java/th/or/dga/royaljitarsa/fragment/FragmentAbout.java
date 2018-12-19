@@ -1,5 +1,6 @@
 package th.or.dga.royaljitarsa.fragment;
 
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,6 +32,8 @@ import org.json.JSONObject;
 import th.or.dga.royaljitarsa.R;
 import th.or.dga.royaljitarsa.connection.AboutAPI;
 import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
+import th.or.dga.royaljitarsa.customview.SukhumvitZoomableTextView;
+import th.or.dga.royaljitarsa.customview.SukhumvitZoomableV2TextView;
 import th.or.dga.royaljitarsa.utils.FirebaseLogTracking;
 import th.or.dga.royaljitarsa.utils.MyConfiguration;
 
@@ -51,6 +54,14 @@ public class FragmentAbout extends Fragment {
     private AboutAPI.AboutAPIListener aboutAPIListener;
 
     private String youtubeVideoID = "";
+
+    final static float STEP = 200;
+    float mRatio = 1.0f;
+    int mBaseDist;
+    float mBaseRatio;
+    float fontsize = 13;
+
+    private int margin8dp;
 
     public static FragmentAbout newInstance() {
         FragmentAbout fragment = new FragmentAbout();
@@ -76,10 +87,18 @@ public class FragmentAbout extends Fragment {
     }
 
     private void initUI(View rootView) {
+        Resources r = getActivity().getResources();
+        margin8dp = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                8,
+                r.getDisplayMetrics()
+        );
+
         layout = (LinearLayout) rootView.findViewById(R.id.layout);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
 
         layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(margin8dp, margin8dp, margin8dp, margin8dp);
 
         int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 180, getResources().getDisplayMetrics());
         layoutParamsWebView = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
@@ -200,9 +219,12 @@ public class FragmentAbout extends Fragment {
         layout.addView(webView);
     }
 
+    //SukhumvitZoomableV2TextView textView;
     private void insertTextView(String text) {
-        SukhumvitTextView textView = new SukhumvitTextView(getActivity());
+        SukhumvitZoomableV2TextView textView = new SukhumvitZoomableV2TextView(getActivity());
+        //textView = new SukhumvitZoomableV2TextView(getActivity());
         textView.setLayoutParams(layoutParams);
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             textView.setText(Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY));

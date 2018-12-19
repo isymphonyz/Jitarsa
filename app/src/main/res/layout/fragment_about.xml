@@ -7,18 +7,22 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layoutDirection="ltr"
+        android:descendantFocusability="afterDescendants">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:descendantFocusability="afterDescendants">
 
             <LinearLayout
                 android:id="@+id/layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical"
+                android:descendantFocusability="afterDescendants"></LinearLayout>
 
             <ProgressBar
                 android:id="@+id/progressBar"

@@ -5,8 +5,8 @@ package th.or.dga.royaljitarsa.utils;
  */
 public class MyConfiguration {
     //public static String DOMAIN = "http://demo.360innovative.com/2018/360jitarsa/";
-    //public static String DOMAIN = "http://103.77.116.70/api/";
-    public static String DOMAIN = "http://apps.royaljitarsa.com/";
+    public static String DOMAIN = "http://103.77.116.70/api/";
+    //public static String DOMAIN = "http://apps.royaljitarsa.com/";
     public static String URL_REGISTER = "register";
     public static String URL_REGISTER_FACEBOOK = "register/facebook";
     public static String URL_LOGIN = "user/login";

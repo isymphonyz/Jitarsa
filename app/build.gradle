@@ -11,8 +11,8 @@ android {
         applicationId "th.or.dga.royaljitarsa"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 20
-        versionName "1.0.20"
+        versionCode 21
+        versionName "1.0.21"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

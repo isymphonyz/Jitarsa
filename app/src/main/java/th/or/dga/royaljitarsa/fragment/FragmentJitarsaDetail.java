@@ -25,6 +25,7 @@ import java.util.Calendar;
 
 import th.or.dga.royaljitarsa.R;
 import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
+import th.or.dga.royaljitarsa.customview.SukhumvitZoomableV2TextView;
 import th.or.dga.royaljitarsa.utils.Utils;
 
 import static com.bumptech.glide.request.RequestOptions.fitCenterTransform;
@@ -152,7 +153,8 @@ public class FragmentJitarsaDetail extends Fragment {
                 layoutContent.addView(videoView);
                 Log.d(TAG, "layoutContent.addView(videoView);");
             } else if(typeIDList.get(y) == 3) {
-                SukhumvitTextView textView = new SukhumvitTextView(getActivity());
+                //SukhumvitTextView textView = new SukhumvitTextView(getActivity());
+                SukhumvitZoomableV2TextView textView = new SukhumvitZoomableV2TextView(getActivity());
                 textView.setLayoutParams(params);
                 //textView.setText(descriptionList.get(y));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
