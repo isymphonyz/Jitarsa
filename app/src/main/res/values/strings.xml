@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Jitarsa</string>
+    <string name="txt_jitarsa">จิตอาสา</string>
     <string name="context_menu">Context menu</string>
 
     <!-- Facebook -->
@@ -143,6 +144,9 @@
     <string name="fragment_activity_btn_share">แชร์</string>
     <string name="fragment_activity_txt_province">จังหวัด :\u00A0</string>
     <string name="fragment_activity_txt_place">สถานที่ :\u00A0</string>
+    <string name="fragment_activity_filter_btn_calendar">ปฏิทินกิจกรรม</string>
+    <string name="fragment_activity_filter_btn_location">กิจกรรมตามพื้นที่</string>
+    <string name="fragment_activity_filter_btn_province">เลือกจังหวัด</string>
 
     <!-- Fragment Activity Detail -->
     <string name="fragment_activity_detail_txt_title">กิจกรรม</string>
@@ -230,5 +234,36 @@
     <string name="barcode_success">Barcode read successfully</string>
     <string name="barcode_failure">No barcode captured</string>
     <string name="barcode_error">"Error reading barcode: %1$s"</string>
+    <string name="title_activity_test_calendar">TestCalendar</string>
+
+    <!-- Month -->
+    <string-array name="month_en">
+        <item>Jan</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>May</item>
+        <item>Jun</item>
+        <item>Jul</item>
+        <item>Aug</item>
+        <item>Sep</item>
+        <item>Oct</item>
+        <item>Nov</item>
+        <item>Dec</item>
+    </string-array>
+    <string-array name="month_th">
+        <item>มกราคม</item>
+        <item>กุมภาพันธ์</item>
+        <item>มีนาคม</item>
+        <item>เมษายน</item>
+        <item>พฤษภาคม</item>
+        <item>มิถุนายน</item>
+        <item>กรกฎาคม</item>
+        <item>สิงหาคม</item>
+        <item>กันยายน</item>
+        <item>ตุลาคม</item>
+        <item>พฤศจิกายน</item>
+        <item>ธันวาคม</item>
+    </string-array>
 
 </resources>

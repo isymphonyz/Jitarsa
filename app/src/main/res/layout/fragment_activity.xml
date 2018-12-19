@@ -72,6 +72,173 @@
             android:indeterminate="true"
             android:visibility="gone" />
 
+        <LinearLayout
+            android:id="@+id/layoutFilterDetail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/fragment_activity_filter_background"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@android:color/white">
+
+                <LinearLayout
+                    android:id="@+id/layoutFilterMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                        android:id="@+id/btnCalendar"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical|left"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/fragment_activity_filter_btn_calendar"
+                        android:textSize="6sp"/>
+
+                    <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                        android:id="@+id/btnLocation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/fragment_activity_filter_btn_location"
+                        android:textSize="6sp"/>
+
+                    <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                        android:id="@+id/btnProvince"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical|right"
+                        android:gravity="center_vertical|right"
+                        android:text="@string/fragment_activity_filter_btn_province"
+                        android:textSize="6sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutFilterDetailCalendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/layoutCalendarDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp">
+
+                        <ImageView
+                            android:id="@+id/btnPreviousMonth"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:adjustViewBounds="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/arrow_left_01"/>
+
+                        <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                            android:id="@+id/txtCalendarDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_centerInParent="true"
+                            android:text="@string/app_name"/>
+
+                        <ImageView
+                            android:id="@+id/btnNextMonth"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:adjustViewBounds="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/arrow_right_01"/>
+
+                    </RelativeLayout>
+
+                    <com.github.sundeepk.compactcalendarview.CompactCalendarView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/calendarView"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:layout_margin="8dp"
+                        app:compactCalendarTargetHeight="250dp"
+                        app:compactCalendarTextSize="12sp"
+                        app:compactCalendarBackgroundColor="@android:color/white"
+                        app:compactCalendarTextColor="@android:color/black"
+                        app:compactCalendarCurrentSelectedDayBackgroundColor="@android:color/holo_blue_bright"
+                        app:compactCalendarCurrentDayBackgroundColor="@android:color/white"
+                        app:compactCalendarMultiEventIndicatorColor="@android:color/holo_green_light"
+                        app:compactCalendarEventIndicatorStyle="fill_large_indicator"
+                        app:compactCalendarShouldSelectFirstDayOfMonthOnScroll="false"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutFilterDetailLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <th.or.dga.royaljitarsa.customview.SukhumvitEditText
+                        android:id="@+id/inputFilterMapSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:lines="1"
+                        android:hint="@string/fragment_activity_hint_search"/>
+
+                    <com.google.android.gms.maps.MapView
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/mapView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutFilterDetailProvince"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <th.or.dga.royaljitarsa.customview.SukhumvitEditText
+                        android:id="@+id/inputFilterProvinceSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:lines="1"
+                        android:hint="@string/fragment_activity_hint_search"/>
+
+                    <ListView
+                        android:id="@+id/provinceListView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/layoutTypePost"
+                        android:layout_margin="8dp"
+                        android:scrollbars="none"
+                        android:cacheColorHint="@android:color/transparent"
+                        android:divider="@android:color/transparent"></ListView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -313,6 +313,7 @@ public class FragmentDisaster extends Fragment {
         projectAPI.setLimit("10");
         projectAPI.setOffset("0");
         projectAPI.setDate(getDate());
+        //projectAPI.setDate("2018-11");
         projectAPI.setListener(new ProjectAPI.ProjectAPIListener() {
             @Override
             public void onProjectAPIPreExecuteConcluded() {
@@ -473,7 +474,16 @@ public class FragmentDisaster extends Fragment {
             if(s.length() > 0) {
                 adapter.getFilter().filter(s);
             } else {
+                //adapter.setNameList(nameList);
+                adapter.setCategoryIDList(categoryIDList);
+                adapter.setIDList(idList);
+                adapter.setImageMap(imageMap);
+                adapter.setImageCoverMap(imageCoverMap);
+                //adapter.setImageList(imageCoverList);
                 adapter.setNameList(nameList);
+                adapter.setDateList(dateList);
+                adapter.setDescriptionList(shortDescriptionList);
+                adapter.setLikeList(likeList);
                 adapter.notifyDataSetChanged();
                 listView.invalidate();
             }

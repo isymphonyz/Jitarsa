@@ -133,8 +133,8 @@ public class ProjectAPI extends AsyncTask<String, Void, String> {
             jsonObject.accumulate("category_id",  categoryID);
             jsonObject.accumulate("limit",  limit);
             jsonObject.accumulate("offset",  offset);
-            //jsonObject.accumulate("date",  date);
-            jsonObject.accumulate("date",  "2018-11");
+            jsonObject.accumulate("date",  date);
+            //jsonObject.accumulate("date",  "2018-11");
         } catch (Exception e) {
 
         }

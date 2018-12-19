@@ -40,6 +40,7 @@ import th.or.dga.royaljitarsa.utils.Utils;
  * Created by Dooplus on 7/16/16 AD.
  */
 public class FragmentActivityListAdapter extends BaseAdapter implements Filterable {
+
     private String TAG = FragmentActivityListAdapter.this.getClass().getSimpleName();
 
     private Activity activity;
@@ -58,6 +59,8 @@ public class FragmentActivityListAdapter extends BaseAdapter implements Filterab
     private ArrayList<String> placeList = null;
     private ArrayList<String> likeList = null;
     private ArrayList<String> descriptionList = null;
+    private ArrayList<String> scheduleDateList = null;
+    private ArrayList<String> calendarDateList = null;
 
     private ArrayList<String> tempCategoryIDList = null;
     private ArrayList<String> tempIDList = null;
@@ -68,6 +71,8 @@ public class FragmentActivityListAdapter extends BaseAdapter implements Filterab
     private ArrayList<String> tempPlaceList = null;
     private ArrayList<String> tempProvinceList = null;
     private ArrayList<String> tempLikeList = null;
+    private ArrayList<String> tempScheduleDateList = null;
+    private ArrayList<String> tempCalendarDateList = null;
 
     private Utils utils;
 
@@ -145,6 +150,16 @@ public class FragmentActivityListAdapter extends BaseAdapter implements Filterab
     public void setPlaceList(ArrayList<String> placeList) {
         this.placeList = placeList;
         this.tempPlaceList = new ArrayList<>(placeList);
+    }
+
+    public void setScheduleDateList(ArrayList<String> scheduleDateList) {
+        this.scheduleDateList = scheduleDateList;
+        this.tempScheduleDateList = new ArrayList<>(scheduleDateList);
+    }
+
+    public void setCalendarDateList(ArrayList<String> calendarDateList) {
+        this.calendarDateList = calendarDateList;
+        this.tempCalendarDateList = new ArrayList<>(calendarDateList);
     }
 
     public int getCount() {
@@ -351,6 +366,8 @@ public class FragmentActivityListAdapter extends BaseAdapter implements Filterab
                 tempLikeList.clear();
                 tempProvinceList.clear();
                 tempPlaceList.clear();
+                tempScheduleDateList.clear();
+                tempCalendarDateList.clear();
                 if(tempNameList.size() == 0) {
                     //tempNameList = new ArrayList<>(nameList);
                 } else {
@@ -364,6 +381,8 @@ public class FragmentActivityListAdapter extends BaseAdapter implements Filterab
                                 tempLikeList.add(likeList.get(x));
                                 tempProvinceList.add(provinceList.get(x));
                                 tempPlaceList.add(placeList.get(x));
+                                tempScheduleDateList.add(scheduleDateList.get(x));
+                                tempCalendarDateList.add(calendarDateList.get(x));
                             }
                         }
                     }
@@ -381,11 +400,19 @@ public class FragmentActivityListAdapter extends BaseAdapter implements Filterab
 
                 // perform your search here using the searchConstraint String.
 
-                constraint = constraint.toString().toLowerCase();
+                constraint = constraint.toString().toLowerCase().replace(" ", "");
                 for (int i = 0; i < tempNameList.size(); i++) {
                     String dataNames = tempNameList.get(i);
                     String dataContent = tempDescriptionList.get(i);
-                    if (dataNames.toLowerCase().contains(constraint.toString()) || dataContent.toLowerCase().contains(constraint.toString()))  {
+                    String dataDate = tempDateList.get(i);
+                    String dataScheduleDate = tempScheduleDateList.get(i);
+                    String dataProvince = tempProvinceList.get(i);
+                    String dataCalendar = tempCalendarDateList.get(i);
+                    Log.d(TAG, "constraint.toString():  " + constraint.toString());
+                    Log.d(TAG, "dataProvince:  " + dataProvince.toLowerCase());
+                    if (dataNames.toLowerCase().contains(constraint.toString()) || dataContent.toLowerCase().contains(constraint.toString())
+                            || dataDate.toLowerCase().contains(constraint.toString()) || dataScheduleDate.toLowerCase().contains(constraint.toString())
+                            || dataProvince.toLowerCase().contains(constraint.toString()) || dataCalendar.toLowerCase().contains(constraint.toString()))  {
                         FilteredArrayNames.add(dataNames);
                     }
                 }

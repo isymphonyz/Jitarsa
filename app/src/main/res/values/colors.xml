@@ -29,6 +29,10 @@
     <!-- Fragment Me -->
     <color name="fragment_me_bg_menu_header">#f7f9f9</color>
 
+    <!-- Fragment Activity -->
+    <color name="fragment_activity_filter_background">#66000000</color>
+    <color name="fragment_activity_filter_calendar_event">#e1eff8</color>
+
     <!-- Fragment QR Code -->
     <color name="fragment_qr_code_bg">#000000</color>
 

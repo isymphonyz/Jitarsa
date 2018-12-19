@@ -57,7 +57,7 @@
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
-                    android:text="@string/app_name"/>
+                    android:text="@string/txt_jitarsa"/>
 
                 <th.or.dga.royaljitarsa.customview.SukhumvitTextView
                     android:id="@+id/txtPostDate"
