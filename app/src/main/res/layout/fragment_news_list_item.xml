@@ -128,6 +128,16 @@
 
         </RelativeLayout>
 
+        <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+            android:id="@+id/btnDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:gravity="center"
+            android:text="@string/fragment_activity_detail_btn_description"
+            android:background="@drawable/radius_blue_corner_white_background"/>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

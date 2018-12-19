@@ -11,8 +11,8 @@ android {
         applicationId "th.or.dga.royaljitarsa"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 18
-        versionName "1.0.18"
+        versionCode 20
+        versionName "1.0.20"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -82,6 +82,10 @@ dependencies {
     }
 
     implementation 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
+
+    implementation 'com.jsibbold:zoomage:1.2.0'
+
+    implementation 'com.github.chrisbanes:PhotoView:2.1.3'
 
 }
 

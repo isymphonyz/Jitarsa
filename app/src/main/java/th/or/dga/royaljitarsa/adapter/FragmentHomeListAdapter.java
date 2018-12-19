@@ -26,6 +26,7 @@ import java.util.HashMap;
 
 import me.relex.circleindicator.CircleIndicator;
 import ss.com.bannerslider.Slider;
+import th.or.dga.royaljitarsa.GalleryActivity;
 import th.or.dga.royaljitarsa.R;
 import th.or.dga.royaljitarsa.connection.LikeProjectAPI;
 import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
@@ -63,6 +64,7 @@ public class FragmentHomeListAdapter extends BaseAdapter {
 
     //public LazyAdapter(Activity a, String[] d) {
     public FragmentHomeListAdapter(Activity a) {
+        Log.d(TAG, "FragmentHomeListAdapter Create");
         activity = a;
         //imageLoader = new ImageLoader(activity);
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -136,6 +138,7 @@ public class FragmentHomeListAdapter extends BaseAdapter {
         public SukhumvitTextView btnShare;
         public ImageView btnSave;
         public LinearLayout layoutLike;
+        public SukhumvitTextView btnDescription;
 
         public Slider slider;
         public ViewPager viewPager;
@@ -159,6 +162,7 @@ public class FragmentHomeListAdapter extends BaseAdapter {
         holder.btnShare = (SukhumvitTextView) vi.findViewById(R.id.btnShare);
         holder.btnSave = (ImageView) vi.findViewById(R.id.btnSave);
         holder.layoutLike = (LinearLayout) vi.findViewById(R.id.layoutLike);
+        holder.btnDescription = (SukhumvitTextView) vi.findViewById(R.id.btnDescription);
 
         //holder.slider = (Slider) vi.findViewById(R.id.slider);
         //holder.slider.setAdapter(new MainSliderAdapter());
@@ -260,8 +264,33 @@ public class FragmentHomeListAdapter extends BaseAdapter {
             }
         });
 
+        holder.txtDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "layout.setOnClickListener");
+                fragment.goToDetail(position);
+            }
+        });
+
+        holder.btnDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "btnDescription.setOnClickListener");
+                fragment.goToDetail(position);
+            }
+        });
+
         holder.viewPager.setAdapter(new ImageSlidePagerStringAdapter(activity, imageCoverMap.get(idList.get(position))));
         holder.indicator.setViewPager(holder.viewPager);
+        holder.viewPager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "viewPager.setOnClickListener: " + position);
+                Intent intent = new Intent(activity, GalleryActivity.class);
+                intent.putStringArrayListExtra("imageList", imageCoverMap.get(idList.get(position)));
+                activity.startActivity(intent);
+            }
+        });
 
         holder.indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -283,5 +312,15 @@ public class FragmentHomeListAdapter extends BaseAdapter {
         });
 
         return vi;
+    }
+
+    @Override
+    public boolean areAllItemsEnabled() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled(int arg0) {
+        return true;
     }
 }

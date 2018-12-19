@@ -171,6 +171,11 @@
             android:hardwareAccelerated="true"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".GalleryActivity"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".BarcodeCaptureActivity"></activity>
 
         <service android:name=".firebase.MyFirebaseMessagingService">

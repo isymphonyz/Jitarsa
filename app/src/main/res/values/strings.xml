@@ -24,6 +24,7 @@
     <string name="log_param_about">เกี่ยวกับแอปพลิเคชัน</string>
     <string name="log_param_login">login</string>
     <string name="log_param_forget_password">ลืมรหัสผ่าน</string>
+    <string name="log_param_gallery">แกลลอรี่</string>
 
     <!-- Menu -->
     <string name="menu_home">หน้าแรก</string>
@@ -145,6 +146,7 @@
 
     <!-- Fragment Activity Detail -->
     <string name="fragment_activity_detail_txt_title">กิจกรรม</string>
+    <string name="fragment_activity_detail_btn_description">อ่านรายละเอียด</string>
 
     <!-- Fragment News -->
     <string name="fragment_news_txt_title">คลังข่าวสาร</string>

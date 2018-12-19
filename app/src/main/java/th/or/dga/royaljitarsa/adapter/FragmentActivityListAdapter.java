@@ -27,6 +27,8 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import me.relex.circleindicator.CircleIndicator;
+import th.or.dga.royaljitarsa.GalleryActivity;
+import th.or.dga.royaljitarsa.Home;
 import th.or.dga.royaljitarsa.R;
 import th.or.dga.royaljitarsa.connection.LikeProjectAPI;
 import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
@@ -169,6 +171,7 @@ public class FragmentActivityListAdapter extends BaseAdapter implements Filterab
         public SukhumvitTextView txtLike;
         public SukhumvitTextView btnShare;
         public LinearLayout layoutLike;
+        public SukhumvitTextView btnDescription;
 
         public ViewPager viewPager;
         public CircleIndicator indicator;
@@ -191,6 +194,7 @@ public class FragmentActivityListAdapter extends BaseAdapter implements Filterab
         holder.txtLike = (SukhumvitTextView) vi.findViewById(R.id.txtLike);
         holder.btnShare = (SukhumvitTextView) vi.findViewById(R.id.btnShare);
         holder.layoutLike = (LinearLayout) vi.findViewById(R.id.layoutLike);
+        holder.btnDescription = (SukhumvitTextView) vi.findViewById(R.id.btnDescription);
 
         holder.viewPager = (ViewPager) vi.findViewById(R.id.viewPager);
         holder.indicator = (CircleIndicator) vi.findViewById(R.id.indicator);
@@ -286,8 +290,24 @@ public class FragmentActivityListAdapter extends BaseAdapter implements Filterab
             }
         });
 
+        holder.btnDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "btnDescription.setOnClickListener");
+                fragment.goToDetail(position, tempNameList.get(position));
+            }
+        });
+
         holder.viewPager.setAdapter(new ImageSlidePagerStringAdapter(activity, imageCoverMap.get(tempIDList.get(position))));
         holder.indicator.setViewPager(holder.viewPager);
+        holder.viewPager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, GalleryActivity.class);
+                intent.putStringArrayListExtra("imageList", imageCoverMap.get(tempIDList.get(position)));
+                activity.startActivity(intent);
+            }
+        });
 
         holder.indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -364,7 +384,8 @@ public class FragmentActivityListAdapter extends BaseAdapter implements Filterab
                 constraint = constraint.toString().toLowerCase();
                 for (int i = 0; i < tempNameList.size(); i++) {
                     String dataNames = tempNameList.get(i);
-                    if (dataNames.toLowerCase().contains(constraint.toString()))  {
+                    String dataContent = tempDescriptionList.get(i);
+                    if (dataNames.toLowerCase().contains(constraint.toString()) || dataContent.toLowerCase().contains(constraint.toString()))  {
                         FilteredArrayNames.add(dataNames);
                     }
                 }

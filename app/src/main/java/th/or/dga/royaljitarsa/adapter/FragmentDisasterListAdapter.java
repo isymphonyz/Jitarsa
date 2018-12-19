@@ -29,6 +29,7 @@ import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
 import ss.com.bannerslider.Slider;
+import th.or.dga.royaljitarsa.GalleryActivity;
 import th.or.dga.royaljitarsa.R;
 import th.or.dga.royaljitarsa.connection.LikeProjectAPI;
 import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
@@ -154,6 +155,7 @@ public class FragmentDisasterListAdapter extends BaseAdapter implements Filterab
         public SukhumvitTextView btnShare;
         public ImageView btnSave;
         public LinearLayout layoutLike;
+        public SukhumvitTextView btnDescription;
 
         public Slider slider;
         public ViewPager viewPager;
@@ -177,6 +179,7 @@ public class FragmentDisasterListAdapter extends BaseAdapter implements Filterab
         holder.btnShare = (SukhumvitTextView) vi.findViewById(R.id.btnShare);
         holder.btnSave = (ImageView) vi.findViewById(R.id.btnSave);
         holder.layoutLike = (LinearLayout) vi.findViewById(R.id.layoutLike);
+        holder.btnDescription = (SukhumvitTextView) vi.findViewById(R.id.btnDescription);
 
         //holder.slider = (Slider) vi.findViewById(R.id.slider);
         //holder.slider.setAdapter(new MainSliderAdapter());
@@ -278,8 +281,32 @@ public class FragmentDisasterListAdapter extends BaseAdapter implements Filterab
             }
         });
 
+        holder.txtDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "layout.setOnClickListener");
+                fragment.goToDetail(position);
+            }
+        });
+
+        holder.btnDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "btnDescription.setOnClickListener");
+                fragment.goToDetail(position);
+            }
+        });
+
         holder.viewPager.setAdapter(new ImageSlidePagerStringAdapter(activity, imageCoverMap.get(idList.get(position))));
         holder.indicator.setViewPager(holder.viewPager);
+        holder.viewPager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, GalleryActivity.class);
+                intent.putStringArrayListExtra("imageList", imageCoverMap.get(idList.get(position)));
+                activity.startActivity(intent);
+            }
+        });
 
         holder.indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -329,7 +356,8 @@ public class FragmentDisasterListAdapter extends BaseAdapter implements Filterab
                 constraint = constraint.toString().toLowerCase();
                 for (int i = 0; i < tempNameList.size(); i++) {
                     String dataNames = tempNameList.get(i);
-                    if (dataNames.toLowerCase().contains(constraint.toString()))  {
+                    String dataContent = tempDescriptionList.get(i);
+                    if (dataNames.toLowerCase().contains(constraint.toString()) || dataContent.toLowerCase().contains(constraint.toString()))  {
                         FilteredArrayNames.add(dataNames);
                     }
                 }
