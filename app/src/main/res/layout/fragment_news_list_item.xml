@@ -28,7 +28,8 @@
                 android:layout_marginRight="8dp"
                 android:layout_alignParentLeft="true"
                 android:layout_toLeftOf="@id/btnSave"
-                android:text="@string/app_name"/>
+                android:text="@string/app_name"
+                android:textColor="@color/colorPrimary"/>
             
             <ImageView
                 android:id="@+id/btnSave"

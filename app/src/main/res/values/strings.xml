@@ -132,7 +132,7 @@
     <string name="fragment_home_txt_friend_post">โพสต์ของเพื่อน</string>
 
     <!-- Fragment Jitarsa -->
-    <string name="fragment_jitarsa_txt_title">ความเป็นมาของจิตอาสา</string>
+    <string name="fragment_jitarsa_txt_title">จิตอาสา \"เราทำความดี ด้วยหัวใจ\"</string>
 
     <!-- Fragment Announcement -->
     <string name="fragment_announcement_txt_title">ประกาศ</string>
@@ -157,7 +157,7 @@
 
     <!-- Fragment Disaster -->
     <string name="fragment_disaster_txt_title">ภัยพิบัติทั้งหมด</string>
-    <string name="fragment_disaster_txt_title_detail">ภัยพิบัติท</string>
+    <string name="fragment_disaster_txt_title_detail">ภัยพิบัติ</string>
     <string name="fragment_disaster_btn_map">แผนที่</string>
     <string name="fragment_disaster_btn_list">รายการ</string>
 

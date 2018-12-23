@@ -311,6 +311,8 @@ public class FragmentHomeListAdapter extends BaseAdapter {
             }
         });
 
+        holder.txtName.setTypeface(Typeface.BOLD);
+
         return vi;
     }
 

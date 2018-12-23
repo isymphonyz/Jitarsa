@@ -343,6 +343,8 @@ public class FragmentActivityListAdapter extends BaseAdapter implements Filterab
             }
         });
 
+        holder.txtName.setTypeface(Typeface.BOLD);
+
         return vi;
     }
 

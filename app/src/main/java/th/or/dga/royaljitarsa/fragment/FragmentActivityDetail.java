@@ -1,6 +1,7 @@
 package th.or.dga.royaljitarsa.fragment;
 
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -134,6 +135,8 @@ public class FragmentActivityDetail extends Fragment {
 
         txtName.setText(name);
         txtDate.setText(date);
+
+        txtName.setTypeface(Typeface.BOLD);
 
         for(int y=0; y<typeIDList.size(); y++) {
             if(typeIDList.get(y) == 1) {

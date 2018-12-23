@@ -15,6 +15,7 @@ import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 import th.or.dga.royaljitarsa.adapter.ImageSlidePagerAdapter;
+import th.or.dga.royaljitarsa.adapter.ImageSlidePagerStringAdapter;
 import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
 import th.or.dga.royaljitarsa.utils.AppPreference;
 import th.or.dga.royaljitarsa.utils.FirebaseLogTracking;
@@ -25,7 +26,8 @@ public class HowToPlay extends AppCompatActivity {
     private ViewPager viewPager;
     private CircleIndicator indicator;
 
-    private ArrayList<Integer> imageList;
+    //private ArrayList<Integer> imageList;
+    private ArrayList<String> imageList;
     private static int currentPage = 0;
     private static int NUM_PAGES = 0;
 
@@ -57,12 +59,17 @@ public class HowToPlay extends AppCompatActivity {
     }
 
     private void initValue() {
-        imageList = new ArrayList<>();
+        /*imageList = new ArrayList<>();
         imageList.add(R.mipmap.title_01);
         imageList.add(R.mipmap.title_02);
-        imageList.add(R.mipmap.title_03);
+        imageList.add(R.mipmap.title_03);*/
         //imageList.add(R.mipmap.title_04);
         //imageList.add(R.mipmap.title_05);
+
+        imageList = new ArrayList<>();
+        imageList.add("http://plearnengineering.com/360innovative/jitarsa/howtoplay/title_01.png");
+        imageList.add("http://plearnengineering.com/360innovative/jitarsa/howtoplay/title_02.png");
+        imageList.add("http://plearnengineering.com/360innovative/jitarsa/howtoplay/title_03.png");
 
         NUM_PAGES = imageList.size();
 
@@ -90,7 +97,7 @@ public class HowToPlay extends AppCompatActivity {
             }
         });
 
-        viewPager.setAdapter(new ImageSlidePagerAdapter(getApplicationContext(), imageList));
+        viewPager.setAdapter(new ImageSlidePagerStringAdapter(getApplicationContext(), imageList));
         indicator.setViewPager(viewPager);
 
         indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

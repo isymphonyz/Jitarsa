@@ -309,6 +309,8 @@ public class FragmentJitarsaListAdapter extends BaseAdapter {
             }
         });
 
+        holder.txtName.setTypeface(Typeface.BOLD);
+
         return vi;
     }
 }
