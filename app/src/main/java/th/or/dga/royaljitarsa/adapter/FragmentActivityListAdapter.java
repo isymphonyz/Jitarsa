@@ -402,7 +402,7 @@ public class FragmentActivityListAdapter extends BaseAdapter implements Filterab
 
                 // perform your search here using the searchConstraint String.
 
-                constraint = constraint.toString().toLowerCase().replace(" ", "");
+                constraint = constraint.toString().toLowerCase().replace("   ", "").replace("  ", "");
                 for (int i = 0; i < tempNameList.size(); i++) {
                     String dataNames = tempNameList.get(i);
                     String dataContent = tempDescriptionList.get(i);

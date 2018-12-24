@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +32,8 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
@@ -86,6 +90,7 @@ public class Home extends AppCompatActivity {
     private ImageView btnBack;
     private LinearLayout layoutSearch;
     private SukhumvitEditText inputSearch;
+    private SukhumvitTextView txtVersion;
 
     private CircleImageView imgProfile;
     private SukhumvitTextView txtName;
@@ -96,6 +101,7 @@ public class Home extends AppCompatActivity {
     private AppPreference appPreference;
     private String urlImageProfile = "";
     private String name = "";
+    private String appVersion = "";
 
     public static Home getInstance(Context context) {
         if (instance == null) {
@@ -110,8 +116,8 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
-        initUI();
         initValue();
+        initUI();
         setUI();
         setListener();
 
@@ -158,6 +164,13 @@ public class Home extends AppCompatActivity {
         appPreference = new AppPreference(this);
         urlImageProfile = appPreference.getProfileImage();
         name = appPreference.getFullname();
+
+        try {
+            PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
+            appVersion = pInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initUI() {
@@ -167,8 +180,16 @@ public class Home extends AppCompatActivity {
         layoutSearch = (LinearLayout) findViewById(R.id.layoutSearch);
         inputSearch = (SukhumvitEditText) findViewById(R.id.inputSearch);
 
+        //txtVersion = (SukhumvitTextView) findViewById(R.id.txtVersion);
+        //txtVersion.setText(appVersion);
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        NavigationView navigation2 = (NavigationView) navigationView.findViewById(R.id.navigation2);
+        View view = navigation2.inflateHeaderView(R.layout.version);
+        txtVersion = (SukhumvitTextView) view.findViewById(R.id.txtVersion);
+        txtVersion.setText("Ver. " + appVersion);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

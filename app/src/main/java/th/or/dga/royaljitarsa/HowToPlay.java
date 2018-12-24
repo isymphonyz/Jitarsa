@@ -26,13 +26,14 @@ public class HowToPlay extends AppCompatActivity {
     private ViewPager viewPager;
     private CircleIndicator indicator;
 
-    //private ArrayList<Integer> imageList;
-    private ArrayList<String> imageList;
+    private ArrayList<Integer> imageList;
+    //private ArrayList<String> imageList;
     private static int currentPage = 0;
     private static int NUM_PAGES = 0;
 
     private Bundle extras;
     private boolean isFromHome = false;
+    private boolean isGallery = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,22 +60,23 @@ public class HowToPlay extends AppCompatActivity {
     }
 
     private void initValue() {
-        /*imageList = new ArrayList<>();
+        imageList = new ArrayList<>();
         imageList.add(R.mipmap.title_01);
         imageList.add(R.mipmap.title_02);
-        imageList.add(R.mipmap.title_03);*/
+        imageList.add(R.mipmap.title_03);
         //imageList.add(R.mipmap.title_04);
         //imageList.add(R.mipmap.title_05);
 
-        imageList = new ArrayList<>();
+        /*imageList = new ArrayList<>();
         imageList.add("http://plearnengineering.com/360innovative/jitarsa/howtoplay/title_01.png");
         imageList.add("http://plearnengineering.com/360innovative/jitarsa/howtoplay/title_02.png");
-        imageList.add("http://plearnengineering.com/360innovative/jitarsa/howtoplay/title_03.png");
+        imageList.add("http://plearnengineering.com/360innovative/jitarsa/howtoplay/title_03.png");*/
 
         NUM_PAGES = imageList.size();
 
         extras = getIntent().getExtras();
         isFromHome = extras.getBoolean("isFromHome");
+        isGallery = extras.getBoolean("isGallery");
     }
 
     private void initUI() {
@@ -97,7 +99,7 @@ public class HowToPlay extends AppCompatActivity {
             }
         });
 
-        viewPager.setAdapter(new ImageSlidePagerStringAdapter(getApplicationContext(), imageList));
+        viewPager.setAdapter(new ImageSlidePagerAdapter(getApplicationContext(), imageList));
         indicator.setViewPager(viewPager);
 
         indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

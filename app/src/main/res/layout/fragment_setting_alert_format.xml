@@ -14,7 +14,7 @@
             android:id="@+id/txtAlertFormatTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="16dp"
             android:text="@string/fragment_setting_txt_alert_format_title"/>
         
         <RelativeLayout
@@ -26,9 +26,9 @@
                 android:id="@+id/layoutSound"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginTop="24dp">
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp">
 
                 <th.or.dga.royaljitarsa.customview.SukhumvitTextView
                     android:id="@+id/txtSoundTitle"
@@ -52,9 +52,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/layoutSound"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginTop="24dp">
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp">
 
                 <th.or.dga.royaljitarsa.customview.SukhumvitTextView
                     android:id="@+id/txtVibrationTitle"

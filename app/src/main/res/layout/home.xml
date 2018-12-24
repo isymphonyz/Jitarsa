@@ -9,7 +9,8 @@
     android:fitsSystemWindows="true"
     android:layout_gravity="end"
     tools:openDrawer="end"
-    android:layoutDirection="rtl">
+    android:layoutDirection="rtl"
+    android:background="@color/white">
 
     <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
     <!--
@@ -145,6 +146,18 @@
         android:fitsSystemWindows="true"
         app:menu="@menu/menu_drawer"
         android:layoutDirection="ltr"
-        app:itemTextAppearance="@style/NavigationDrawerStyle"/>
+        app:itemTextAppearance="@style/NavigationDrawerStyle"
+        android:background="@color/white">
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/navigation2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:background="@color/white">
+        </android.support.design.widget.NavigationView>
+
+
+    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

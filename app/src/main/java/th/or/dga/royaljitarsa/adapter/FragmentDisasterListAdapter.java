@@ -58,6 +58,7 @@ public class FragmentDisasterListAdapter extends BaseAdapter implements Filterab
     private ArrayList<String> dateList = null;
     private ArrayList<String> descriptionList = null;
     private ArrayList<String> likeList = null;
+    private ArrayList<String> provinceList = null;
 
     private ArrayList<String> tempCategoryIDList = null;
     private ArrayList<String> tempIDList = null;
@@ -66,6 +67,7 @@ public class FragmentDisasterListAdapter extends BaseAdapter implements Filterab
     private ArrayList<String> tempDateList = null;
     private ArrayList<String> tempDescriptionList = null;
     private ArrayList<String> tempLikeList = null;
+    private ArrayList<String> tempProvinceList = null;
 
     private Utils utils;
 
@@ -130,6 +132,11 @@ public class FragmentDisasterListAdapter extends BaseAdapter implements Filterab
     public void setLikeList(ArrayList<String> likeList) {
         this.likeList = likeList;
         this.tempLikeList = likeList;
+    }
+
+    public void setProvinceList(ArrayList<String> provinceList) {
+        this.provinceList = provinceList;
+        this.tempProvinceList = provinceList;
     }
 
     public int getCount() {
@@ -342,7 +349,33 @@ public class FragmentDisasterListAdapter extends BaseAdapter implements Filterab
             protected void publishResults(CharSequence constraint, FilterResults results) {
 
                 Log.d(TAG, "publishResults constraint: " + constraint);
-                nameList = (ArrayList<String>) results.values;
+                /*nameList = (ArrayList<String>) results.values;
+                notifyDataSetChanged();*/
+
+                tempNameList = (ArrayList<String>) results.values;
+                tempCategoryIDList.clear();
+                tempIDList.clear();
+                //tempNameList.clear();
+                tempDateList.clear();
+                tempDescriptionList.clear();
+                tempLikeList.clear();
+                tempProvinceList.clear();
+                if(tempNameList.size() == 0) {
+                    //tempNameList = new ArrayList<>(nameList);
+                } else {
+                    for(int x=0; x<nameList.size(); x++) {
+                        for(int y=0; y<tempNameList.size(); y++) {
+                            if(nameList.get(x).equals(tempNameList.get(y))) {
+                                tempCategoryIDList.add(categoryIDList.get(x));
+                                tempIDList.add(idList.get(x));
+                                tempDateList.add(dateList.get(x));
+                                tempDescriptionList.add(descriptionList.get(x));
+                                tempLikeList.add(likeList.get(x));
+                                tempProvinceList.add(provinceList.get(x));
+                            }
+                        }
+                    }
+                }
                 notifyDataSetChanged();
             }
 
@@ -359,7 +392,8 @@ public class FragmentDisasterListAdapter extends BaseAdapter implements Filterab
                 for (int i = 0; i < tempNameList.size(); i++) {
                     String dataNames = tempNameList.get(i);
                     String dataContent = tempDescriptionList.get(i);
-                    if (dataNames.toLowerCase().contains(constraint.toString()) || dataContent.toLowerCase().contains(constraint.toString()))  {
+                    String dataProvince = tempProvinceList.get(i);
+                    if (dataNames.toLowerCase().contains(constraint.toString()) || dataContent.toLowerCase().contains(constraint.toString()) || dataProvince.toLowerCase().contains(constraint.toString()))  {
                         FilteredArrayNames.add(dataNames);
                     }
                 }

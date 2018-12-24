@@ -484,6 +484,7 @@ public class FragmentDisaster extends Fragment {
                 adapter.setDateList(dateList);
                 adapter.setDescriptionList(shortDescriptionList);
                 adapter.setLikeList(likeList);
+                adapter.setProvinceList(provinceList);
                 adapter.notifyDataSetChanged();
                 listView.invalidate();
             }

@@ -517,8 +517,8 @@ public class FragmentActivity extends Fragment {
                             placeList.add(jArrayContent.optJSONObject(x).optString("place"));
                             likeList.add(jArrayContent.optJSONObject(x).optString("like_count"));
                             shortDescriptionList.add(jArrayContent.optJSONObject(x).optString("short_description"));
-                            scheduleDateList.add(jArrayContent.optJSONObject(x).optString("schedule_date"));
-                            calendarDateList.add(convertScheduleDateToCalendarDate(jArrayContent.optJSONObject(x).optString("schedule_date")));
+                            scheduleDateList.add(jArrayContent.optJSONObject(x).optString("start_date"));
+                            calendarDateList.add(convertScheduleDateToCalendarDate(jArrayContent.optJSONObject(x).optString("start_date")));
                             latitudeList.add(jArrayContent.optJSONObject(x).optString("latitude"));
                             longitudeList.add(jArrayContent.optJSONObject(x).optString("longitude"));
 

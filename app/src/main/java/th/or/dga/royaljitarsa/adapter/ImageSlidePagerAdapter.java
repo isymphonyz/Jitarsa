@@ -6,10 +6,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
@@ -25,6 +28,8 @@ import static com.bumptech.glide.request.RequestOptions.fitCenterTransform;
  */
 
 public class ImageSlidePagerAdapter extends PagerAdapter {
+
+    private String TAG = ImageSlidePagerAdapter.class.getSimpleName();
 
     private ArrayList<Integer> imageList;
     private LayoutInflater inflater;
@@ -51,14 +56,27 @@ public class ImageSlidePagerAdapter extends PagerAdapter {
         View imageLayout = inflater.inflate(R.layout.image_sliding, view, false);
 
         assert imageLayout != null;
-        final ImageView imageView = (ImageView) imageLayout.findViewById(R.id.imageView);
-        Glide.with(context)
-                .load(imageList.get(position))
-                .apply(fitCenterTransform()
-                        .placeholder(R.drawable.ic_launcher_foreground)
-                        .error(R.drawable.ic_launcher_background)
-                        .priority(Priority.HIGH))
-                .into(imageView);
+        RelativeLayout layout = (RelativeLayout) imageLayout.findViewById(R.id.layout);
+        try {
+            ImageView imageView = (ImageView) imageLayout.findViewById(R.id.imageView);
+            Glide.with(context)
+                    .load(imageList.get(position))
+                    .apply(fitCenterTransform()
+                            .placeholder(R.drawable.ic_launcher_foreground)
+                            .error(R.drawable.ic_launcher_background)
+                            .priority(Priority.HIGH))
+                    .into(imageView);
+            imageView.setVisibility(View.VISIBLE);
+        } catch(Exception e) {
+            Log.d(TAG, "Exception: " + e.toString());
+            ImageView mImageView = new ImageView(context);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+            mImageView.setLayoutParams(params);
+            mImageView.setAdjustViewBounds(true);
+            mImageView.setImageResource(imageList.get(position));
+            layout.addView(mImageView);
+        }
 
         view.addView(imageLayout, 0);
 
