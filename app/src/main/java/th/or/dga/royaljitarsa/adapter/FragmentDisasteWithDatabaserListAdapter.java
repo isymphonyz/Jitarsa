@@ -25,7 +25,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
 import ss.com.bannerslider.Slider;
@@ -34,50 +33,40 @@ import th.or.dga.royaljitarsa.R;
 import th.or.dga.royaljitarsa.connection.LikeProjectAPI;
 import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
 import th.or.dga.royaljitarsa.fragment.FragmentDisaster;
-import th.or.dga.royaljitarsa.fragment.FragmentNews;
+import th.or.dga.royaljitarsa.fragment.FragmentDisasterWithDatabase;
 import th.or.dga.royaljitarsa.utils.AppPreference;
 import th.or.dga.royaljitarsa.utils.Utils;
 
 /**
  * Created by Dooplus on 7/16/16 AD.
  */
-public class FragmentDisasterListAdapter extends BaseAdapter implements Filterable {
-    private String TAG = FragmentDisasterListAdapter.this.getClass().getSimpleName();
+public class FragmentDisasteWithDatabaserListAdapter extends BaseAdapter {
+    private String TAG = FragmentDisasteWithDatabaserListAdapter.this.getClass().getSimpleName();
 
     private Activity activity;
     private static LayoutInflater inflater=null;
     //ImageLoader imageLoader;
     Typeface tf;
 
-    private FragmentDisaster fragment;
+    private FragmentDisasterWithDatabase fragment;
 
     private ArrayList<String> categoryIDList = null;
     private ArrayList<String> idList = null;
-    //private ArrayList<String> imageList = null;
+    private ArrayList<String> imageList = null;
+    private ArrayList<String> imageCoverList = null;
     private ArrayList<String> nameList = null;
     private ArrayList<String> dateList = null;
     private ArrayList<String> descriptionList = null;
     private ArrayList<String> likeList = null;
     private ArrayList<String> provinceList = null;
 
-    private ArrayList<String> tempCategoryIDList = null;
-    private ArrayList<String> tempIDList = null;
-    //private ArrayList<String> tempImageList = null;
-    private ArrayList<String> tempNameList = null;
-    private ArrayList<String> tempDateList = null;
-    private ArrayList<String> tempDescriptionList = null;
-    private ArrayList<String> tempLikeList = null;
-    private ArrayList<String> tempProvinceList = null;
-
     private Utils utils;
 
-    private HashMap<String, ArrayList<String>> imageMap;
-    private HashMap<String, ArrayList<String>> imageCoverMap;
     private static int currentPage = 0;
     private static int NUM_PAGES = 0;
 
     //public LazyAdapter(Activity a, String[] d) {
-    public FragmentDisasterListAdapter(Activity a) {
+    public FragmentDisasteWithDatabaserListAdapter(Activity a) {
         activity = a;
         //imageLoader = new ImageLoader(activity);
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -88,60 +77,49 @@ public class FragmentDisasterListAdapter extends BaseAdapter implements Filterab
         //Slider.init(new PicassoImageLoadingService(activity));
     }
 
-    public void setFragment(FragmentDisaster fragment) {
+    public void setFragment(FragmentDisasterWithDatabase fragment) {
         this.fragment = fragment;
     }
 
-    public void setImageMap(HashMap<String, ArrayList<String>> imageMap) {
-        this.imageMap = imageMap;
+    public void setImageList(ArrayList<String> imageList) {
+        this.imageList = imageList;
     }
 
-    public void setImageCoverMap(HashMap<String, ArrayList<String>> imageCoverMap) {
-        this.imageCoverMap = imageCoverMap;
+    public void setImageCoverList(ArrayList<String> imageCoverList) {
+        this.imageCoverList = imageCoverList;
     }
 
     public void setCategoryIDList(ArrayList<String> categoryIDList) {
         this.categoryIDList = categoryIDList;
-        this.tempCategoryIDList = new ArrayList<>(categoryIDList);
     }
 
     public void setIDList(ArrayList<String> idList) {
         this.idList = idList;
-        this.tempIDList = new ArrayList<>(idList);
     }
-
-    /*public void setImageList(ArrayList<String> imageList) {
-        this.imageList = imageList;
-    }*/
 
     public void setNameList(ArrayList<String> nameList) {
         this.nameList = nameList;
-        this.tempNameList = new ArrayList<>(nameList);
     }
 
     public void setDateList(ArrayList<String> dateList) {
         this.dateList = dateList;
-        this.tempDateList = new ArrayList<>(dateList);
     }
 
     public void setDescriptionList(ArrayList<String> descriptionList) {
         this.descriptionList = descriptionList;
-        this.tempDescriptionList = new ArrayList<>(descriptionList);
     }
 
     public void setLikeList(ArrayList<String> likeList) {
         this.likeList = likeList;
-        this.tempLikeList = new ArrayList<>(likeList);
     }
 
     public void setProvinceList(ArrayList<String> provinceList) {
         this.provinceList = provinceList;
-        this.tempProvinceList = new ArrayList<>(provinceList);
     }
 
     public int getCount() {
         //return data.length;
-        return tempNameList.size();
+        return nameList.size();
     }
 
     public Object getItem(int position) {
@@ -304,13 +282,13 @@ public class FragmentDisasterListAdapter extends BaseAdapter implements Filterab
             }
         });
 
-        holder.viewPager.setAdapter(new ImageSlidePagerStringAdapter(activity, imageCoverMap.get(idList.get(position))));
+        holder.viewPager.setAdapter(new ImageSlidePagerStringAdapter(activity, imageCoverList));
         holder.indicator.setViewPager(holder.viewPager);
         holder.viewPager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, GalleryActivity.class);
-                intent.putStringArrayListExtra("imageList", imageCoverMap.get(idList.get(position)));
+                intent.putStringArrayListExtra("imageList", imageCoverList);
                 activity.startActivity(intent);
             }
         });
@@ -337,75 +315,5 @@ public class FragmentDisasterListAdapter extends BaseAdapter implements Filterab
         holder.txtName.setTypeface(Typeface.BOLD);
 
         return vi;
-    }
-
-    @Override
-    public Filter getFilter() {
-
-        Filter filter = new Filter() {
-
-            @SuppressWarnings("unchecked")
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-
-                Log.d(TAG, "publishResults constraint: " + constraint);
-                /*nameList = (ArrayList<String>) results.values;
-                notifyDataSetChanged();*/
-
-                tempNameList = (ArrayList<String>) results.values;
-                tempCategoryIDList.clear();
-                tempIDList.clear();
-                //tempNameList.clear();
-                tempDateList.clear();
-                tempDescriptionList.clear();
-                tempLikeList.clear();
-                tempProvinceList.clear();
-                if(tempNameList.size() == 0) {
-                    //tempNameList = new ArrayList<>(nameList);
-                } else {
-                    for(int x=0; x<nameList.size(); x++) {
-                        for(int y=0; y<tempNameList.size(); y++) {
-                            if(nameList.get(x).equals(tempNameList.get(y))) {
-                                tempCategoryIDList.add(categoryIDList.get(x));
-                                tempIDList.add(idList.get(x));
-                                tempDateList.add(dateList.get(x));
-                                tempDescriptionList.add(descriptionList.get(x));
-                                tempLikeList.add(likeList.get(x));
-                                tempProvinceList.add(provinceList.get(x));
-                            }
-                        }
-                    }
-                }
-                notifyDataSetChanged();
-            }
-
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-
-                Log.d(TAG, "performFiltering constraint: " + constraint);
-                FilterResults results = new FilterResults();
-                ArrayList<String> FilteredArrayNames = new ArrayList<String>();
-
-                // perform your search here using the searchConstraint String.
-
-                constraint = constraint.toString().toLowerCase().replace("   ", "").replace("  ", "");
-                for (int i = 0; i < tempNameList.size(); i++) {
-                    String dataNames = tempNameList.get(i);
-                    String dataContent = tempDescriptionList.get(i);
-                    String dataProvince = tempProvinceList.get(i);
-                    if (dataNames.toLowerCase().contains(constraint.toString()) || dataContent.toLowerCase().contains(constraint.toString()) || dataProvince.toLowerCase().contains(constraint.toString()))  {
-                        FilteredArrayNames.add(dataNames);
-                    }
-                }
-
-                results.count = FilteredArrayNames.size();
-                results.values = FilteredArrayNames;
-                Log.e(TAG, "VALUES: " + results.values.toString());
-
-                return results;
-            }
-        };
-
-        return filter;
     }
 }

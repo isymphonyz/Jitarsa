@@ -43,27 +43,33 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import io.realm.Case;
+import io.realm.OrderedCollectionChangeSet;
+import io.realm.OrderedRealmCollectionChangeListener;
 import io.realm.Realm;
+import io.realm.RealmResults;
 import th.or.dga.royaljitarsa.R;
-import th.or.dga.royaljitarsa.adapter.FragmentDisasterListAdapter;
+import th.or.dga.royaljitarsa.adapter.FragmentDisasteWithDatabaserListAdapter;
 import th.or.dga.royaljitarsa.connection.ProjectAPI;
 import th.or.dga.royaljitarsa.customview.SukhumvitEditText;
 import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
+import th.or.dga.royaljitarsa.database.ContentDetail;
+import th.or.dga.royaljitarsa.database.ContentImageCover;
 import th.or.dga.royaljitarsa.database.ContentInfo;
 import th.or.dga.royaljitarsa.utils.AppPreference;
 import th.or.dga.royaljitarsa.utils.FirebaseLogTracking;
 import th.or.dga.royaljitarsa.utils.MyConfiguration;
 
-public class FragmentDisaster extends Fragment {
+public class FragmentDisasterWithDatabase extends Fragment {
 
-    private String TAG = FragmentDisaster.this.getClass().getSimpleName();
+    private String TAG = FragmentDisasterWithDatabase.this.getClass().getSimpleName();
 
     private ProgressBar progressBar;
     private MapView mMapView;
     private LinearLayout layoutMap;
     private LinearLayout layoutList;
     private ListView listView;
-    private FragmentDisasterListAdapter adapter;
+    private FragmentDisasteWithDatabaserListAdapter adapter;
     private GoogleMap googleMap;
     private SukhumvitTextView txtTitle;
     private SukhumvitEditText inputSearch;
@@ -83,6 +89,7 @@ public class FragmentDisaster extends Fragment {
     private HashMap<String, ArrayList<Integer>> typeIDMap;
 
     private ArrayList<String> imageList;
+    private ArrayList<String> imageCoverList;
     private ArrayList<String> nameList;
     private ArrayList<String> dateList;
     private ArrayList<String> provinceList;
@@ -98,10 +105,12 @@ public class FragmentDisaster extends Fragment {
     private String categoryID = MyConfiguration.CATEGORY_DISASTER_ID;
 
     private Realm realm;
-    private ArrayList<ContentInfo> contentLists;
+    private ArrayList<ContentInfo> contentInfoLists;
+    private ArrayList<ContentImageCover> contentImageCoverLists;
+    private ArrayList<ContentDetail> contentDetailLists;
 
-    public static FragmentDisaster newInstance() {
-        FragmentDisaster fragment = new FragmentDisaster();
+    public static FragmentDisasterWithDatabase newInstance() {
+        FragmentDisasterWithDatabase fragment = new FragmentDisasterWithDatabase();
         return fragment;
     }
 
@@ -139,9 +148,12 @@ public class FragmentDisaster extends Fragment {
 
     private void initValue() {
         realm = Realm.getDefaultInstance();
-        contentLists = new ArrayList<>();
+        contentInfoLists = new ArrayList<>();
+        contentImageCoverLists = new ArrayList<>();
+        contentDetailLists = new ArrayList<>();
 
         imageList = new ArrayList<>();
+        imageCoverList = new ArrayList<>();
         nameList = new ArrayList<>();
         dateList = new ArrayList<>();
         provinceList = new ArrayList<>();
@@ -172,7 +184,7 @@ public class FragmentDisaster extends Fragment {
         layoutMap = (LinearLayout) rootView.findViewById(R.id.layoutMap);
         layoutList = (LinearLayout) rootView.findViewById(R.id.layoutList);
         listView = (ListView) rootView.findViewById(R.id.listView);
-        adapter = new FragmentDisasterListAdapter(getActivity());
+        adapter = new FragmentDisasteWithDatabaserListAdapter(getActivity());
         inputSearch = (SukhumvitEditText) rootView.findViewById(R.id.inputSearch);
         imgUp = (ImageView) rootView.findViewById(R.id.imgUp);
         imgDown = (ImageView) rootView.findViewById(R.id.imgDown);
@@ -218,8 +230,8 @@ public class FragmentDisaster extends Fragment {
         adapter.setFragment(this);
         adapter.setCategoryIDList(categoryIDList);
         adapter.setIDList(idList);
-        adapter.setImageMap(imageMap);
-        adapter.setImageCoverMap(imageCoverMap);
+        adapter.setImageList(imageList);
+        adapter.setImageCoverList(imageCoverList);
         //adapter.setImageList(imageCoverList);
         adapter.setNameList(nameList);
         adapter.setDateList(dateList);
@@ -337,75 +349,194 @@ public class FragmentDisaster extends Fragment {
 
                     Log.d(TAG, "statusDetail: " + statusDetail);
                     if(status == 200) {
-                        JSONArray jArrayContent = jObj.optJSONArray("content");
-                        for(int x=0; x<jArrayContent.length(); x++) {
-                            imageList.add(jArrayContent.optJSONObject(x).optJSONArray("detail").optJSONObject(0).optString("image"));
-                            nameList.add(jArrayContent.optJSONObject(x).optString("title"));
-                            dateList.add(jArrayContent.optJSONObject(x).optString("project_date"));
-                            provinceList.add(jArrayContent.optJSONObject(x).optJSONArray("province").optJSONObject(0).optString("province_name"));
-                            placeList.add(jArrayContent.optJSONObject(x).optString("place"));
-                            likeList.add(jArrayContent.optJSONObject(x).optString("like_count"));
-                            latitudeList.add(jArrayContent.optJSONObject(x).optString("latitude"));
-                            longitudeList.add(jArrayContent.optJSONObject(x).optString("longitude"));
-                            descriptionList.add(jArrayContent.optJSONObject(x).optJSONArray("detail").optJSONObject(0).optString("discription"));
-
-                            categoryIDList.add("" + jArrayContent.optJSONObject(x).optInt("category_id"));
-                            idList.add("" + jArrayContent.optJSONObject(x).optInt("id"));
-                            shortDescriptionList.add(jArrayContent.optJSONObject(x).optString("short_description"));
-
-                            ArrayList<String> imageCoverList = new ArrayList<>();
-                            JSONArray jArrayImageCover = jArrayContent.optJSONObject(x).optJSONArray("image_cover");
-                            for(int y=0; y<jArrayImageCover.length(); y++) {
-                                imageCoverList.add(jArrayImageCover.optJSONObject(y).optJSONObject("lg").optString("source"));
-                            }
-                            imageCoverMap.put(idList.get(x), imageCoverList);
-
-                            ArrayList<Integer> typeIDList = new ArrayList<>();
-                            ArrayList<String> typeList = new ArrayList<>();
-                            ArrayList<String> imageList = new ArrayList<>();
-                            ArrayList<String> youtubeList = new ArrayList<>();
-                            ArrayList<String> descriptionList = new ArrayList<>();
-                            JSONArray jArrayDetail = jArrayContent.optJSONObject(x).optJSONArray("detail");
-                            for(int z=0; z<jArrayDetail.length(); z++) {
-                                typeIDList.add(jArrayDetail.optJSONObject(z).optInt("type_id"));
-                                typeList.add(jArrayDetail.optJSONObject(z).optString("type"));
-                                try {
-                                    //imageList.add(jArrayDetail.optJSONObject(z).optJSONArray("image").optJSONObject(0).optJSONObject("lg").optString("source"));
-                                    imageList.add(jArrayDetail.optJSONObject(z).optJSONObject("image").optJSONObject("lg").optString("source"));
-                                } catch(Exception e) {
-                                    imageList.add("");
-                                }
-                                youtubeList.add(jArrayDetail.optJSONObject(z).optString("youtube"));
-                                descriptionList.add(jArrayDetail.optJSONObject(z).optString("discription"));
-                            }
-                            typeIDMap.put(idList.get(x), typeIDList);
-                            typeMap.put(idList.get(x), typeList);
-                            imageMap.put(idList.get(x), imageList);
-                            youtubeMap.put(idList.get(x), youtubeList);
-                            descriptionMap.put(idList.get(x), descriptionList);
-                        }
+                        clearData();
+                        deleteOldData();
+                        readJSONContent(jObj);
                     } else {
                         Toast.makeText(getActivity(), statusDetail, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                setDisasterMarker();
 
-                adapter.setCategoryIDList(categoryIDList);
-                adapter.setIDList(idList);
-                adapter.setImageMap(imageMap);
-                adapter.setImageCoverMap(imageCoverMap);
-                //adapter.setImageList(imageCoverList);
-                adapter.setNameList(nameList);
-                adapter.setDateList(dateList);
-                adapter.setDescriptionList(shortDescriptionList);
-                adapter.setLikeList(likeList);
-                adapter.setProvinceList(provinceList);
+                setDisasterMarker();
                 adapter.notifyDataSetChanged();
             }
         });
         projectAPI.execute("");
+    }
+
+    private void clearData() {
+        categoryIDList.clear();
+        idList.clear();
+        imageList.clear();
+        imageCoverList.clear();
+        nameList.clear();
+        dateList.clear();
+        shortDescriptionList.clear();
+        likeList.clear();
+        provinceList.clear();
+        adapter.notifyDataSetChanged();
+    }
+
+    private void deleteOldData() {
+        realm.beginTransaction();
+        realm.where(ContentInfo.class)
+                .equalTo("category", "5", Case.INSENSITIVE)
+                .findAll();
+        realm.deleteAll();
+        realm.commitTransaction();
+
+        realm.beginTransaction();
+        realm.where(ContentImageCover.class)
+                .equalTo("contentCategoryID", "5", Case.INSENSITIVE)
+                .findAll();
+        realm.deleteAll();
+        realm.commitTransaction();
+
+        realm.beginTransaction();
+        realm.where(ContentDetail.class)
+                .equalTo("contentCategoryID", "5", Case.INSENSITIVE)
+                .findAll();
+        realm.deleteAll();
+        realm.commitTransaction();
+    }
+
+    private void readJSONContent(JSONObject jObj) {
+        JSONArray jArrayContent = jObj.optJSONArray("content");
+        for(int x=0; x<jArrayContent.length(); x++) {
+            String id = jArrayContent.optJSONObject(x).optString("id");
+            String category = "" + jArrayContent.optJSONObject(x).optInt("category_id");
+            String title = jArrayContent.optJSONObject(x).optString("title");
+            String shortDescription = jArrayContent.optJSONObject(x).optString("short_description");
+            String latitude = jArrayContent.optJSONObject(x).optString("latitude");
+            String longitude = jArrayContent.optJSONObject(x).optString("longitude");
+            String startDate = jArrayContent.optJSONObject(x).optString("start_date");
+            String endDate = jArrayContent.optJSONObject(x).optString("end_date");
+            String projectProvince = jArrayContent.optJSONObject(x).optString("project_province");
+            String projectPlace = jArrayContent.optJSONObject(x).optString("project_place");
+            String projectDate = jArrayContent.optJSONObject(x).optString("project_date");
+            String schedultDate = jArrayContent.optJSONObject(x).optString("schedule_date");
+
+            ArrayList<String> imageCoverIDList = new ArrayList<>();
+            ArrayList<String> imageCoverURLList = new ArrayList<>();
+            JSONArray jArrayImageCover = jArrayContent.optJSONObject(x).optJSONArray("image_cover");
+            for(int y=0; y<jArrayImageCover.length(); y++) {
+                imageCoverIDList.add("" + y);
+                imageCoverURLList.add(jArrayImageCover.optJSONObject(y).optJSONObject("lg").optString("source"));
+            }
+
+            ArrayList<String> detailNoList = new ArrayList<>();
+            ArrayList<String> detailTypeIDList = new ArrayList<>();
+            ArrayList<String> detailTypeNameList = new ArrayList<>();
+            ArrayList<String> detailContentList = new ArrayList<>();
+            JSONArray jArrayDetail = jArrayContent.optJSONObject(x).optJSONArray("detail");
+            for(int y=0; y<jArrayDetail.length(); y++) {
+                String no = jArrayDetail.optJSONObject(y).optString("No");
+                String typeID = "" + jArrayDetail.optJSONObject(y).optString("type_id");
+                String typeName = jArrayDetail.optJSONObject(y).optString("type");
+                String content = "";
+                if(typeID.equals("1")) {
+                    content = jArrayDetail.optJSONObject(y).optJSONObject("image").optJSONObject("lg").optString("source");
+                } else if(typeID.equals("2")) {
+                    content = jArrayDetail.optJSONObject(y).optString("youtube");
+                } else {
+                    content = jArrayDetail.optJSONObject(y).optString("discription");
+                }
+                detailNoList.add(no);
+                detailTypeIDList.add(typeID);
+                detailTypeNameList.add(typeName);
+                detailContentList.add(content);
+            }
+
+            ContentInfo contentInfo = new ContentInfo();
+            contentInfo.setId(id);
+            contentInfo.setCategory(category);
+            contentInfo.setTitle(title);
+            contentInfo.setShortDescription(shortDescription);
+            contentInfo.setLatitude(latitude);
+            contentInfo.setLongitude(longitude);
+            contentInfo.setStartDate(startDate);
+            contentInfo.setEndDate(endDate);
+            contentInfo.setProjectProvince(projectProvince);
+            contentInfo.setProjectPlace(projectPlace);
+            contentInfo.setProjectDate(projectDate);
+            contentInfo.setScheduleDate(schedultDate);
+            contentInfoLists.add(contentInfo);
+
+            ContentImageCover contentImageCover = new ContentImageCover();
+            for(int z=0; z<imageCoverIDList.size(); z++) {
+                contentImageCover.setContentCategoryID(category);
+                contentImageCover.setContentInfoID(id);
+                contentImageCover.setImageCoverID(imageCoverIDList.get(z));
+                contentImageCover.setImageCoverURL(imageCoverURLList.get(z));
+                contentImageCoverLists.add(contentImageCover);
+            }
+
+            ContentDetail contentDetail = new ContentDetail();
+            for(int z=0; z<detailNoList.size(); z++) {
+                contentDetail.setContentCategoryID(category);
+                contentDetail.setContentInfoID(id);
+                contentDetail.setDetailNo(detailNoList.get(z));
+                contentDetail.setDetailTypeID(detailTypeIDList.get(z));
+                contentDetail.setDetailTypeName(detailTypeNameList.get(z));
+                contentDetail.setDetailContent(detailContentList.get(z));
+                contentDetailLists.add(contentDetail);
+            }
+        }
+
+        addContentToDatabase();
+    }
+
+    private void addContentToDatabase() {
+        realm.executeTransactionAsync(
+                new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        for (final ContentInfo contentInfoList : contentInfoLists) {
+                            ContentInfo contentInfo = realm.createObject(ContentInfo.class);
+                            contentInfo.setId(contentInfoList.getId());
+                            contentInfo.setCategory(contentInfoList.getCategory());
+                            contentInfo.setTitle(contentInfoList.getTitle());
+                            contentInfo.setShortDescription(contentInfoList.getShortDescription());
+                            contentInfo.setLatitude(contentInfoList.getLatitude());
+                            contentInfo.setLongitude(contentInfoList.getLongitude());
+                            contentInfo.setStartDate(contentInfoList.getStartDate());
+                            contentInfo.setEndDate(contentInfoList.getEndDate());
+                            contentInfo.setProjectProvince(contentInfoList.getProjectProvince());
+                            contentInfo.setProjectPlace(contentInfoList.getProjectPlace());
+                            contentInfo.setProjectDate(contentInfoList.getProjectDate());
+                            contentInfo.setScheduleDate(contentInfoList.getScheduleDate());
+                            Log.d(TAG, "Add Title Name = " + contentInfoList.getTitle());
+                        }
+                        for (final ContentImageCover contentImageCoverList : contentImageCoverLists) {
+                            ContentImageCover contentImageCover = realm.createObject(ContentImageCover.class);
+                            contentImageCover.setContentInfoID(contentImageCoverList.getContentInfoID());
+                            contentImageCover.setImageCoverID(contentImageCoverList.getImageCoverID());
+                            contentImageCover.setImageCoverURL(contentImageCoverList.getImageCoverURL());
+                        }
+                        for (final ContentDetail contentDetailList : contentDetailLists) {
+                            ContentDetail contentDetail = realm.createObject(ContentDetail.class);
+                            contentDetail.setContentInfoID(contentDetailList.getContentInfoID());
+                            contentDetail.setDetailNo(contentDetailList.getDetailNo());
+                            contentDetail.setDetailTypeID(contentDetailList.getDetailTypeID());
+                            contentDetail.setDetailTypeName(contentDetailList.getDetailTypeName());
+                            contentDetail.setDetailContent(contentDetailList.getDetailContent());
+                        }
+                    }
+                }, new Realm.Transaction.OnSuccess() {
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                }, new Realm.Transaction.OnError() {
+                    @Override
+                    public void onError(Throwable error) {
+                        //error.printStackTrace();
+                        //Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private String getDate() {
@@ -490,21 +621,9 @@ public class FragmentDisaster extends Fragment {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if(s.length() > 0) {
-                adapter.getFilter().filter(s);
+                //queryData(s.toString());
             } else {
-                //adapter.setNameList(nameList);
-                adapter.setCategoryIDList(categoryIDList);
-                adapter.setIDList(idList);
-                adapter.setImageMap(imageMap);
-                adapter.setImageCoverMap(imageCoverMap);
-                //adapter.setImageList(imageCoverList);
-                adapter.setNameList(nameList);
-                adapter.setDateList(dateList);
-                adapter.setDescriptionList(shortDescriptionList);
-                adapter.setLikeList(likeList);
-                adapter.setProvinceList(provinceList);
-                adapter.notifyDataSetChanged();
-                listView.invalidate();
+                //getAllBranch();
             }
             mapMarkerFilter(s);
         }
@@ -520,6 +639,77 @@ public class FragmentDisaster extends Fragment {
 
         }
     };
+
+    private void getAllContent() {
+        RealmResults<ContentInfo> resultContentInfo = realm.where(ContentInfo.class).equalTo("category", "5").findAll();
+        RealmResults<ContentImageCover> resultContentImageCover = realm.where(ContentImageCover.class).equalTo("contentCategoryID", "5").findAll();
+        RealmResults<ContentDetail> resultContentDetail = realm.where(ContentDetail.class).equalTo("contentCategoryID", "5").findAll();
+
+        clearData();
+        //setContent(resultContentInfo, resultContentImageCover, resultContentDetail);
+    }
+
+    private void queryBranch(String s) {
+        /*Log.d(TAG, "query: " + s.toString());
+
+        clearData();
+        RealmResults<DatabaseServiceLocationBranchList> result = realm.where(DatabaseServiceLocationBranchList.class)
+                .contains("name", s, Case.INSENSITIVE)
+                .or()
+                .contains("address", s, Case.INSENSITIVE)
+                .or()
+                .contains("keyword", s, Case.INSENSITIVE)
+                .or()
+                .contains("stationKey", s, Case.INSENSITIVE)
+                .findAllAsync();
+
+        result.addChangeListener(new OrderedRealmCollectionChangeListener<RealmResults<DatabaseServiceLocationBranchList>>() {
+            @Override
+            public void onChange(RealmResults<DatabaseServiceLocationBranchList> databaseServiceLocationBranchLists, OrderedCollectionChangeSet changeSet) {
+                setBranch(databaseServiceLocationBranchLists);
+            }
+        });*/
+    }
+
+    private void setBranch(RealmResults<ContentInfo> resultContentInfo, RealmResults<ContentImageCover> resultContentImageCover, RealmResults<ContentDetail> resultContentDetail) {
+        /*for (ContentInfo contentInfo : resultContentInfo) {
+            idList.add(contentInfo.getId());
+            latitudeList.add(contentInfo.getLatitude());
+            longitudeList.add(contentInfo.getLongitude());
+            typeList.add(contentInfo.getType());
+            provinceIDList.add(contentInfo.getProvinceID());
+            coolList.add(contentInfo.getCool());
+            isCoolList.add(contentInfo.getIsCool());
+            dryList.add(contentInfo.getDry());
+            nameList.add(contentInfo.getName());
+            telList.add(contentInfo.getTel());
+            telPrimaryList.add(contentInfo.getTelPrimary());
+            pptLogoList.add(contentInfo.getPptLogo());
+
+            private ArrayList<String> nameList;
+            private ArrayList<String> dateList;
+            private ArrayList<String> provinceList;
+            private ArrayList<String> placeList;
+            private ArrayList<String> likeList;
+            private ArrayList<String> latitudeList;
+            private ArrayList<String> longitudeList;
+            private ArrayList<String> descriptionList;
+
+            timeOpenList.add(contentInfo.getTimeOpen());
+            timeCloseList.add(branch.getTimeClose());
+            dateOpenList.add(branch.getDateOpen());
+            datePrimaryList.add(branch.getDatePrimary());
+            dateTimeOpenList.add(branch.getDateTimeOpen());
+            addressList.add(branch.getAddress());
+            branchTypeList.add(branch.getBranchType());
+            keywordList.add(branch.getKeyword());
+            stationKeyList.add(branch.getStationKey());
+            Log.d(TAG, "set Name: " + branch.getName());
+        }
+        adapter.notifyDataSetChanged();
+        listView.invalidate();
+        setBranchMarker();*/
+    }
 
     private void mapMarkerFilter(CharSequence s) {
         for(int x=0; x<nameList.size(); x++) {

@@ -27,6 +27,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -274,6 +275,10 @@ public class Home extends AppCompatActivity {
 
                         Fragment selectedFragment = null;
                         switch (menuItem.getItemId()) {
+                            case R.id.menuHome:
+                                bottomNavigationView.setSelectedItemId(R.id.menuHome);
+                                return true;
+                                //break;
                             case R.id.menuVolunteer:
                                 selectedFragment = FragmentJitarsa.newInstance();
                                 isCallFragment = true;
@@ -520,6 +525,7 @@ public class Home extends AppCompatActivity {
 
             }
         });
+
     }
 
     public void displayFragment(Fragment selectedFragment) {

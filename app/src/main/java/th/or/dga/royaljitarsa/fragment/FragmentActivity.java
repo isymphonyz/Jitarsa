@@ -296,8 +296,10 @@ public class FragmentActivity extends Fragment {
 
         listView.setAdapter(adapter);
 
+        String[] dayColumnNames = {"อา", "จ", "อ", "พ", "พฤ", "ศ", "ส"};
         compactCalendarView.setFirstDayOfWeek(Calendar.SUNDAY);
         setTextCalendarDate(compactCalendarView.getFirstDayOfCurrentMonth());
+        compactCalendarView.setDayColumnNames(dayColumnNames);
     }
 
     private void setListener() {
