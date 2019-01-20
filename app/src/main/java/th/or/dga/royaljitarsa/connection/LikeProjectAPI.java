@@ -119,6 +119,9 @@ public class LikeProjectAPI extends AsyncTask<String, Void, String> {
     private String setParameter() {
         JSONObject jsonObject = new JSONObject();
         try {
+            Log.d(TAG, "userID: " + userID);
+            Log.d(TAG, "categoryID: " + categoryID);
+            Log.d(TAG, "projectID: " + projectID);
             jsonObject.accumulate("userID", userID);
             jsonObject.accumulate("category_id",  categoryID);
             jsonObject.accumulate("project_id",  projectID);

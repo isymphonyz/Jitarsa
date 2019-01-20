@@ -1,14 +1,12 @@
 package th.or.dga.royaljitarsa.fragment;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -21,18 +19,17 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -57,7 +54,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 import th.or.dga.royaljitarsa.R;
 import th.or.dga.royaljitarsa.adapter.FilterProvinceListAdapter;
@@ -147,6 +143,19 @@ public class FragmentActivity extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //View rootView = inflater.inflate(R.layout.fragment_activity, container, false);
+
+        try {
+            MapsInitializer.initialize(getActivity());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d(TAG, "Exception: " + e.toString());
+        }
+
+        GoogleApiAvailability googleApiAvailability= GoogleApiAvailability.getInstance();
+
+        int status = googleApiAvailability.isGooglePlayServicesAvailable(getActivity());
+        Log.d(TAG, "ConnectionResult.SUCCESS): " + ConnectionResult.SUCCESS);
+        Log.d(TAG, "status: " + status);
 
         if(rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_activity, container, false);
@@ -242,14 +251,18 @@ public class FragmentActivity extends Fragment {
         btnNextMonth = (ImageView) rootView.findViewById(R.id.btnNextMonth);
 
         try {
-            MapsInitializer.initialize(getActivity().getApplicationContext());
+            MapsInitializer.initialize(getActivity());
         } catch (Exception e) {
             e.printStackTrace();
+            Log.d(TAG, "Exception: " + e.toString());
         }
 
         locationMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap mMap) {
+
+                MapsInitializer.initialize(getActivity().getApplicationContext());
+
                 googleMap = mMap;
 
                 // For showing a move to my location button
@@ -578,7 +591,7 @@ public class FragmentActivity extends Fragment {
                 adapter.notifyDataSetChanged();
 
                 setCalendarEvent(scheduleDateList);
-                setActivityMarker();
+                //setActivityMarker();
             }
         });
         projectAPI.execute("");
@@ -768,17 +781,25 @@ public class FragmentActivity extends Fragment {
     }
 
     private void setActivityMarker() {
-        BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.mipmap.pin_intersection_1);
+        //BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.mipmap.pin_intersection_1);
         int height = 100;
         int width = (height*79)/100;
-        BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.mipmap.pin_intersection_1);
-        Bitmap b = bitmapdraw.getBitmap();
+        //BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.mipmap.pin_intersection_1);
+        //Bitmap b = bitmapdraw.getBitmap();
+        //Bitmap b =  BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.pin_intersection_1);
+        Bitmap b = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.pin_intersection_1);
+        //BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.mipmap.pin_intersection_1);
+
+        Drawable circleDrawable = getResources().getDrawable(R.mipmap.pin_intersection_1);
+        BitmapDescriptor icon = getMarkerIconFromDrawable(circleDrawable);
+        //BitmapDescriptor icon = new BitmapDescriptor(getActivity());
+
         Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
 
         for(int x=0; x<latitudeList.size(); x++) {
             // For dropping a marker at a point on the Map
             LatLng disaster = new LatLng(Double.parseDouble(latitudeList.get(x)), Double.parseDouble(longitudeList.get(x)));
-            markerArray.add(googleMap.addMarker(new MarkerOptions().position(disaster).title(nameList.get(x)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker))));
+            markerArray.add(googleMap.addMarker(new MarkerOptions().position(disaster).title(nameList.get(x)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))));
 
             if(x == 0) {
                 // For zooming automatically to the location of the marker
@@ -837,5 +858,14 @@ public class FragmentActivity extends Fragment {
                 markerArray.get(x).setVisible(false);
             }
         }
+    }
+
+    private BitmapDescriptor getMarkerIconFromDrawable(Drawable drawable) {
+        Canvas canvas = new Canvas();
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        canvas.setBitmap(bitmap);
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        drawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 }

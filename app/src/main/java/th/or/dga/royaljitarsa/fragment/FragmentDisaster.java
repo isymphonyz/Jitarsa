@@ -22,6 +22,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -390,7 +392,12 @@ public class FragmentDisaster extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                setDisasterMarker();
+
+                GoogleApiAvailability googleApiAvailability= GoogleApiAvailability.getInstance();
+                int status = googleApiAvailability.isGooglePlayServicesAvailable(getActivity());
+                if(status == ConnectionResult.SUCCESS) {
+                    setDisasterMarker();
+                }
 
                 adapter.setCategoryIDList(categoryIDList);
                 adapter.setIDList(idList);
@@ -417,7 +424,7 @@ public class FragmentDisaster extends Fragment {
     }
 
     private void setDisasterMarker() {
-        BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.mipmap.pin_intersection_1);
+        //BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.mipmap.pin_intersection_1);
         int height = 100;
         int width = (height*79)/100;
         BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.mipmap.pin_intersection_1);
@@ -428,6 +435,7 @@ public class FragmentDisaster extends Fragment {
             // For dropping a marker at a point on the Map
             LatLng disaster = new LatLng(Double.parseDouble(latitudeList.get(x)), Double.parseDouble(longitudeList.get(x)));
             markerArray.add(googleMap.addMarker(new MarkerOptions().position(disaster).title(nameList.get(x)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker))));
+            //markerArray.add(googleMap.addMarker(new MarkerOptions().position(disaster).title(nameList.get(x))));
 
             if(x == 0) {
                 // For zooming automatically to the location of the marker

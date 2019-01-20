@@ -23,6 +23,7 @@ import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.vision.barcode.Barcode;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
@@ -56,6 +57,8 @@ public class LandingPage extends AppCompatActivity implements BaseSliderView.OnS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.landing_page);
 
+        //FirebaseApp.initializeApp(this);
+
         try {
             PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
             appVersion = pInfo.versionName;
@@ -79,7 +82,7 @@ public class LandingPage extends AppCompatActivity implements BaseSliderView.OnS
     }
 
     private void firebaseSubscriptTopic() {
-        FirebaseMessaging.getInstance().subscribeToTopic(getText(R.string.firebase_messaging_subscribe_topic).toString())
+        FirebaseMessaging.getInstance().subscribeToTopic(getText(R.string.firebase_messaging_subscribe_topic_android).toString())
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -90,6 +93,18 @@ public class LandingPage extends AppCompatActivity implements BaseSliderView.OnS
                         Log.d(TAG, msg);
                     }
                 });
+
+        /*FirebaseMessaging.getInstance().subscribeToTopic(getText(R.string.firebase_messaging_subscribe_topic_testandroid).toString())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "Success to Subscript Topic : Android";
+                        if (!task.isSuccessful()) {
+                            msg = "Fail to Subscript Topic : Android";
+                        }
+                        Log.d(TAG, msg);
+                    }
+                });*/
     }
 
     private void initValue() {

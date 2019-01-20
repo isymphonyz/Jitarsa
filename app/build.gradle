@@ -16,9 +16,10 @@ android {
         applicationId "th.or.dga.royaljitarsa"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 34
-        versionName "1.1.3"
+        versionCode 36
+        versionName "1.1.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -93,6 +94,8 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.1.3'
 
     implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
+
+    implementation 'com.android.support:multidex:1.0.3'
 
 }
 

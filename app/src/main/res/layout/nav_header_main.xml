@@ -10,7 +10,8 @@
     android:gravity="bottom"
     android:orientation="vertical"
     android:padding="16dp"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    android:visibility="visible">
 
     <ImageView
         android:id="@+id/nav_header_imageView"

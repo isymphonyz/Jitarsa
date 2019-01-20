@@ -10,11 +10,16 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+
 import java.util.ArrayList;
 
 import th.or.dga.royaljitarsa.R;
 import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
 import th.or.dga.royaljitarsa.utils.Utils;
+
+import static com.bumptech.glide.request.RequestOptions.fitCenterTransform;
 
 /**
  * Created by Dooplus on 7/16/16 AD.
@@ -86,7 +91,15 @@ public class FragmentMeImageListAdapter extends BaseAdapter {
         holder.txtNumber = (SukhumvitTextView) vi.findViewById(R.id.txtNumber);
 
         holder.txtName.setText(nameList.get(position));
-        holder.txtNumber.setText(numberList.get(position));
+        holder.txtNumber.setText(numberList.get(position) + " " + activity.getText(R.string.fragment_me_friend_txt_image).toString());
+
+        Glide.with(activity)
+                .load("https://www.khaosod.co.th/wp-content/uploads/2018/07/%E0%B8%9A%E0%B8%B4%E0%B9%8A%E0%B8%81.jpg")
+                .apply(fitCenterTransform()
+                        .placeholder(R.drawable.ic_launcher_foreground)
+                        .error(R.drawable.ic_launcher_background)
+                        .priority(Priority.HIGH))
+                .into(holder.img);
 
         return vi;
     }

@@ -133,7 +133,7 @@ public class AppPreference {
 	}
 
 	public String getFullname() {
-		String fullname = this.preference.getString(this.FULLNAME, "");
+		String fullname = this.preference.getString(this.FULLNAME, "จิตอาสา");
 		return fullname;
 	}
 

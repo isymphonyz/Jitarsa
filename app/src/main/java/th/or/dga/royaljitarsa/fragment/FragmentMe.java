@@ -21,8 +21,16 @@ public class FragmentMe extends Fragment {
     private FragmentTransaction transaction;
     private Fragment selectedFragment = null;
 
+    private String menu = "";
+
     public static FragmentMe newInstance() {
         FragmentMe fragment = new FragmentMe();
+        return fragment;
+    }
+
+    public static FragmentMe newInstance(Bundle bundle) {
+        FragmentMe fragment = new FragmentMe();
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -30,11 +38,18 @@ public class FragmentMe extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_me, container, false);
 
+        initValue();
         initUI(rootView);
         setUI();
         setListener();
 
+        checkMenu();
+
         return rootView;
+    }
+
+    private void initValue() {
+        menu = getArguments().getString("menu");
     }
 
     private void initUI(View rootView) {
@@ -52,7 +67,7 @@ public class FragmentMe extends Fragment {
         layoutPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectedFragment = FragmentPost.newInstance();
+                selectedFragment = FragmentMePost.newInstance();
                 displayFragment(selectedFragment);
             }
         });
@@ -91,5 +106,13 @@ public class FragmentMe extends Fragment {
         //transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.layoutContent, selectedFragment);
         transaction.commit();
+    }
+
+    private void checkMenu() {
+        if(menu.equals("post")) {
+            layoutPost.performClick();
+        } else {
+            layoutHistory.performClick();
+        }
     }
 }

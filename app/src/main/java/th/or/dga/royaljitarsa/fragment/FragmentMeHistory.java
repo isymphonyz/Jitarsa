@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
@@ -30,9 +31,12 @@ import static com.bumptech.glide.request.RequestOptions.centerCropTransform;
 
 public class FragmentMeHistory extends Fragment {
 
+    private String TAG = FragmentMeHistory.class.getSimpleName();
+
     private CircleImageView imgProfile;
     private SukhumvitTextView txtName;
     private SukhumvitTextView txtAge;
+    private RelativeLayout layoutMember;
     private LinearLayout layoutEditProfile;
     private LinearLayout layoutProofJitarsa;
     private ListView listView;
@@ -79,6 +83,7 @@ public class FragmentMeHistory extends Fragment {
         imgProfile = (CircleImageView) rootView.findViewById(R.id.imgProfile);
         txtName = (SukhumvitTextView) rootView.findViewById(R.id.txtName);
         txtAge = (SukhumvitTextView) rootView.findViewById(R.id.txtAge);
+        layoutMember = (RelativeLayout) rootView.findViewById(R.id.layoutMember);
         layoutEditProfile = (LinearLayout) rootView.findViewById(R.id.layoutEditProfile);
         layoutProofJitarsa = (LinearLayout) rootView.findViewById(R.id.layoutProofJitarsa);
         listView = (ListView) rootView.findViewById(R.id.listView);
@@ -96,6 +101,10 @@ public class FragmentMeHistory extends Fragment {
 
         txtName.setText(name);
         txtAge.setText(getText(R.string.fragment_me_history_txt_age) + " " + age + " " + getText(R.string.fragment_me_history_txt_year));
+
+        if(urlImageProfile.equals("")) {
+            layoutMember.setVisibility(View.GONE);
+        }
 
         adapter.setDateList(dateList);
         adapter.setProjectList(projectList);

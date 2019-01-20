@@ -57,6 +57,7 @@ import th.or.dga.royaljitarsa.fragment.FragmentHome;
 import th.or.dga.royaljitarsa.fragment.FragmentHowToPlay;
 import th.or.dga.royaljitarsa.fragment.FragmentJitarsa;
 import th.or.dga.royaljitarsa.fragment.FragmentMe;
+import th.or.dga.royaljitarsa.fragment.FragmentMePost;
 import th.or.dga.royaljitarsa.fragment.FragmentNews;
 import th.or.dga.royaljitarsa.fragment.FragmentPost;
 import th.or.dga.royaljitarsa.fragment.FragmentQRCode;
@@ -140,13 +141,13 @@ public class Home extends AppCompatActivity {
         Log.d(TAG, "getLoginStatus: " + appPreference.getLoginStatus());
 
         Menu nav_Menu = navigationView.getMenu();
-        /*if(appPreference.getLoginStatus() == 200) {
+        if(appPreference.getLoginStatus() == 200) {
             nav_Menu.findItem(R.id.menuSignIn).setVisible(false);
             nav_Menu.findItem(R.id.menuSignOut).setVisible(true);
         } else {
             nav_Menu.findItem(R.id.menuSignIn).setVisible(true);
             nav_Menu.findItem(R.id.menuSignOut).setVisible(false);
-        }*/
+        }
 
         initValue();
         setUI();
@@ -204,7 +205,7 @@ public class Home extends AppCompatActivity {
         BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
 
         View hView =  navigationView.inflateHeaderView(R.layout.nav_header_main);
-        hView.setVisibility(View.GONE);
+        //hView.setVisibility(View.GONE);
         imgProfile = (CircleImageView) hView.findViewById(R.id.imgProfile);
         txtName = (SukhumvitTextView) hView.findViewById(R.id.txtName);
 
@@ -228,13 +229,23 @@ public class Home extends AppCompatActivity {
     private void setUI() {
         Log.d(TAG, "urlImageProfile: " + urlImageProfile);
         Log.d(TAG, "name: " + name);
-        Glide.with(this)
-                .load(urlImageProfile)
-                .apply(fitCenterTransform()
-                        .placeholder(R.drawable.ic_launcher_foreground)
-                        .error(R.drawable.ic_launcher_background)
-                        .priority(Priority.HIGH))
-                .into(imgProfile);
+        if(urlImageProfile.equals("")) {
+            Glide.with(this)
+                    .load(R.mipmap.ic_launcher)
+                    .apply(fitCenterTransform()
+                            .placeholder(R.drawable.ic_launcher_foreground)
+                            .error(R.drawable.ic_launcher_background)
+                            .priority(Priority.HIGH))
+                    .into(imgProfile);
+        } else {
+            Glide.with(this)
+                    .load(urlImageProfile)
+                    .apply(fitCenterTransform()
+                            .placeholder(R.drawable.ic_launcher_foreground)
+                            .error(R.drawable.ic_launcher_background)
+                            .priority(Priority.HIGH))
+                    .into(imgProfile);
+        }
 
         txtName.setText(name);
         inputSearch.setSingleLine(true);
@@ -254,7 +265,7 @@ public class Home extends AppCompatActivity {
         //BottomNavigationItemView[] mButtons = getBottomNavigationItemViews();
 
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
-        menuView.setVisibility(View.GONE);
+        //menuView.setVisibility(View.GONE);
     }
     
     private void setListener() {
@@ -385,27 +396,31 @@ public class Home extends AppCompatActivity {
                 }
         );
 
-        bottomNavigationView.getMenu().removeItem(R.id.menuPost);
-        bottomNavigationView.getMenu().removeItem(R.id.menuSave);
+        //bottomNavigationView.getMenu().removeItem(R.id.menuPost);
+        //bottomNavigationView.getMenu().removeItem(R.id.menuSave);
         bottomNavigationView.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         Fragment selectedFragment = null;
+                        Bundle bundle = new Bundle();
                         switch (item.getItemId()) {
                             case R.id.menuHome:
                                 selectedFragment = FragmentHome.newInstance();
                                 break;
                             case R.id.menuPost:
-                                selectedFragment = FragmentPost.newInstance();
-                                selectedFragment = FragmentUnderConstruction.newInstance();
+                                //selectedFragment = FragmentPost.newInstance();
+                                //selectedFragment = FragmentUnderConstruction.newInstance();
+                                bundle.putString("menu", "post");
+                                selectedFragment = FragmentMe.newInstance(bundle);
                                 break;
                             case R.id.menuSave:
                                 selectedFragment = FragmentSave.newInstance();
                                 selectedFragment = FragmentUnderConstruction.newInstance();
                                 break;
                             case R.id.menuMe:
-                                selectedFragment = FragmentMe.newInstance();
+                                bundle.putString("menu", "history");
+                                selectedFragment = FragmentMe.newInstance(bundle);
                                 break;
                         }
                         //selectedFragment = FragmentUnderConstruction.newInstance();

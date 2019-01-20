@@ -1,6 +1,7 @@
 package th.or.dga.royaljitarsa.customview;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatTextView;
@@ -48,6 +49,7 @@ public class SukhumvitTextView extends AppCompatTextView {
         tf = Typeface.createFromAsset(context.getAssets(), "fonts/sukhumvitset.ttf");
         this.setTypeface(tf);
         this.setTextSize(TypedValue.COMPLEX_UNIT_SP, context.getResources().getDimension(R.dimen.text_size));
+        this.setTextColor(Color.BLACK);
         initialize();
     }
 

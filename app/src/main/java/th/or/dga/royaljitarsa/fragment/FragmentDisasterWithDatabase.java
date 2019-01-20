@@ -558,7 +558,8 @@ public class FragmentDisasterWithDatabase extends Fragment {
         for(int x=0; x<latitudeList.size(); x++) {
             // For dropping a marker at a point on the Map
             LatLng disaster = new LatLng(Double.parseDouble(latitudeList.get(x)), Double.parseDouble(longitudeList.get(x)));
-            markerArray.add(googleMap.addMarker(new MarkerOptions().position(disaster).title(nameList.get(x)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker))));
+            //markerArray.add(googleMap.addMarker(new MarkerOptions().position(disaster).title(nameList.get(x)).icon(BitmapDescriptorFactory.fromBitmap(smallMarker))));
+            markerArray.add(googleMap.addMarker(new MarkerOptions().position(disaster).title(nameList.get(x))));
 
             if(x == 0) {
                 // For zooming automatically to the location of the marker

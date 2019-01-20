@@ -8,7 +8,8 @@
     <string name="fb_login_protocol">fb736233786739872</string>
 
     <!-- Firebase Messaging -->
-    <string name="firebase_messaging_subscribe_topic">android</string>
+    <string name="firebase_messaging_subscribe_topic_android">android</string>
+    <string name="firebase_messaging_subscribe_topic_testandroid">testandroid</string>
 
     <!-- Log Param -->
     <string name="log_param_home">หน้าแรก</string>
@@ -173,6 +174,12 @@
     <string name="fragment_me_txt_image">รูปภาพ</string>
     <string name="fragment_me_txt_friend">เพื่อน</string>
 
+    <!-- Fragment Me Post -->
+    <string name="fragment_me_post_btn_image_or_message">เลือกรูปหรือเพิ่มข้อความ</string>
+    <string name="fragment_me_post_btn_post">โพสต์</string>
+    <string name="fragment_me_post_txt_add_image_max_5">เพิ่มรูปสูงสุด 5 รูป</string>
+    <string name="fragment_me_post_hint_input_message_here">พิมพ์ข้อความของคุณที่นี่</string>
+
     <!-- Fragment Me History -->
     <string name="fragment_me_history_txt_age">อายุ</string>
     <string name="fragment_me_history_txt_year">ปี</string>
@@ -209,6 +216,7 @@
     <!-- Fragment Me Album -->
     <string name="fragment_me_friend_txt_album">อัลบั้ม</string>
     <string name="fragment_me_friend_txt_create_album">สร้างอัลบั้ม</string>
+    <string name="fragment_me_friend_txt_image">ภาพ</string>
 
     <!-- Dialog -->
     <string name="dialog_logout_txt_title">คุณต้องการออกจากระบบ?</string>

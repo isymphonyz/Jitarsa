@@ -18,7 +18,7 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:layoutDirection="ltr"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <th.or.dga.royaljitarsa.customview.SukhumvitTextView
                 android:id="@+id/txtAllPost"
@@ -42,11 +42,18 @@
 
         </LinearLayout>
 
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/layoutTypePost"
+            android:background="@android:color/darker_gray"/>
+
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/layoutTypePost"
+            android:layout_below="@+id/line"
             android:layout_margin="8dp"
             android:scrollbars="none"
             android:cacheColorHint="@android:color/transparent"

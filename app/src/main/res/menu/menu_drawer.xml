@@ -33,17 +33,17 @@
         android:title="@string/menu_how_to_play" />
     <item android:id="@+id/menuChangePassword"
         android:icon="@mipmap/menu_9"
-        android:title="@string/menu_change_password"
-        android:visible="false" />
+        android:title="@string/menu_change_password"/>
     <item android:id="@+id/menuAbout"
         android:icon="@mipmap/menu_10"
         android:title="@string/menu_about" />
     <item android:id="@+id/menuSignIn"
         android:icon="@mipmap/menu_11"
-        android:title="@string/menu_sign_in"
-        android:visible="false" />
+        android:title="@string/menu_sign_in"/>
     <item android:id="@+id/menuSignOut"
         android:icon="@mipmap/menu_11"
-        android:title="@string/menu_sign_out"
-        android:visible="false" />
+        android:title="@string/menu_sign_out"/>
+    <item android:id="@+id/menuBlank"
+        android:icon="@null"
+        android:title=""/>
 </menu>
