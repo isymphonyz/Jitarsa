@@ -62,8 +62,8 @@ public class ImageSlidePagerAdapter extends PagerAdapter {
             Glide.with(context)
                     .load(imageList.get(position))
                     .apply(fitCenterTransform()
-                            .placeholder(R.drawable.ic_launcher_foreground)
-                            .error(R.drawable.ic_launcher_background)
+                            //.placeholder(R.mipmap.ic_launcher)
+                            //.error(R.mipmap.ic_launcher)
                             .priority(Priority.HIGH))
                     .into(imageView);
             imageView.setVisibility(View.VISIBLE);

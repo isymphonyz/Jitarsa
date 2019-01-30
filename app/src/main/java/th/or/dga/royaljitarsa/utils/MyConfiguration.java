@@ -5,8 +5,8 @@ package th.or.dga.royaljitarsa.utils;
  */
 public class MyConfiguration {
     //public static String DOMAIN = "http://demo.360innovative.com/2018/360jitarsa/";
-    //public static String DOMAIN = "http://103.77.116.70/api/";
-    public static String DOMAIN = "https://apps.royaljitarsa.com/";
+    public static String DOMAIN = "http://122.155.4.141/api/";
+    //public static String DOMAIN = "https://apps.royaljitarsa.com/";
     public static String URL_REGISTER = "register";
     public static String URL_REGISTER_FACEBOOK = "register/facebook";
     public static String URL_LOGIN = "user/login";
@@ -36,6 +36,7 @@ public class MyConfiguration {
     public static String URL_ABOUT = "about";
     public static String URL_FORGET_PASSWORD = "user/forgot_password";
     public static String URL_RESET_PASSWORD = "user/reset_password";
+    public static String URL_CALENDAR = "jitarsa/calendar";
 
     public static String CATEGORY_HOME_ID = "0";
     public static String CATEGORY_JITARSA_ID = "1";
@@ -48,4 +49,8 @@ public class MyConfiguration {
     public static String FIREBASE_ANALYTIC_PARAM_CATEGORY_NAME = "categoryName";
     public static String FIREBASE_ANALYTIC_PARAM_CONTENT_ID = "contentID";
     public static String FIREBASE_ANALYTIC_PARAM_SCREEN = "screen";
+
+    public static String PROJECT_LIMIT_PER_PAGE = "35";
+    public static String YOUTUBE_PREFIX = "https://www.youtube.com/embed/";
+    public static String YOUTUBE_SUFFIX = "?autoplay=1&vq=small";
 }

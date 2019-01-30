@@ -94,8 +94,8 @@ public class FragmentMeHistory extends Fragment {
         Glide.with(this)
                 .load(urlImageProfile)
                 .apply(centerCropTransform()
-                        .placeholder(R.drawable.ic_launcher_foreground)
-                        .error(R.drawable.ic_launcher_background)
+                        //.placeholder(R.mipmap.ic_launcher)
+                        //.error(R.mipmap.ic_launcher)
                         .priority(Priority.HIGH))
                 .into(imgProfile);
 

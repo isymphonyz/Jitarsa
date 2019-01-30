@@ -62,6 +62,7 @@ public class FragmentJitarsaV0 extends Fragment {
     
     private ProjectAPI projectAPI;
     private String categoryID = MyConfiguration.CATEGORY_JITARSA_ID;
+    private String keyword = "";
 
     public static FragmentJitarsaV0 newInstance() {
         FragmentJitarsaV0 fragment = new FragmentJitarsaV0();
@@ -77,7 +78,7 @@ public class FragmentJitarsaV0 extends Fragment {
         setUI();
         setListener();
         
-        callProjectAPI();
+        callProjectAPI(keyword, date);
 
         return rootView;
     }
@@ -112,11 +113,11 @@ public class FragmentJitarsaV0 extends Fragment {
 
     }
     
-    private void callProjectAPI() {
+    private void callProjectAPI(String keyword, String date) {
         projectAPI = new ProjectAPI();
         projectAPI.setCategoryID(categoryID);
         projectAPI.setUserID(AppPreference.getInstance(getActivity().getApplicationContext()).getUserID());
-        projectAPI.setLimit("10");
+        projectAPI.setLimit(MyConfiguration.PROJECT_LIMIT_PER_PAGE);
         projectAPI.setOffset("0");
         projectAPI.setDate(getDate());
         projectAPI.setListener(new ProjectAPI.ProjectAPIListener() {
@@ -174,8 +175,8 @@ public class FragmentJitarsaV0 extends Fragment {
                                     Glide.with(getActivity())
                                             .load(imageList.get(y))
                                             .apply(fitCenterTransform()
-                                                    .placeholder(R.drawable.ic_launcher_foreground)
-                                                    .error(R.drawable.ic_launcher_background)
+                                                    //.placeholder(R.mipmap.ic_launcher)
+                                                    //.error(R.mipmap.ic_launcher)
                                                     .priority(Priority.HIGH))
                                             .into(imageView);
                                     layoutContent.addView(imageView);

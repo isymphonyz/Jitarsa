@@ -100,8 +100,8 @@ public class FragmentDisasterDetail extends Fragment {
         Glide.with(getActivity())
                 .load(image)
                 .apply(fitCenterTransform()
-                        .placeholder(R.drawable.ic_launcher_foreground)
-                        .error(R.drawable.ic_launcher_background)
+                        //.placeholder(R.mipmap.ic_launcher)
+                        //.error(R.mipmap.ic_launcher)
                         .priority(Priority.HIGH))
                 .into(img);
 

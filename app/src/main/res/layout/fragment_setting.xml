@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:textColor="@android:color/black"
             android:text="@string/fragment_setting_txt_title"/>
 
         <ScrollView
@@ -44,6 +45,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:textColor="@android:color/black"
                         android:text="@string/fragment_setting_txt_alert_format_title"/>
 
                     <ImageView
@@ -72,6 +74,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:textColor="@android:color/black"
                         android:text="@string/fragment_setting_txt_alert_title"/>
 
                     <th.or.dga.royaljitarsa.customview.SwitchButton
@@ -98,6 +101,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:textColor="@android:color/black"
                         android:text="@string/fragment_setting_txt_location_title"/>
 
                     <th.or.dga.royaljitarsa.customview.SwitchButton
@@ -124,6 +128,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="false"
+                        android:textColor="@android:color/black"
                         android:text="@string/fragment_setting_txt_follow_title"/>
 
                     <com.warkiz.widget.IndicatorSeekBar
@@ -155,6 +160,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
+                            android:textColor="@android:color/black"
                             android:text="@string/fragment_setting_txt_follow_500_m"/>
 
                         <th.or.dga.royaljitarsa.customview.SukhumvitTextView
@@ -162,6 +168,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
+                            android:textColor="@android:color/black"
                             android:text="@string/fragment_setting_txt_follow_1_km"/>
 
                         <th.or.dga.royaljitarsa.customview.SukhumvitTextView
@@ -169,6 +176,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center_vertical|right"
+                            android:textColor="@android:color/black"
                             android:text="@string/fragment_setting_txt_follow_2_km"/>
 
                     </LinearLayout>
@@ -189,6 +197,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:textColor="@android:color/black"
                         android:text="@string/fragment_setting_txt_schedule_title"/>
 
                     <th.or.dga.royaljitarsa.customview.SwitchButton
@@ -215,6 +224,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:textColor="@android:color/black"
                         android:text="@string/fragment_setting_txt_near_by_title"/>
 
                     <th.or.dga.royaljitarsa.customview.SwitchButton
@@ -242,6 +252,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:textColor="@android:color/black"
                         android:text="@string/fragment_setting_txt_share_title"/>
 
                     <ImageView
@@ -270,6 +281,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:textColor="@android:color/black"
                         android:text="@string/fragment_setting_txt_language_title"/>
 
                     <ImageView

@@ -117,8 +117,8 @@ public class FragmentQRCode extends Fragment {
         Glide.with(this)
                 .load(qrCode)
                 .apply(centerCropTransform()
-                        .placeholder(R.drawable.ic_launcher_foreground)
-                        .error(R.drawable.ic_launcher_background)
+                        //.placeholder(R.mipmap.ic_launcher)
+                        //.error(R.mipmap.ic_launcher)
                         .priority(Priority.HIGH))
                 .into(imgQRCode);
     }

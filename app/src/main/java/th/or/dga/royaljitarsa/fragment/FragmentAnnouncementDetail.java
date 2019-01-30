@@ -7,11 +7,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.ValueCallback;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -27,8 +32,10 @@ import th.or.dga.royaljitarsa.R;
 import th.or.dga.royaljitarsa.connection.ProjectAPI;
 import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
 import th.or.dga.royaljitarsa.customview.SukhumvitZoomableV2TextView;
+import th.or.dga.royaljitarsa.utils.AppJavaScriptProxy;
 import th.or.dga.royaljitarsa.utils.MyConfiguration;
 import th.or.dga.royaljitarsa.utils.Utils;
+import th.or.dga.royaljitarsa.utils.WebViewClientImpl;
 
 import static com.bumptech.glide.request.RequestOptions.fitCenterTransform;
 
@@ -149,17 +156,18 @@ public class FragmentAnnouncementDetail extends Fragment {
                 Glide.with(getActivity())
                         .load(imageList.get(y))
                         .apply(fitCenterTransform()
-                                .placeholder(R.drawable.ic_launcher_foreground)
-                                .error(R.drawable.ic_launcher_background)
+                                //.placeholder(R.mipmap.ic_launcher)
+                                //.error(R.mipmap.ic_launcher)
                                 .priority(Priority.HIGH))
                         .into(imageView);
                 layoutContent.addView(imageView);
                 Log.d(TAG, "layoutContent.addView(imageView);");
             } else if(typeIDList.get(y) == 2) {
-                VideoView videoView = new VideoView(getActivity());
+                /*VideoView videoView = new VideoView(getActivity());
                 videoView.setLayoutParams(params);
                 layoutContent.addView(videoView);
-                Log.d(TAG, "layoutContent.addView(videoView);");
+                Log.d(TAG, "layoutContent.addView(videoView);");*/
+                setYoutubePlayer(youtubeList.get(y));
             } else if(typeIDList.get(y) == 3) {
                 //SukhumvitTextView textView = new SukhumvitTextView(getActivity());
                 SukhumvitZoomableV2TextView textView = new SukhumvitZoomableV2TextView(getActivity());
@@ -186,5 +194,54 @@ public class FragmentAnnouncementDetail extends Fragment {
         int month = calendar.get(Calendar.MONTH) + 1;
         String date = year + "-" + month;
         return date;
+    }
+
+    private void setYoutubePlayer(String urlYoutube) {
+        DisplayMetrics metrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int heightPixels = metrics.heightPixels;
+        float widthPixels = metrics.widthPixels;
+        int densityDpi = metrics.densityDpi;
+        float xdpi = metrics.xdpi;
+        float ydpi = metrics.ydpi;
+        Log.d(TAG, "width: " + widthPixels);
+
+        float height = widthPixels/16;
+        Log.d(TAG, "height: " + height);
+
+        WebView webView = new WebView(getActivity());
+        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int)height*9);
+        webView.setLayoutParams(param);
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setPluginState(WebSettings.PluginState.ON);
+
+        WebViewClientImpl webViewClient = new WebViewClientImpl(getActivity());
+        webView.setWebViewClient(webViewClient);
+        //webView.setWebViewClient(new Browser());
+        //webView.setWebChromeClient(new MyWebClient());
+
+        webView.addJavascriptInterface(new AppJavaScriptProxy(getActivity(), webView), "androidAppProxy");
+        //webView.loadUrl(url);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            webView.evaluateJavascript("fromAndroid()", new ValueCallback<String>() {
+                @Override
+                public void onReceiveValue(String value) {
+                    //store / process result received from executing Javascript.
+                }
+            });
+        }
+
+        webView.loadUrl(MyConfiguration.YOUTUBE_PREFIX + urlYoutube + MyConfiguration.YOUTUBE_SUFFIX);
+        webView.setWebChromeClient(new WebChromeClient());
+        layoutContent.addView(webView);
     }
 }

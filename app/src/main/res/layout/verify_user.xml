@@ -40,6 +40,7 @@
                 android:maxLines="1"
                 android:inputType="numberDecimal"
                 android:textColorHint="@color/hint"
+                android:textColor="@android:color/black"
                 android:hint="@string/verify_user_hint_citizen_id"
                 android:background="@android:color/white"/>
 
@@ -56,6 +57,7 @@
                 android:maxLines="1"
                 android:inputType="text"
                 android:textColorHint="@color/hint"
+                android:textColor="@android:color/black"
                 android:hint="@string/verify_user_hint_laser_code"
                 android:background="@android:color/white"/>
 

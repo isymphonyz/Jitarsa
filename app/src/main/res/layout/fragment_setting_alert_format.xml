@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:textColor="@android:color/black"
             android:text="@string/fragment_setting_txt_alert_format_title"/>
         
         <RelativeLayout
@@ -35,6 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:textColor="@android:color/black"
                     android:text="@string/fragment_setting_txt_alert_format_sound"/>
 
                 <th.or.dga.royaljitarsa.customview.SwitchButton
@@ -61,6 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:textColor="@android:color/black"
                     android:text="@string/fragment_setting_txt_alert_format_vibration"/>
 
                 <th.or.dga.royaljitarsa.customview.SwitchButton

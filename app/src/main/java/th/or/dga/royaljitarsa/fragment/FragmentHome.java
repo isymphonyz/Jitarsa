@@ -61,6 +61,8 @@ public class FragmentHome extends Fragment {
 
     private ProjectAPI projectAPI;
     private String categoryID = MyConfiguration.CATEGORY_HOME_ID;
+    private String keyword = "";
+    private String date = "";
 
     public static FragmentHome newInstance() {
         FragmentHome fragment = new FragmentHome();
@@ -80,7 +82,7 @@ public class FragmentHome extends Fragment {
             setUI();
             setListener();
 
-            callProjectAPI();
+            callProjectAPI(keyword, date);
         }
 
         return rootView;
@@ -172,11 +174,11 @@ public class FragmentHome extends Fragment {
         });
     }
 
-    private void callProjectAPI() {
+    private void callProjectAPI(String keyword, String date) {
         projectAPI = new ProjectAPI();
         projectAPI.setCategoryID(categoryID);
         projectAPI.setUserID(AppPreference.getInstance(getActivity().getApplicationContext()).getUserID());
-        projectAPI.setLimit("10");
+        projectAPI.setLimit(MyConfiguration.PROJECT_LIMIT_PER_PAGE);
         projectAPI.setOffset("0");
         projectAPI.setDate(getDate());
         projectAPI.setListener(new ProjectAPI.ProjectAPIListener() {
@@ -196,6 +198,7 @@ public class FragmentHome extends Fragment {
 
                     Log.d(TAG, "statusDetail: " + statusDetail);
                     if(status == 200) {
+                        clearData();
                         JSONArray jArrayContent = jObj.optJSONArray("content");
                         for(int x=0; x<jArrayContent.length(); x++) {
                             categoryIDList.add("" + jArrayContent.optJSONObject(x).optInt("category_id"));
@@ -248,6 +251,25 @@ public class FragmentHome extends Fragment {
             }
         });
         projectAPI.execute("");
+    }
+
+    private void clearData() {
+        categoryIDList.clear();
+        idList.clear();
+        //imageCoverList.clear();
+        nameList.clear();
+        dateList.clear();
+        provinceList.clear();
+        placeList.clear();
+        likeList.clear();
+        shortDescriptionList.clear();
+
+        imageCoverMap.clear();
+        imageMap.clear();
+        descriptionMap.clear();
+        youtubeMap.clear();
+        typeIDMap.clear();
+        typeMap.clear();
     }
 
     private String getDate() {

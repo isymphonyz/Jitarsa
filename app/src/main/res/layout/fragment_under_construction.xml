@@ -26,6 +26,7 @@
             android:layout_margin="16dp"
             android:layout_gravity="center"
             android:gravity="center"
+            android:textColor="@android:color/black"
             android:text="@string/under_construction_txt_title"/>
 
     </LinearLayout>

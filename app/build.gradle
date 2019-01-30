@@ -16,8 +16,8 @@ android {
         applicationId "th.or.dga.royaljitarsa"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 36
-        versionName "1.1.5"
+        versionCode 39
+        versionName "1.1.9"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }

@@ -103,6 +103,8 @@ public class FragmentDisasterWithDatabase extends Fragment {
 
     private ProjectAPI projectAPI;
     private String categoryID = MyConfiguration.CATEGORY_DISASTER_ID;
+    private String keyword = "";
+    private String date = "";
 
     private Realm realm;
     private ArrayList<ContentInfo> contentInfoLists;
@@ -132,7 +134,7 @@ public class FragmentDisasterWithDatabase extends Fragment {
             initUI(rootView);
             setUI();
 
-            callProjectAPI();
+            callProjectAPI(keyword, date);
 
             setListener();
         }
@@ -325,11 +327,11 @@ public class FragmentDisasterWithDatabase extends Fragment {
         mMapView.onLowMemory();
     }
 
-    private void callProjectAPI() {
+    private void callProjectAPI(String keyword, String date) {
         projectAPI = new ProjectAPI();
         projectAPI.setCategoryID(categoryID);
         projectAPI.setUserID(AppPreference.getInstance(getActivity().getApplicationContext()).getUserID());
-        projectAPI.setLimit("10");
+        projectAPI.setLimit(MyConfiguration.PROJECT_LIMIT_PER_PAGE);
         projectAPI.setOffset("0");
         projectAPI.setDate(getDate());
         //projectAPI.setDate("2018-11");

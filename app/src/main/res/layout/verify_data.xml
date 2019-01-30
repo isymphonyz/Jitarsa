@@ -44,6 +44,7 @@
                     android:maxLines="1"
                     android:inputType="numberDecimal"
                     android:textColorHint="@color/hint"
+                    android:textColor="@android:color/black"
                     android:hint="@string/verify_data_hint_citizen_id"
                     android:background="@android:color/white"/>
 
@@ -60,6 +61,7 @@
                     android:maxLines="1"
                     android:inputType="text"
                     android:textColorHint="@color/hint"
+                    android:textColor="@android:color/black"
                     android:hint="@string/verify_data_hint_laser_code"
                     android:background="@android:color/white"/>
 
@@ -76,6 +78,7 @@
                     android:maxLines="1"
                     android:inputType="text"
                     android:textColorHint="@color/hint"
+                    android:textColor="@android:color/black"
                     android:hint="@string/verify_data_hint_name"
                     android:background="@android:color/white"/>
 
@@ -92,6 +95,7 @@
                     android:maxLines="1"
                     android:inputType="numberDecimal"
                     android:textColorHint="@color/hint"
+                    android:textColor="@android:color/black"
                     android:hint="@string/verify_data_hint_age"
                     android:background="@android:color/white"/>
 
@@ -109,6 +113,7 @@
                     android:inputType="date"
                     android:textColorHint="@color/hint"
                     android:hint="@string/verify_data_hint_birth_date"
+                    android:textColor="@android:color/black"
                     android:background="@android:color/white"/>
 
                 <th.or.dga.royaljitarsa.customview.SukhumvitEditText
@@ -124,6 +129,7 @@
                     android:maxLines="1"
                     android:inputType="date"
                     android:textColorHint="@color/hint"
+                    android:textColor="@android:color/black"
                     android:hint="@string/verify_data_hint_registed_date"
                     android:background="@android:color/white"/>
 
@@ -140,6 +146,7 @@
                     android:maxLines="1"
                     android:inputType="textEmailAddress"
                     android:textColorHint="@color/hint"
+                    android:textColor="@android:color/black"
                     android:hint="@string/verify_data_hint_email"
                     android:background="@android:color/white"/>
 
@@ -156,6 +163,7 @@
                     android:maxLines="1"
                     android:inputType="phone"
                     android:textColorHint="@color/hint"
+                    android:textColor="@android:color/black"
                     android:hint="@string/verify_data_hint_tel"
                     android:background="@android:color/white"/>
 

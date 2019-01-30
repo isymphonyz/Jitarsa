@@ -12,14 +12,17 @@ import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -98,6 +101,8 @@ public class FragmentDisaster extends Fragment {
 
     private ProjectAPI projectAPI;
     private String categoryID = MyConfiguration.CATEGORY_DISASTER_ID;
+    private String keyword = "";
+    private String date = "";
 
     private Realm realm;
     private ArrayList<ContentInfo> contentLists;
@@ -125,7 +130,7 @@ public class FragmentDisaster extends Fragment {
             initUI(rootView);
             setUI();
 
-            callProjectAPI();
+            callProjectAPI(keyword, date);
 
             setListener();
         }
@@ -233,7 +238,22 @@ public class FragmentDisaster extends Fragment {
     }
 
     private void setListener() {
-        inputSearch.addTextChangedListener(myTextWatcher);
+        //inputSearch.addTextChangedListener(myTextWatcher);
+
+        inputSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    keyword = v.getText().toString();
+                    date = "";
+                    Log.d(TAG, "Keyword: " + keyword);
+                    callProjectAPI(keyword, date);
+                    return true;
+                }
+                return false;
+            }
+        });
+
         layoutMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -315,11 +335,11 @@ public class FragmentDisaster extends Fragment {
         mMapView.onLowMemory();
     }
 
-    private void callProjectAPI() {
+    private void callProjectAPI(String keyword, String date) {
         projectAPI = new ProjectAPI();
         projectAPI.setCategoryID(categoryID);
         projectAPI.setUserID(AppPreference.getInstance(getActivity().getApplicationContext()).getUserID());
-        projectAPI.setLimit("10");
+        projectAPI.setLimit(MyConfiguration.PROJECT_LIMIT_PER_PAGE);
         projectAPI.setOffset("0");
         projectAPI.setDate(getDate());
         //projectAPI.setDate("2018-11");
@@ -339,6 +359,7 @@ public class FragmentDisaster extends Fragment {
 
                     Log.d(TAG, "statusDetail: " + statusDetail);
                     if(status == 200) {
+                        clearData();
                         JSONArray jArrayContent = jObj.optJSONArray("content");
                         for(int x=0; x<jArrayContent.length(); x++) {
                             imageList.add(jArrayContent.optJSONObject(x).optJSONArray("detail").optJSONObject(0).optString("image"));
@@ -413,6 +434,27 @@ public class FragmentDisaster extends Fragment {
             }
         });
         projectAPI.execute("");
+    }
+
+    private void clearData() {
+        categoryIDList.clear();
+        idList.clear();
+        //imageCoverList.clear();
+        nameList.clear();
+        dateList.clear();
+        provinceList.clear();
+        placeList.clear();
+        likeList.clear();
+        shortDescriptionList.clear();
+        latitudeList.clear();
+        longitudeList.clear();
+
+        imageCoverMap.clear();
+        imageMap.clear();
+        descriptionMap.clear();
+        youtubeMap.clear();
+        typeIDMap.clear();
+        typeMap.clear();
     }
 
     private String getDate() {

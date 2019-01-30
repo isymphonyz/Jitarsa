@@ -170,8 +170,8 @@ public class FragmentAbout extends Fragment {
         Glide.with(getActivity())
                 .load(url)
                 .apply(fitCenterTransform()
-                        .placeholder(R.drawable.ic_launcher_foreground)
-                        .error(R.drawable.ic_launcher_background)
+                        //.placeholder(R.mipmap.ic_launcher)
+                        //.error(R.mipmap.ic_launcher)
                         .priority(Priority.HIGH))
                 .into(imageView);
         layout.addView(imageView);

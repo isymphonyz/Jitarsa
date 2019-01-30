@@ -3,67 +3,39 @@ package th.or.dga.royaljitarsa.connection;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import org.json.JSONObject;
-
 import java.io.IOException;
 
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import th.or.dga.royaljitarsa.utils.MyConfiguration;
 
-public class ProjectAPI extends AsyncTask<String, Void, String> {
+public class CalendarAPI extends AsyncTask<String, Void, String> {
 
-    public interface ProjectAPIListener {
-        void onProjectAPIPreExecuteConcluded();
-        void onProjectAPIPostExecuteConcluded(String result);
+    public interface CalendarAPIListener {
+        void onCalendarAPIPreExecuteConcluded();
+        void onCalendarAPIPostExecuteConcluded(String result);
     }
 
-    private String TAG = ProjectAPI.this.getClass().getSimpleName();
+    private String TAG = CalendarAPI.this.getClass().getSimpleName();
 
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     private OkHttpClient okHttpClient;
-    private String url = MyConfiguration.DOMAIN + MyConfiguration.URL_PROJECT;
+    private String url = MyConfiguration.DOMAIN + MyConfiguration.URL_CALENDAR;
     private String userID = "";
-    private String categoryID = "";
-    private String limit = "";
-    private String offset = "";
-    private String calendar = "";
-    private String date = "";
-    private String keyword = "";
 
-    private ProjectAPIListener mListener;
+    private CalendarAPIListener mListener;
 
-    final public void setListener(ProjectAPIListener listener) {
+    final public void setListener(CalendarAPIListener listener) {
         mListener = listener;
     }
 
     public void setUserID(String userID) {
         this.userID = userID;
-    }
-    public void setCategoryID(String categoryID) {
-        this.categoryID = categoryID;
-    }
-    public void setLimit(String limit) {
-        this.limit = limit;
-    }
-    public void setOffset(String offset) {
-        this.offset = offset;
-    }
-
-    public void setCalendar(String calendar) {
-        this.calendar = calendar;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
     }
 
     @Override
@@ -73,19 +45,16 @@ public class ProjectAPI extends AsyncTask<String, Void, String> {
         Log.d(TAG, "onPostExecute");
 
         if (mListener != null) {
-            mListener.onProjectAPIPreExecuteConcluded();
+            mListener.onCalendarAPIPreExecuteConcluded();
         }
     }
 
     @Override
     protected String doInBackground(String... params) {
         String result = "";
-        /*RequestBody requestBody = new MultipartBody.Builder()
+        RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("userID", userID)
-                .addFormDataPart("category_id", categoryID)
-                .addFormDataPart("limit", limit)
-                .addFormDataPart("offset", offset)
                 //.addFormDataPart("image", "logo-square.png", RequestBody.create(MEDIA_TYPE_PNG, new File("website/static/logo-square.png")))
                 .build();
 
@@ -94,14 +63,13 @@ public class ProjectAPI extends AsyncTask<String, Void, String> {
                 //.header("Authorization", "Client-ID " + IMGUR_CLIENT_ID)
                 .url(url)
                 .post(requestBody)
-                .build();*/
+                .build();
 
-        Log.d(TAG, "url: " + url);
-        RequestBody body = RequestBody.create(JSON, setParameter());
+        /*RequestBody body = RequestBody.create(JSON, setParameter());
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)
-                .build();
+                .build();*/
 
         try {
 
@@ -119,7 +87,7 @@ public class ProjectAPI extends AsyncTask<String, Void, String> {
         }
 
         if (mListener != null)
-            mListener.onProjectAPIPreExecuteConcluded();
+            mListener.onCalendarAPIPreExecuteConcluded();
 
         return result;
     }
@@ -130,29 +98,24 @@ public class ProjectAPI extends AsyncTask<String, Void, String> {
         Log.d(TAG, "onPostExecute: " + result);
 
         if (mListener != null) {
-            mListener.onProjectAPIPostExecuteConcluded(result);
+            mListener.onCalendarAPIPostExecuteConcluded(result);
         }
     }
 
     @Override
     protected void onProgressUpdate(Void... values) {}
 
-    private String setParameter() {
+    /*private String setParameter() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.accumulate("userID", userID);
-            jsonObject.accumulate("category_id",  categoryID);
-            jsonObject.accumulate("limit",  limit);
-            jsonObject.accumulate("offset",  offset);
-            jsonObject.accumulate("calendar",  calendar);
-            jsonObject.accumulate("date",  date);
-            jsonObject.accumulate("keyword",  keyword);
-            //jsonObject.accumulate("date",  "2018-11");
+            jsonObject.accumulate("userpassword", password);
+            jsonObject.accumulate("fullname",  fullName);
+            jsonObject.accumulate("email",  email);
+            jsonObject.accumulate("token_id",  tokenID);
         } catch (Exception e) {
 
         }
 
-        Log.d(TAG, "Parameter: " + jsonObject.toString());
         return jsonObject.toString();
-    }
+    }*/
 }

@@ -41,6 +41,7 @@
                 android:inputType="textEmailAddress"
                 android:textColorHint="@color/hint"
                 android:hint="@string/register_hint_email"
+                android:textColor="@android:color/black"
                 android:background="@android:color/white"/>
 
             <th.or.dga.royaljitarsa.customview.SukhumvitEditText
@@ -57,6 +58,7 @@
                 android:inputType="text"
                 android:textColorHint="@color/hint"
                 android:hint="@string/register_hint_name"
+                android:textColor="@android:color/black"
                 android:background="@android:color/white"/>
 
             <th.or.dga.royaljitarsa.customview.SukhumvitEditText
@@ -73,6 +75,7 @@
                 android:inputType="text"
                 android:textColorHint="@color/hint"
                 android:hint="@string/register_hint_username"
+                android:textColor="@android:color/black"
                 android:background="@android:color/white"/>
 
             <th.or.dga.royaljitarsa.customview.SukhumvitEditText
@@ -89,6 +92,7 @@
                 android:inputType="textPassword"
                 android:textColorHint="@color/hint"
                 android:hint="@string/register_hint_password"
+                android:textColor="@android:color/black"
                 android:background="@android:color/white"/>
 
             <th.or.dga.royaljitarsa.customview.SukhumvitEditText
@@ -105,6 +109,7 @@
                 android:inputType="textPassword"
                 android:textColorHint="@color/hint"
                 android:hint="@string/register_hint_confirm_password"
+                android:textColor="@android:color/black"
                 android:background="@android:color/white"/>
 
             <CheckBox
@@ -121,6 +126,7 @@
                 android:layout_margin="16dp"
                 android:layout_toRightOf="@+id/btnAgreement"
                 android:layout_below="@+id/inputConfirmPassword"
+                android:textColor="@android:color/black"
                 android:text="@string/register_checkbox_agreement"/>
 
             <th.or.dga.royaljitarsa.customview.SukhumvitTextView

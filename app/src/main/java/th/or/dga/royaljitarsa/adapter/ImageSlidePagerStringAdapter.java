@@ -98,24 +98,24 @@ public class ImageSlidePagerStringAdapter extends PagerAdapter {
         Glide.with(context)
                 .load(imageList.get(position))
                 .apply(fitCenterTransform()
-                        .placeholder(R.drawable.ic_launcher_foreground)
-                        .error(R.drawable.ic_launcher_background)
+                        //.placeholder(R.mipmap.ic_launcher)
+                        //.error(R.mipmap.ic_launcher)
                         .priority(Priority.HIGH))
                 .into(imageView);
 
         Glide.with(context)
                 .load(imageList.get(position))
                 .apply(fitCenterTransform()
-                        .placeholder(R.drawable.ic_launcher_foreground)
-                        .error(R.drawable.ic_launcher_background)
+                        //.placeholder(R.mipmap.ic_launcher)
+                        //.error(R.mipmap.ic_launcher)
                         .priority(Priority.HIGH))
                 .into(myZoomageView);
 
         Glide.with(context)
                 .load(imageList.get(position))
                 .apply(fitCenterTransform()
-                        .placeholder(R.drawable.ic_launcher_foreground)
-                        .error(R.drawable.ic_launcher_background)
+                        //.placeholder(R.mipmap.ic_launcher)
+                        //.error(R.mipmap.ic_launcher)
                         .priority(Priority.HIGH))
                 .into(photoView);
 

@@ -31,6 +31,13 @@ public class AppPreference {
 	private final String FACEBOOK_TOKEN = "facebookToken";
 	private final String FACEBOOK_USER_ID = "facebookUserID";
 	private final String FACEBOOK_APPLICATION_ID = "facebookApplicationID";
+	private final String SETTING_NOTIFICATION = "settingNotification";
+	private final String SETTING_LOCATION = "settingLocation";
+	private final String SETTING_DISTANCE = "settingDistance";
+	private final String SETTING_NOTIFICATION_ACTIVITY = "settingNotificationActivity";
+	private final String SETTING_NOTIFICATION_ACTIVITY_NEARBY = "settingNotificationActivityNearBy";
+	private final String SETTING_VIBRATION = "settingVibration";
+	private final String SETTING_SOUND = "settingSound";
 	
 	private SharedPreferences preference = null;
 	private Context context = null;
@@ -333,5 +340,82 @@ public class AppPreference {
 	public String getFacebookApplicationID() {
 		String facebookApplicationID = this.preference.getString(this.FACEBOOK_APPLICATION_ID, "");
 		return facebookApplicationID;
+	}
+
+	public void setSettingNotification(boolean settingNotification) {
+		SharedPreferences.Editor editor = this.preference.edit();
+		editor.putBoolean(this.SETTING_NOTIFICATION, settingNotification);
+		editor.commit();
+	}
+
+	public boolean getSettingNotification() {
+		boolean settingNotification = this.preference.getBoolean(this.SETTING_NOTIFICATION, true);
+		return settingNotification;
+	}
+
+	public void setSettingLocation(boolean settingLocation) {
+		SharedPreferences.Editor editor = this.preference.edit();
+		editor.putBoolean(this.SETTING_LOCATION, settingLocation);
+		editor.commit();
+	}
+
+	public boolean getSettingLocation() {
+		boolean settingLocation = this.preference.getBoolean(this.SETTING_LOCATION, true);
+		return settingLocation;
+	}
+
+	public void setSettingNotificationActivity(boolean settingNotificationActivity) {
+		SharedPreferences.Editor editor = this.preference.edit();
+		editor.putBoolean(this.SETTING_NOTIFICATION_ACTIVITY, settingNotificationActivity);
+		editor.commit();
+	}
+
+	public boolean getSettingNotificationActivity() {
+		boolean settingNotificationActivity = this.preference.getBoolean(this.SETTING_NOTIFICATION_ACTIVITY, true);
+		return settingNotificationActivity;
+	}
+
+	public void setSettingNotificationActivityNearBy(boolean settingNotificationActivityNearBy) {
+		SharedPreferences.Editor editor = this.preference.edit();
+		editor.putBoolean(this.SETTING_NOTIFICATION_ACTIVITY_NEARBY, settingNotificationActivityNearBy);
+		editor.commit();
+	}
+
+	public boolean getSettingNotificationActivityNearBy() {
+		boolean settingNotificationActivityNearBy = this.preference.getBoolean(this.SETTING_NOTIFICATION_ACTIVITY_NEARBY, true);
+		return settingNotificationActivityNearBy;
+	}
+
+	public void setSettingVibration(boolean settingVibration) {
+		SharedPreferences.Editor editor = this.preference.edit();
+		editor.putBoolean(this.SETTING_VIBRATION, settingVibration);
+		editor.commit();
+	}
+
+	public boolean getSettingVibration() {
+		boolean settingVibration = this.preference.getBoolean(this.SETTING_VIBRATION, true);
+		return settingVibration;
+	}
+
+	public void setSettingSound(boolean settingSound) {
+		SharedPreferences.Editor editor = this.preference.edit();
+		editor.putBoolean(this.SETTING_SOUND, settingSound);
+		editor.commit();
+	}
+
+	public boolean getSettingSound() {
+		boolean settingSound = this.preference.getBoolean(this.SETTING_SOUND, true);
+		return settingSound;
+	}
+
+	public void setSettingDistance(int settingDistance) {
+		SharedPreferences.Editor editor = this.preference.edit();
+		editor.putInt(this.SETTING_DISTANCE, settingDistance);
+		editor.commit();
+	}
+
+	public int getSettingDistance() {
+		int settingDistance = this.preference.getInt(this.SETTING_DISTANCE, 1);
+		return settingDistance;
 	}
 }

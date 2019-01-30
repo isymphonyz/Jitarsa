@@ -143,16 +143,16 @@ public class FragmentMePostImageOrMessage extends Fragment {
             Glide.with(this)
                     .load(R.mipmap.ic_launcher)
                     .apply(circleCropTransform()
-                            .placeholder(R.drawable.ic_launcher_foreground)
-                            .error(R.drawable.ic_launcher_background)
+                            //.placeholder(R.mipmap.ic_launcher)
+                            //.error(R.mipmap.ic_launcher)
                             .priority(Priority.HIGH))
                     .into(imgUser);
         } else {
             Glide.with(this)
                     .load(urlImageProfile)
                     .apply(circleCropTransform()
-                            .placeholder(R.drawable.ic_launcher_foreground)
-                            .error(R.drawable.ic_launcher_background)
+                            //.placeholder(R.mipmap.ic_launcher)
+                            //.error(R.mipmap.ic_launcher)
                             .priority(Priority.HIGH))
                     .into(imgUser);
         }
@@ -290,8 +290,8 @@ public class FragmentMePostImageOrMessage extends Fragment {
                             Glide.with(this)
                                     .load(data.getClipData().getItemAt(x).getUri())
                                     .apply(fitCenterTransform()
-                                            .placeholder(R.drawable.ic_launcher_foreground)
-                                            .error(R.drawable.ic_launcher_background)
+                                            //.placeholder(R.mipmap.ic_launcher)
+                                            //.error(R.mipmap.ic_launcher)
                                             .priority(Priority.HIGH))
                                     .into(imageViewList.get(x));
                         }
@@ -300,8 +300,8 @@ public class FragmentMePostImageOrMessage extends Fragment {
                         Glide.with(this)
                                 .load(data.getData())
                                 .apply(fitCenterTransform()
-                                        .placeholder(R.drawable.ic_launcher_foreground)
-                                        .error(R.drawable.ic_launcher_background)
+                                        //.placeholder(R.mipmap.ic_launcher)
+                                        //.error(R.mipmap.ic_launcher)
                                         .priority(Priority.HIGH))
                                 .into(imageViewList.get(indexImage));
                     }
@@ -345,8 +345,8 @@ public class FragmentMePostImageOrMessage extends Fragment {
         Glide.with(this)
                 .load(R.mipmap.post_add_picture)
                 .apply(fitCenterTransform()
-                        .placeholder(R.drawable.ic_launcher_foreground)
-                        .error(R.drawable.ic_launcher_background)
+                        //.placeholder(R.mipmap.ic_launcher)
+                        //.error(R.mipmap.ic_launcher)
                         .priority(Priority.HIGH))
                 .into(imageViewList.get(indexBtnClose));
     }

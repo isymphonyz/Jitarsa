@@ -184,8 +184,8 @@ public class FragmentDisasteWithDatabaserListAdapter extends BaseAdapter {
         /*Glide.with(activity)
                 .load(imageList.get(position))
                 .apply(fitCenterTransform()
-                        .placeholder(R.drawable.ic_launcher_foreground)
-                        .error(R.drawable.ic_launcher_background)
+                        .placeholder(R.mipmap.ic_launcher)
+                        .error(R.mipmap.ic_launcher)
                         .priority(Priority.HIGH))
                 .into(holder.img);*/
 

@@ -59,6 +59,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:text="@string/app_name"
+            android:textColor="@android:color/black"
             android:textStyle="bold"/>
 
         <th.or.dga.royaljitarsa.customview.SukhumvitTextView
@@ -67,6 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
+            android:textColor="@android:color/black"
             android:text="@string/app_name"/>
 
         <th.or.dga.royaljitarsa.customview.SukhumvitTextView
@@ -75,12 +77,13 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
+            android:textColor="@android:color/black"
             android:text="@string/app_name"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <LinearLayout
                 android:id="@+id/layoutLike"
@@ -109,7 +112,9 @@
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_margin="8dp"
+                android:padding="8dp"
                 android:gravity="center"
                 android:background="@drawable/radius_blue_corner_white_background"
                 android:text="@string/fragment_activity_btn_share" />
@@ -124,6 +129,7 @@
             android:padding="8dp"
             android:gravity="center"
             android:text="@string/fragment_activity_detail_btn_description"
+            android:textColor="@android:color/black"
             android:background="@drawable/radius_blue_corner_white_background"/>
 
     </LinearLayout>

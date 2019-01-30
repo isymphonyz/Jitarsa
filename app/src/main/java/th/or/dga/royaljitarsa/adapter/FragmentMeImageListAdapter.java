@@ -96,8 +96,8 @@ public class FragmentMeImageListAdapter extends BaseAdapter {
         Glide.with(activity)
                 .load("https://www.khaosod.co.th/wp-content/uploads/2018/07/%E0%B8%9A%E0%B8%B4%E0%B9%8A%E0%B8%81.jpg")
                 .apply(fitCenterTransform()
-                        .placeholder(R.drawable.ic_launcher_foreground)
-                        .error(R.drawable.ic_launcher_background)
+                        //.placeholder(R.mipmap.ic_launcher)
+                        //.error(R.mipmap.ic_launcher)
                         .priority(Priority.HIGH))
                 .into(holder.img);
 

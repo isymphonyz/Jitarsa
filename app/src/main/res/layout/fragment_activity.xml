@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:textColor="@android:color/black"
             android:text="@string/fragment_activity_txt_title"/>
 
         <LinearLayout
@@ -35,6 +36,7 @@
             <th.or.dga.royaljitarsa.customview.SukhumvitTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
                 android:text="@string/fragment_activity_txt_filter"/>
 
         </LinearLayout>
@@ -46,6 +48,9 @@
             android:layout_below="@+id/txtTitle"
             android:layout_margin="8dp"
             android:lines="1"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"
+            android:textColor="@android:color/black"
             android:hint="@string/fragment_activity_hint_search"/>
 
         <ListView
@@ -102,6 +107,7 @@
                         android:layout_gravity="center_vertical|left"
                         android:gravity="center_vertical|left"
                         android:text="@string/fragment_activity_filter_btn_calendar"
+                        android:textColor="@android:color/black"
                         android:textSize="6sp"/>
 
                     <th.or.dga.royaljitarsa.customview.SukhumvitTextView
@@ -113,6 +119,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:text="@string/fragment_activity_filter_btn_location"
+                        android:textColor="@android:color/black"
                         android:textSize="6sp"/>
 
                     <th.or.dga.royaljitarsa.customview.SukhumvitTextView
@@ -124,6 +131,7 @@
                         android:layout_gravity="center_vertical|right"
                         android:gravity="center_vertical|right"
                         android:text="@string/fragment_activity_filter_btn_province"
+                        android:textColor="@android:color/black"
                         android:textSize="6sp"/>
 
                 </LinearLayout>
@@ -154,6 +162,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:layout_centerInParent="true"
+                            android:textColor="@android:color/black"
                             android:text="@string/app_name"/>
 
                         <ImageView
@@ -199,6 +208,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:lines="1"
+                        android:textColor="@android:color/black"
                         android:hint="@string/fragment_activity_hint_search"/>
 
                     <com.google.android.gms.maps.MapView
@@ -223,7 +233,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:lines="1"
-                        android:hint="@string/fragment_activity_hint_search"/>
+                        android:hint="@string/fragment_activity_hint_search"
+                        android:textColor="@android:color/black"/>
 
                     <ListView
                         android:id="@+id/provinceListView"

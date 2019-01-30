@@ -16,14 +16,17 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
@@ -47,6 +50,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,6 +62,7 @@ import java.util.List;
 import th.or.dga.royaljitarsa.R;
 import th.or.dga.royaljitarsa.adapter.FilterProvinceListAdapter;
 import th.or.dga.royaljitarsa.adapter.FragmentActivityListAdapter;
+import th.or.dga.royaljitarsa.connection.CalendarAPI;
 import th.or.dga.royaljitarsa.connection.ProjectAPI;
 import th.or.dga.royaljitarsa.connection.ProvinceAPI;
 import th.or.dga.royaljitarsa.customview.SukhumvitEditText;
@@ -122,9 +127,15 @@ public class FragmentActivity extends Fragment {
     private HashMap<String, ArrayList<String>> typeMap;
     private HashMap<String, ArrayList<Integer>> typeIDMap;
 
+    private CalendarAPI calendarAPI;
+    private ArrayList<String> calendarList;
+
     private ProvinceAPI provinceAPI;
     private ProjectAPI projectAPI;
     private String categoryID = MyConfiguration.CATEGORY_ACTIVITY_ID;
+    private String calendar = "";
+    private String keyword = "";
+    private String date = "";
 
     private int textSize8sp = 0;
     private String[] arrMonthEN;
@@ -171,7 +182,10 @@ public class FragmentActivity extends Fragment {
             setUI();
             setListener();
 
-            callProjectAPI();
+            setCurrentDate();
+            callProjectAPI(keyword, date, calendar);
+
+            callCalendarAPI();
         }
 
         return rootView;
@@ -292,6 +306,8 @@ public class FragmentActivity extends Fragment {
     }
 
     private void setUI() {
+        //inputSearch.addTextChangedListener(myTextWatcher);
+
         adapter.setFragment(this);
         adapter.setCategoryIDList(categoryIDList);
         adapter.setIDList(idList);
@@ -316,7 +332,6 @@ public class FragmentActivity extends Fragment {
     }
 
     private void setListener() {
-        inputSearch.addTextChangedListener(myTextWatcher);
         inputFilterProvinceSearch.addTextChangedListener(provinceTextWatcher);
         inputFilterMapSearch.addTextChangedListener(mapTextWatcher);
 
@@ -399,6 +414,27 @@ public class FragmentActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 compactCalendarView.scrollLeft();
+
+                int year = Integer.parseInt(date.split("-")[0]);
+                int month = Integer.parseInt(date.split("-")[1]);
+                Log.d(TAG, "month: " + month);
+
+                if(month == 1) {
+                    month = 12;
+                    year = year-1;
+                } else {
+                    month = month-1;
+                }
+
+                String m = "" + month;
+                if(m.length() == 1) {
+                    m = "0" + m;
+                }
+
+                keyword = "";
+                date = year + "-" + m;
+                calendar = year + "-" + m;
+                callProjectAPI(keyword, date, calendar);
             }
         });
 
@@ -406,6 +442,42 @@ public class FragmentActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 compactCalendarView.scrollRight();
+
+                int year = Integer.parseInt(date.split("-")[0]);
+                int month = Integer.parseInt(date.split("-")[1]);
+                Log.d(TAG, "month: " + month);
+
+                if(month == 12) {
+                    month = 1;
+                    year = year+1;
+                } else {
+                    month = month+1;
+                }
+
+                String m = "" + month;
+                if(m.length() == 1) {
+                    m = "0" + m;
+                }
+
+                keyword = "";
+                date = year + "-" + m;
+                calendar = year + "-" + m;
+                callProjectAPI(keyword, date, calendar);
+            }
+        });
+
+        inputSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    keyword = v.getText().toString();
+                    date = "";
+                    calendar = "";
+                    Log.d(TAG, "Keyword: " + keyword);
+                    callProjectAPI(keyword, date, calendar);
+                    return true;
+                }
+                return false;
             }
         });
 
@@ -414,9 +486,25 @@ public class FragmentActivity extends Fragment {
             public void onDayClick(Date dateClicked) {
                 List<Event> events = compactCalendarView.getEvents(dateClicked);
                 Log.d(TAG, "Day was clicked: " + dateClicked + " with events " + events);
-                inputSearch.setText("");
+                String[] temp = dateClicked.toString().split(" ");
+                String year = temp[5];
+                String month = "" + (monthENList.indexOf(temp[1])+1);
+                String day = temp[2];
+
+                if(month.length() == 1) {
+                    month = "0" + month;
+                }
+                if(day.length() == 1) {
+                    day = "0" + day;
+                }
+                calendar = year + "-" + month;
+                date = year + "-" + month + "-" + day;
+                keyword = "";
+                Log.d(TAG, "date: " + date);
+                inputSearch.setText(calendar);
                 setCalendarDateFilter(dateClicked);
                 layoutFilterDetail.setVisibility(View.GONE);
+                callProjectAPI(keyword, date, calendar);
             }
 
             @Override
@@ -459,6 +547,70 @@ public class FragmentActivity extends Fragment {
         locationMapView.onLowMemory();
     }
 
+    private void callCalendarAPI() {
+        calendarList = new ArrayList<>();
+
+        calendarAPI = new CalendarAPI();
+        calendarAPI.setListener(new CalendarAPI.CalendarAPIListener() {
+            @Override
+            public void onCalendarAPIPreExecuteConcluded() {
+
+            }
+
+            @Override
+            public void onCalendarAPIPostExecuteConcluded(String result) {
+                try {
+                    JSONObject jObj = new JSONObject(result);
+
+                    JSONObject jObjYear2018 = jObj.optJSONObject("2018");
+                    for(int m=1; m<=12; m++) {
+                        if(jObjYear2018.has("" + m)) {
+                            JSONArray jArrayYear201811 = jObjYear2018.optJSONArray("" + m);
+                            for(int x=0; x<jArrayYear201811.length(); x++) {
+                                String year = jArrayYear201811.optJSONObject(x).optString("year");
+                                String month = jArrayYear201811.optJSONObject(x).optString("month");
+                                String day = jArrayYear201811.optJSONObject(x).optString("day");
+
+                                if(month.length() == 1) {
+                                    month = "0" + month;
+                                }
+                                if(day.length() == 1) {
+                                    day = "0" + day;
+                                }
+                                calendarList.add(year + "-" + month + "-" + day + " 00:00:00");
+                            }
+                        }
+                    }
+
+                    JSONObject jObjYear2019 = jObj.optJSONObject("2019");
+                    for(int m=1; m<=12; m++) {
+                        if(jObjYear2019.has("" + m)) {
+                            JSONArray jArrayYear201911 = jObjYear2019.optJSONArray("" + m);
+                            for(int x=0; x<jArrayYear201911.length(); x++) {
+                                String year = jArrayYear201911.optJSONObject(x).optString("year");
+                                String month = jArrayYear201911.optJSONObject(x).optString("month");
+                                String day = jArrayYear201911.optJSONObject(x).optString("day");
+
+                                if(month.length() == 1) {
+                                    month = "0" + month;
+                                }
+                                if(day.length() == 1) {
+                                    day = "0" + day;
+                                }
+                                calendarList.add(year + "-" + month + "-" + day + " 00:00:00");
+                            }
+                        }
+                    }
+
+                    setCalendarEvent(calendarList);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        calendarAPI.execute("");
+    }
+
     private void callProvinceAPI() {
         provinceAPI = new ProvinceAPI();
         provinceAPI.setListener(new ProvinceAPI.ProvinceAPIListener() {
@@ -498,14 +650,15 @@ public class FragmentActivity extends Fragment {
         provinceAPI.execute("");
     }
     
-    private void callProjectAPI() {
+    private void callProjectAPI(String keyword, String date, String calendar) {
         projectAPI = new ProjectAPI();
         projectAPI.setCategoryID(categoryID);
         projectAPI.setUserID(AppPreference.getInstance(getActivity().getApplicationContext()).getUserID());
-        projectAPI.setLimit("10");
+        projectAPI.setLimit(MyConfiguration.PROJECT_LIMIT_PER_PAGE);
         projectAPI.setOffset("0");
-        //projectAPI.setDate(getDate());
-        projectAPI.setDate("");
+        projectAPI.setCalendar(calendar);
+        projectAPI.setDate(date);
+        projectAPI.setKeyword(keyword);
         projectAPI.setListener(new ProjectAPI.ProjectAPIListener() {
             @Override
             public void onProjectAPIPreExecuteConcluded() {
@@ -522,6 +675,7 @@ public class FragmentActivity extends Fragment {
 
                     Log.d(TAG, "statusDetail: " + statusDetail);
                     if(status == 200) {
+                        clearData();
                         JSONArray jArrayContent = jObj.optJSONArray("content");
                         for(int x=0; x<jArrayContent.length(); x++) {
                             categoryIDList.add("" + jArrayContent.optJSONObject(x).optInt("category_id"));
@@ -590,11 +744,34 @@ public class FragmentActivity extends Fragment {
                 adapter.setCalendarDateList(calendarDateList);
                 adapter.notifyDataSetChanged();
 
-                setCalendarEvent(scheduleDateList);
+                //setCalendarEvent(scheduleDateList);
                 //setActivityMarker();
             }
         });
         projectAPI.execute("");
+    }
+
+    private void clearData() {
+        categoryIDList.clear();
+        idList.clear();
+        //imageCoverList.clear();
+        nameList.clear();
+        dateList.clear();
+        provinceList.clear();
+        placeList.clear();
+        likeList.clear();
+        shortDescriptionList.clear();
+        scheduleDateList.clear();
+        calendarDateList.clear();
+        latitudeList.clear();
+        longitudeList.clear();
+
+        imageCoverMap.clear();
+        imageMap.clear();
+        descriptionMap.clear();
+        youtubeMap.clear();
+        typeIDMap.clear();
+        typeMap.clear();
     }
 
     private String getDate() {
@@ -751,6 +928,32 @@ public class FragmentActivity extends Fragment {
         String month = monthTHList.get(monthENList.indexOf(date[1]));
         int year = Integer.parseInt(date[len-1]) + 543;
         inputSearch.setText(day + " " + month + " " + year);
+    }
+
+    private void setCurrentDate() {
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH) + 1;
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        /*String dtStart = year + "-" + month + "-" + day;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-M-dd");
+        try {
+            Date date = format.parse(dtStart);
+            Log.d(TAG, "setCurrentDate: " + date.toString());
+            compactCalendarView.setCurrentDate(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
+
+        String m = "" + month;
+        if(m.length() == 1) {
+            m = "0" + m;
+        }
+
+        keyword = "";
+        date = year + "-" + m;
+        calendar = year + "-" + m;
     }
 
     private String convertScheduleDateToCalendarDate(String scheduleDate) {

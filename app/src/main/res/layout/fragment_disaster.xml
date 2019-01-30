@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:textColor="@android:color/black"
             android:text="@string/fragment_disaster_txt_title"/>
 
         <th.or.dga.royaljitarsa.customview.SukhumvitEditText
@@ -23,7 +24,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtTitle"
             android:layout_margin="8dp"
-            android:lines="1"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"
+            android:textColor="@android:color/black"
             android:hint="@string/fragment_activity_hint_search"/>
 
         <LinearLayout
@@ -62,6 +66,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="8dp"
                     android:gravity="center"
+                    android:textColor="@android:color/black"
                     android:text="@string/fragment_disaster_btn_map" />
 
             </LinearLayout>
@@ -92,6 +97,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="8dp"
                     android:gravity="center"
+                    android:textColor="@android:color/black"
                     android:text="@string/fragment_disaster_btn_list" />
 
             </LinearLayout>

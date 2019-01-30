@@ -88,16 +88,16 @@ public class FragmentMePost extends Fragment {
             Glide.with(this)
                     .load(R.mipmap.ic_launcher)
                     .apply(fitCenterTransform()
-                            .placeholder(R.drawable.ic_launcher_foreground)
-                            .error(R.drawable.ic_launcher_background)
+                            //.placeholder(R.mipmap.ic_launcher)
+                            //.error(R.mipmap.ic_launcher)
                             .priority(Priority.HIGH))
                     .into(imgProfile);
         } else {
             Glide.with(this)
                     .load(urlImageProfile)
                     .apply(fitCenterTransform()
-                            .placeholder(R.drawable.ic_launcher_foreground)
-                            .error(R.drawable.ic_launcher_background)
+                            //.placeholder(R.mipmap.ic_launcher)
+                            //.error(R.mipmap.ic_launcher)
                             .priority(Priority.HIGH))
                     .into(imgProfile);
         }

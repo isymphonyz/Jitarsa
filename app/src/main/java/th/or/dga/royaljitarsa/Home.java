@@ -45,7 +45,6 @@ import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import th.or.dga.royaljitarsa.customview.SukhumvitEditText;
 import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
 import th.or.dga.royaljitarsa.fragment.FragmentAbout;
@@ -69,6 +68,7 @@ import th.or.dga.royaljitarsa.utils.AppPreference;
 import th.or.dga.royaljitarsa.utils.BottomNavigationViewHelper;
 import th.or.dga.royaljitarsa.utils.FirebaseLogTracking;
 
+import static com.bumptech.glide.request.RequestOptions.circleCropTransform;
 import static com.bumptech.glide.request.RequestOptions.fitCenterTransform;
 
 public class Home extends AppCompatActivity {
@@ -94,7 +94,7 @@ public class Home extends AppCompatActivity {
     private SukhumvitEditText inputSearch;
     private SukhumvitTextView txtVersion;
 
-    private CircleImageView imgProfile;
+    private ImageView imgProfile;
     private SukhumvitTextView txtName;
 
     public FragmentTransaction transaction;
@@ -141,13 +141,13 @@ public class Home extends AppCompatActivity {
         Log.d(TAG, "getLoginStatus: " + appPreference.getLoginStatus());
 
         Menu nav_Menu = navigationView.getMenu();
-        if(appPreference.getLoginStatus() == 200) {
+        /*if(appPreference.getLoginStatus() == 200) {
             nav_Menu.findItem(R.id.menuSignIn).setVisible(false);
             nav_Menu.findItem(R.id.menuSignOut).setVisible(true);
         } else {
             nav_Menu.findItem(R.id.menuSignIn).setVisible(true);
             nav_Menu.findItem(R.id.menuSignOut).setVisible(false);
-        }
+        }*/
 
         initValue();
         setUI();
@@ -206,7 +206,7 @@ public class Home extends AppCompatActivity {
 
         View hView =  navigationView.inflateHeaderView(R.layout.nav_header_main);
         //hView.setVisibility(View.GONE);
-        imgProfile = (CircleImageView) hView.findViewById(R.id.imgProfile);
+        imgProfile = (ImageView) hView.findViewById(R.id.imgProfile);
         txtName = (SukhumvitTextView) hView.findViewById(R.id.txtName);
 
         //Manually displaying the first fragment - one time only
@@ -232,18 +232,18 @@ public class Home extends AppCompatActivity {
         if(urlImageProfile.equals("")) {
             Glide.with(this)
                     .load(R.mipmap.ic_launcher)
-                    .apply(fitCenterTransform()
-                            .placeholder(R.drawable.ic_launcher_foreground)
-                            .error(R.drawable.ic_launcher_background)
-                            .priority(Priority.HIGH))
+                    .apply(circleCropTransform()
+                            //.placeholder(R.mipmap.ic_launcher)
+                            //.error(R.mipmap.ic_launcher)
+                    )
                     .into(imgProfile);
         } else {
             Glide.with(this)
                     .load(urlImageProfile)
-                    .apply(fitCenterTransform()
-                            .placeholder(R.drawable.ic_launcher_foreground)
-                            .error(R.drawable.ic_launcher_background)
-                            .priority(Priority.HIGH))
+                    .apply(circleCropTransform()
+                            //.placeholder(R.mipmap.ic_launcher)
+                            //.error(R.mipmap.ic_launcher)
+                    )
                     .into(imgProfile);
         }
 
@@ -265,7 +265,7 @@ public class Home extends AppCompatActivity {
         //BottomNavigationItemView[] mButtons = getBottomNavigationItemViews();
 
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
-        //menuView.setVisibility(View.GONE);
+        menuView.setVisibility(View.GONE);
     }
     
     private void setListener() {

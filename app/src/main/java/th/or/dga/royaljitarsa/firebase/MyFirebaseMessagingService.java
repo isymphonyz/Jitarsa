@@ -26,6 +26,7 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import th.or.dga.royaljitarsa.LandingPage;
 import th.or.dga.royaljitarsa.R;
+import th.or.dga.royaljitarsa.utils.AppPreference;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
@@ -181,12 +182,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             notificationManager.createNotificationChannel(channel);
         }
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        if(AppPreference.getInstance(this).getSettingNotification()) {
+            notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
 
-        Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        vibe.vibrate(500);
+            Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            vibe.vibrate(500);
 
-        ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, ToneGenerator.MAX_VOLUME);
-        toneG.startTone(ToneGenerator.TONE_CDMA_HIGH_L, 3000);
+            ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, ToneGenerator.MAX_VOLUME);
+            toneG.startTone(ToneGenerator.TONE_CDMA_HIGH_L, 3000);
+        }
     }
 }
