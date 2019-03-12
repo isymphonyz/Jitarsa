@@ -96,6 +96,7 @@ public class FragmentDisaster extends Fragment {
     private ArrayList<String> latitudeList;
     private ArrayList<String> longitudeList;
     private ArrayList<String> descriptionList;
+    private ArrayList<String> publicLinkList;
 
     private ArrayList<Marker> markerArray;
 
@@ -157,6 +158,7 @@ public class FragmentDisaster extends Fragment {
         latitudeList = new ArrayList<>();
         longitudeList = new ArrayList<>();
         descriptionList = new ArrayList<>();
+        publicLinkList = new ArrayList<>();
 
         categoryIDList = new ArrayList<>();
         idList = new ArrayList<>();
@@ -296,6 +298,7 @@ public class FragmentDisaster extends Fragment {
                 bundle.putString("name", nameList.get(i));
                 bundle.putString("date", dateList.get(i));
                 bundle.putString("like", likeList.get(i));
+                bundle.putString("publicLink", publicLinkList.get(i));
                 bundle.putStringArrayList("imageList", imageMap.get(idList.get(i)));
                 bundle.putStringArrayList("youtubeList", youtubeMap.get(idList.get(i)));
                 bundle.putStringArrayList("descriptionList", descriptionMap.get(idList.get(i)));
@@ -375,6 +378,7 @@ public class FragmentDisaster extends Fragment {
                             categoryIDList.add("" + jArrayContent.optJSONObject(x).optInt("category_id"));
                             idList.add("" + jArrayContent.optJSONObject(x).optInt("id"));
                             shortDescriptionList.add(jArrayContent.optJSONObject(x).optString("short_description"));
+                            publicLinkList.add(jArrayContent.optJSONObject(x).optString("public_link"));
 
                             ArrayList<String> imageCoverList = new ArrayList<>();
                             JSONArray jArrayImageCover = jArrayContent.optJSONObject(x).optJSONArray("image_cover");
@@ -448,6 +452,7 @@ public class FragmentDisaster extends Fragment {
         shortDescriptionList.clear();
         latitudeList.clear();
         longitudeList.clear();
+        publicLinkList.clear();
 
         imageCoverMap.clear();
         imageMap.clear();
@@ -512,6 +517,7 @@ public class FragmentDisaster extends Fragment {
                 bundle.putString("name", nameList.get(i));
                 bundle.putString("date", dateList.get(i));
                 bundle.putString("like", likeList.get(i));
+                bundle.putString("publicLink", publicLinkList.get(i));
                 bundle.putStringArrayList("imageList", imageMap.get(idList.get(i)));
                 bundle.putStringArrayList("youtubeList", youtubeMap.get(idList.get(i)));
                 bundle.putStringArrayList("descriptionList", descriptionMap.get(idList.get(i)));

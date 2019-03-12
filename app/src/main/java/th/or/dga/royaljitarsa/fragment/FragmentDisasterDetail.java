@@ -2,6 +2,7 @@ package th.or.dga.royaljitarsa.fragment;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,6 +32,7 @@ public class FragmentDisasterDetail extends Fragment {
     private SukhumvitTextView txtLike;
     private SukhumvitTextView btnShare;
     private ImageView btnSave;
+    private SukhumvitTextView btnPublicLink;
     private LinearLayout layoutLike;
     private LinearLayout.LayoutParams params;
 
@@ -39,6 +41,7 @@ public class FragmentDisasterDetail extends Fragment {
     private String date = "";
     private String description = "";
     private String like = "";
+    private String publicLink = "";
 
     private int margin8dp = 0;
 
@@ -79,6 +82,7 @@ public class FragmentDisasterDetail extends Fragment {
         date = getArguments().getString("date");
         description = getArguments().getString("description");
         like = getArguments().getString("like");
+        publicLink = getArguments().getString("publicLink");
     }
 
     private void initUI(View rootView) {
@@ -91,6 +95,7 @@ public class FragmentDisasterDetail extends Fragment {
         btnShare = (SukhumvitTextView) rootView.findViewById(R.id.btnShare);
         btnSave = (ImageView) rootView.findViewById(R.id.btnSave);
         layoutLike = (LinearLayout) rootView.findViewById(R.id.layoutLike);
+        btnPublicLink = (SukhumvitTextView) rootView.findViewById(R.id.btnPublicLink);
 
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins(margin8dp, margin8dp, margin8dp, margin8dp);
@@ -114,6 +119,10 @@ public class FragmentDisasterDetail extends Fragment {
             txtDescription.setText(Html.fromHtml(description));
         }
         txtLike.setText(like);
+
+        if(!publicLink.equals("")) {
+            btnPublicLink.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setListener() {
@@ -141,6 +150,16 @@ public class FragmentDisasterDetail extends Fragment {
             @Override
             public void onClick(View view) {
 
+            }
+        });
+
+        btnPublicLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "http://www.example.com";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(publicLink));
+                startActivity(i);
             }
         });
     }

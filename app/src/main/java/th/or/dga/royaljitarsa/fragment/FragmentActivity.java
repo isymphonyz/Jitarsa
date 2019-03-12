@@ -119,6 +119,7 @@ public class FragmentActivity extends Fragment {
     private ArrayList<String> calendarDateList;
     private ArrayList<String> latitudeList;
     private ArrayList<String> longitudeList;
+    private ArrayList<String> publicLinkList;
 
     private HashMap<String, ArrayList<String>> imageCoverMap;
     private HashMap<String, ArrayList<String>> imageMap;
@@ -185,7 +186,7 @@ public class FragmentActivity extends Fragment {
             setCurrentDate();
             callProjectAPI(keyword, date, calendar);
 
-            callCalendarAPI();
+            //callCalendarAPI();
         }
 
         return rootView;
@@ -221,6 +222,8 @@ public class FragmentActivity extends Fragment {
         calendarDateList = new ArrayList<>();
         latitudeList = new ArrayList<>();
         longitudeList = new ArrayList<>();
+        publicLinkList = new ArrayList<>();
+        calendarList = new ArrayList<>();
 
         imageCoverMap = new HashMap<>();
         imageMap = new HashMap<>();
@@ -329,6 +332,8 @@ public class FragmentActivity extends Fragment {
         compactCalendarView.setFirstDayOfWeek(Calendar.SUNDAY);
         setTextCalendarDate(compactCalendarView.getFirstDayOfCurrentMonth());
         compactCalendarView.setDayColumnNames(dayColumnNames);
+
+        layoutFilterDetail.setVisibility(View.VISIBLE);
     }
 
     private void setListener() {
@@ -350,6 +355,7 @@ public class FragmentActivity extends Fragment {
                 bundle.putString("name", nameList.get(i));
                 bundle.putString("date", dateList.get(i));
                 bundle.putString("like", likeList.get(i));
+                bundle.putString("publicLink", publicLinkList.get(i));
                 bundle.putStringArrayList("imageList", imageMap.get(idList.get(i)));
                 bundle.putStringArrayList("youtubeList", youtubeMap.get(idList.get(i)));
                 bundle.putStringArrayList("descriptionList", descriptionMap.get(idList.get(i)));
@@ -471,8 +477,7 @@ public class FragmentActivity extends Fragment {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     keyword = v.getText().toString();
-                    date = "";
-                    calendar = "";
+                    setCurrentDate();
                     Log.d(TAG, "Keyword: " + keyword);
                     callProjectAPI(keyword, date, calendar);
                     return true;
@@ -662,7 +667,12 @@ public class FragmentActivity extends Fragment {
         projectAPI.setListener(new ProjectAPI.ProjectAPIListener() {
             @Override
             public void onProjectAPIPreExecuteConcluded() {
-                progressBar.setVisibility(View.VISIBLE);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setVisibility(View.VISIBLE);
+                    }
+                });
             }
 
             @Override
@@ -670,6 +680,17 @@ public class FragmentActivity extends Fragment {
                 progressBar.setVisibility(View.GONE);
                 try {
                     JSONObject jObj = new JSONObject(result);
+
+                    calendarList.clear();
+                    JSONArray jArrayCalendar = jObj.optJSONArray("calendar");
+                    for(int x=0; x<jArrayCalendar.length(); x++) {
+                        Log.d(TAG, "Calendar " + x + ": " + jArrayCalendar.optString(x));
+                        calendarList.add(jArrayCalendar.optString(x) + " 00:00:00");
+                        //calendarList.add(jArrayCalendar.optString(x));
+                    }
+                    Log.d(TAG, "calendarList.size(): " + calendarList.size());
+                    setCalendarEvent(calendarList);
+
                     int status = jObj.optInt("status");
                     String statusDetail = jObj.optString("status_detail");
 
@@ -690,6 +711,7 @@ public class FragmentActivity extends Fragment {
                             calendarDateList.add(convertScheduleDateToCalendarDate(jArrayContent.optJSONObject(x).optString("start_date")));
                             latitudeList.add(jArrayContent.optJSONObject(x).optString("latitude"));
                             longitudeList.add(jArrayContent.optJSONObject(x).optString("longitude"));
+                            publicLinkList.add(jArrayContent.optJSONObject(x).optString("public_link"));
 
                             ArrayList<String> imageCoverList = new ArrayList<>();
                             JSONArray jArrayImageCover = jArrayContent.optJSONObject(x).optJSONArray("image_cover");
@@ -765,6 +787,8 @@ public class FragmentActivity extends Fragment {
         calendarDateList.clear();
         latitudeList.clear();
         longitudeList.clear();
+        publicLinkList.clear();
+        calendarList.clear();
 
         imageCoverMap.clear();
         imageMap.clear();

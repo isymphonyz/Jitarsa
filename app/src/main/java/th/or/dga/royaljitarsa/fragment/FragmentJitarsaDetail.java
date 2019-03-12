@@ -1,7 +1,9 @@
 package th.or.dga.royaljitarsa.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -49,6 +51,7 @@ public class FragmentJitarsaDetail extends Fragment {
     private SukhumvitTextView txtName;
     private SukhumvitTextView txtDate;
     private SukhumvitTextView txtDescription;
+    private SukhumvitTextView btnPublicLink;
     private LinearLayout.LayoutParams params;
 
     private ArrayList<String> imageList;
@@ -66,6 +69,7 @@ public class FragmentJitarsaDetail extends Fragment {
     private String date = "";
     private String description = "";
     private String like = "";
+    private String publicLink = "";
 
     private int margin8dp = 0;
 
@@ -112,6 +116,7 @@ public class FragmentJitarsaDetail extends Fragment {
         name = getArguments().getString("name");
         date = getArguments().getString("date");
         like = getArguments().getString("like");
+        publicLink = getArguments().getString("publicLink");
 
         typeIDList = getArguments().getIntegerArrayList("typeIDList");
         typeList = getArguments().getStringArrayList("typeList");
@@ -128,6 +133,7 @@ public class FragmentJitarsaDetail extends Fragment {
         txtName = (SukhumvitTextView) rootView.findViewById(R.id.txtName);
         txtDate = (SukhumvitTextView) rootView.findViewById(R.id.txtDate);
         txtDescription = (SukhumvitTextView) rootView.findViewById(R.id.txtDescription);
+        btnPublicLink = (SukhumvitTextView) rootView.findViewById(R.id.btnPublicLink);
 
         params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins(margin8dp, margin8dp, margin8dp, margin8dp);
@@ -175,10 +181,22 @@ public class FragmentJitarsaDetail extends Fragment {
                 Log.d(TAG, "layoutContent.addView(textView);");
             }
         }
+
+        if(!publicLink.equals("")) {
+            btnPublicLink.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setListener() {
-
+        btnPublicLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "http://www.example.com";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(publicLink));
+                startActivity(i);
+            }
+        });
     }
 
     private String getDate() {

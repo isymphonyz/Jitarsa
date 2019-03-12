@@ -57,7 +57,7 @@
     <string name="login_txt_forget_password">คุณลืมรหัสผ่าน?</string>
     <string name="login_txt_register">สมัครสมาชิกใหม่</string>
 
-    <!-- Forget & hange Password -->
+    <!-- Forget Password -->
     <string name="forget_password_txt_forget_title">ลืมรหัสผ่าน</string>
     <string name="forget_password_txt_title">เปลี่ยนรหัสผ่าน</string>
     <string name="forget_password_hint_email"><font size="12">อีเมลหรือเบอร์โทรศัพท์</font></string>
@@ -129,6 +129,7 @@
     <string name="fragment_setting_txt_follow_2_km">2 กิโลเมตร</string>
 
     <!-- Fragment Home -->
+    <string name="fragment_home_txt_title">หน้าแรก</string>
     <string name="fragment_home_txt_all_post">โพสต์ทั้งหมด</string>
     <string name="fragment_home_txt_friend_post">โพสต์ของเพื่อน</string>
 
@@ -152,6 +153,7 @@
     <!-- Fragment Activity Detail -->
     <string name="fragment_activity_detail_txt_title">กิจกรรม</string>
     <string name="fragment_activity_detail_btn_description">อ่านรายละเอียด</string>
+    <string name="fragment_activity_detail_btn_go_to_website">อ่านต่อที่เวปไซต์</string>
 
     <!-- Fragment News -->
     <string name="fragment_news_txt_title">คลังข่าวสาร</string>
@@ -219,6 +221,7 @@
     <string name="fragment_me_friend_txt_image">ภาพ</string>
 
     <!-- Dialog -->
+    <string name="dialog_logout_txt_exit">คุณต้องการออกจากโปรแกรม</string>
     <string name="dialog_logout_txt_title">คุณต้องการออกจากระบบ?</string>
     <string name="dialog_logout_btn_confirm">ยืนยัน</string>
     <string name="dialog_logout_btn_cancel">ยกเลิก</string>

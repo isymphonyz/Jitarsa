@@ -30,6 +30,7 @@ import java.util.ArrayList;
 
 import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
 import th.or.dga.royaljitarsa.utils.AppPreference;
+import th.or.dga.royaljitarsa.utils.MyConfiguration;
 
 public class LandingPage extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener  {
 
@@ -75,6 +76,10 @@ public class LandingPage extends AppCompatActivity implements BaseSliderView.OnS
         AppPreference.getInstance(this).setScreenHeight(height);
 
         firebaseSubscriptTopic();
+        if(MyConfiguration.DOMAIN.equals("https://apps.royaljitarsa.com/")) {
+            firebaseUnSubscribeTopic();
+        }
+
         initUI();
         initValue();
         setListener();
@@ -94,7 +99,7 @@ public class LandingPage extends AppCompatActivity implements BaseSliderView.OnS
                     }
                 });
 
-        /*FirebaseMessaging.getInstance().subscribeToTopic(getText(R.string.firebase_messaging_subscribe_topic_testandroid).toString())
+        FirebaseMessaging.getInstance().subscribeToTopic(getText(R.string.firebase_messaging_subscribe_topic_testandroid).toString())
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -104,7 +109,11 @@ public class LandingPage extends AppCompatActivity implements BaseSliderView.OnS
                         }
                         Log.d(TAG, msg);
                     }
-                });*/
+                });
+    }
+
+    private void firebaseUnSubscribeTopic() {
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(getText(R.string.firebase_messaging_subscribe_topic_testandroid).toString());
     }
 
     private void initValue() {

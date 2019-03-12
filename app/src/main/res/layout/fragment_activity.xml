@@ -96,7 +96,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <th.or.dga.royaljitarsa.customview.SukhumvitTextView
                         android:id="@+id/btnCalendar"
@@ -104,8 +104,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:layout_weight="1"
-                        android:layout_gravity="center_vertical|left"
-                        android:gravity="center_vertical|left"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
                         android:text="@string/fragment_activity_filter_btn_calendar"
                         android:textColor="@android:color/black"
                         android:textSize="6sp"/>
@@ -120,7 +120,8 @@
                         android:gravity="center"
                         android:text="@string/fragment_activity_filter_btn_location"
                         android:textColor="@android:color/black"
-                        android:textSize="6sp"/>
+                        android:textSize="6sp"
+                        android:visibility="gone"/>
 
                     <th.or.dga.royaljitarsa.customview.SukhumvitTextView
                         android:id="@+id/btnProvince"
@@ -128,8 +129,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:layout_weight="1"
-                        android:layout_gravity="center_vertical|right"
-                        android:gravity="center_vertical|right"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
                         android:text="@string/fragment_activity_filter_btn_province"
                         android:textColor="@android:color/black"
                         android:textSize="6sp"/>

@@ -1,6 +1,7 @@
 package th.or.dga.royaljitarsa;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -55,6 +56,7 @@ import th.or.dga.royaljitarsa.fragment.FragmentDisaster;
 import th.or.dga.royaljitarsa.fragment.FragmentHome;
 import th.or.dga.royaljitarsa.fragment.FragmentHowToPlay;
 import th.or.dga.royaljitarsa.fragment.FragmentJitarsa;
+import th.or.dga.royaljitarsa.fragment.FragmentJitarsaV2;
 import th.or.dga.royaljitarsa.fragment.FragmentMe;
 import th.or.dga.royaljitarsa.fragment.FragmentMePost;
 import th.or.dga.royaljitarsa.fragment.FragmentNews;
@@ -130,7 +132,9 @@ public class Home extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-            finish();
+            //finish();
+            displayFragment(FragmentHome.newInstance());
+            exitDialog();
         }
     }
 
@@ -291,7 +295,7 @@ public class Home extends AppCompatActivity {
                                 return true;
                                 //break;
                             case R.id.menuVolunteer:
-                                selectedFragment = FragmentJitarsa.newInstance();
+                                selectedFragment = FragmentJitarsaV2.newInstance();
                                 isCallFragment = true;
                                 break;
                             case R.id.menuInformation:
@@ -646,5 +650,32 @@ public class Home extends AppCompatActivity {
                 dialog.dismiss();
             }
         }).show();
+    }
+
+    private void exitDialog() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_confirm);
+
+        final TextView txtTitle = (TextView) dialog.findViewById(R.id.txtTitle);
+        final TextView btnCancel = (TextView) dialog.findViewById(R.id.btnCancel);
+        final TextView btnOK = (TextView) dialog.findViewById(R.id.btnOK);
+
+        txtTitle.setText(getText(R.string.dialog_logout_txt_exit).toString());
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        dialog.show();
     }
 }

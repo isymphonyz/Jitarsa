@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LandingPage"
+    android:background="@mipmap/bg_impress">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:background="@mipmap/bg_impress">
+
+            <TextView
+                android:id="@+id/txtJitarsa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:fontFamily="@font/sukhumvitset"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:text="@string/txt_jitarsa"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:src="@mipmap/head_impress"/>
+
+            <!-- <TextView
+                android:id="@+id/btnHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:fontFamily="@font/sukhumvitset"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:text="@string/txt_jitarsa"
+                android:background="@mipmap/bg_menu_impress"/>
+
+            <TextView
+                android:id="@+id/btnSuggest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:fontFamily="@font/sukhumvitset"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:text="@string/txt_jitarsa"
+                android:background="@mipmap/bg_menu_impress"/>
+
+            <TextView
+                android:id="@+id/btnProperty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:fontFamily="@font/sukhumvitset"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:text="@string/txt_jitarsa"
+                android:background="@mipmap/bg_menu_impress"/>
+
+            <TextView
+                android:id="@+id/btnSchool"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:fontFamily="@font/sukhumvitset"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:text="@string/txt_jitarsa"
+                android:background="@mipmap/bg_menu_impress"/>
+
+            <TextView
+                android:id="@+id/btnKing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:fontFamily="@font/sukhumvitset"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:text="@string/txt_jitarsa"
+                android:background="@mipmap/bg_menu_impress"/>
+
+            <TextView
+                android:id="@+id/btnImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:fontFamily="@font/sukhumvitset"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:text="@string/txt_jitarsa"
+                android:background="@mipmap/bg_menu_impress"/> -->
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:indeterminate="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

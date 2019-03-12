@@ -1,20 +1,25 @@
 package th.or.dga.royaljitarsa.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.vision.text.Line;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.json.JSONArray;
@@ -26,21 +31,27 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 import th.or.dga.royaljitarsa.R;
-import th.or.dga.royaljitarsa.adapter.FragmentNewsListAdapter;
+import th.or.dga.royaljitarsa.adapter.FragmentJitarsaListAdapter;
 import th.or.dga.royaljitarsa.connection.ProjectAPI;
+import th.or.dga.royaljitarsa.customview.SukhumvitTextView;
 import th.or.dga.royaljitarsa.utils.AppPreference;
 import th.or.dga.royaljitarsa.utils.FirebaseLogTracking;
 import th.or.dga.royaljitarsa.utils.MyConfiguration;
+import th.or.dga.royaljitarsa.utils.Utils;
 
-public class FragmentNews extends Fragment {
+public class FragmentJitarsaV2 extends Fragment {
 
-    private String TAG = FragmentNews.this.getClass().getSimpleName();
+    private String TAG = FragmentJitarsaV2.this.getClass().getSimpleName();
 
     private ProgressBar progressBar;
-    private ListView listView;
-    private FragmentNewsListAdapter adapter;
-    private ImageView imgUp;
-    private ImageView imgDown;
+    private LinearLayout layout;
+    private TextView btnHistory;
+    private TextView btnSuggest;
+    private TextView btnProperty;
+    private TextView btnSchool;
+    private TextView btnKing;
+    private TextView btnImage;
+    private LinearLayout.LayoutParams params;
 
     private ArrayList<String> categoryIDList;
     private ArrayList<String> idList;
@@ -59,14 +70,18 @@ public class FragmentNews extends Fragment {
     private HashMap<String, ArrayList<String>> youtubeMap;
     private HashMap<String, ArrayList<String>> typeMap;
     private HashMap<String, ArrayList<Integer>> typeIDMap;
-    
+
     private ProjectAPI projectAPI;
-    private String categoryID = MyConfiguration.CATEGORY_NEWS_ID;
+    private String categoryID = MyConfiguration.CATEGORY_JITARSA_ID;
     private String keyword = "";
     private String date = "";
 
-    public static FragmentNews newInstance() {
-        FragmentNews fragment = new FragmentNews();
+    private Utils utils;
+    private int dpTopx4 = 0;
+    private int dpTopx16 = 0;
+
+    public static FragmentJitarsaV2 newInstance() {
+        FragmentJitarsaV2 fragment = new FragmentJitarsaV2();
         return fragment;
     }
 
@@ -76,7 +91,7 @@ public class FragmentNews extends Fragment {
         //View rootView = inflater.inflate(R.layout.fragment_news, container, false);
 
         if(rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_news, container, false);
+            rootView = inflater.inflate(R.layout.jitarsa, container, false);
 
             addLog();
             initValue();
@@ -93,10 +108,14 @@ public class FragmentNews extends Fragment {
     private void addLog() {
         FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
         FirebaseLogTracking firebaseLogTracking = new FirebaseLogTracking(mFirebaseAnalytics);
-        firebaseLogTracking.addLogActivity(getText(R.string.log_param_news).toString());
+        firebaseLogTracking.addLogActivity(getText(R.string.log_param_jitarsa).toString());
     }
 
     private void initValue() {
+        utils = new Utils(getActivity());
+        dpTopx4 = utils.convertDpToPx(4);
+        dpTopx16 = utils.convertDpToPx(16);
+
         categoryIDList = new ArrayList<>();
         idList = new ArrayList<>();
         //imageCoverList = new ArrayList<>();
@@ -118,70 +137,67 @@ public class FragmentNews extends Fragment {
 
     private void initUI(View rootView) {
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
-        listView = (ListView) rootView.findViewById(R.id.listView);
-        adapter = new FragmentNewsListAdapter(getActivity());
-        imgUp = (ImageView) rootView.findViewById(R.id.imgUp);
-        imgDown = (ImageView) rootView.findViewById(R.id.imgDown);
+        layout = (LinearLayout) rootView.findViewById(R.id.layout);
+        /*btnHistory = (TextView) rootView.findViewById(R.id.btnHistory);
+        btnSuggest = (TextView) rootView.findViewById(R.id.btnSuggest);
+        btnProperty = (TextView) rootView.findViewById(R.id.btnProperty);
+        btnSchool = (TextView) rootView.findViewById(R.id.btnSchool);
+        btnKing = (TextView) rootView.findViewById(R.id.btnKing);
+        btnImage = (TextView) rootView.findViewById(R.id.btnImage);*/
+
+        params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(dpTopx4, dpTopx4, dpTopx4, dpTopx4);
     }
 
     private void setUI() {
-        adapter.setFragment(this);
-        adapter.setCategoryIDList(categoryIDList);
-        adapter.setIDList(idList);
-        adapter.setImageMap(imageMap);
-        adapter.setImageCoverMap(imageCoverMap);
-        //adapter.setImageList(imageCoverList);
-        adapter.setNameList(nameList);
-        adapter.setDateList(dateList);
-        adapter.setDescriptionList(shortDescriptionList);
-        adapter.setLikeList(likeList);
 
-        listView.setAdapter(adapter);
     }
 
     private void setListener() {
-        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-            }
-
+        /*btnHistory.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if(totalItemCount != listView.getLastVisiblePosition() + 1){
-                    //imgUp.setVisibility(View.GONE);
-                    //imgDown.setVisibility(View.VISIBLE);
-                }else{
-                    //imgUp.setVisibility(View.VISIBLE);
-                    //imgDown.setVisibility(View.GONE);
-                }
+            public void onClick(View v) {
+
             }
         });
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        btnSuggest.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Bundle bundle = new Bundle();
-                bundle.putString("title", getText(R.string.fragment_news_txt_title).toString());
-                bundle.putString("name", nameList.get(i));
-                bundle.putString("date", dateList.get(i));
-                bundle.putString("like", likeList.get(i));
-                bundle.putString("publicLink", publicLinkList.get(i));
-                bundle.putStringArrayList("imageList", imageMap.get(idList.get(i)));
-                bundle.putStringArrayList("youtubeList", youtubeMap.get(idList.get(i)));
-                bundle.putStringArrayList("descriptionList", descriptionMap.get(idList.get(i)));
-                bundle.putIntegerArrayList("typeIDList", typeIDMap.get(idList.get(i)));
-                bundle.putStringArrayList("typeList", typeMap.get(idList.get(i)));
-                //displayFragment(FragmentSearch.newInstance(bundle));
+            public void onClick(View v) {
 
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, FragmentActivityDetail.newInstance(bundle));
-                transaction.addToBackStack(null);
-                transaction.commit();
             }
         });
+
+        btnProperty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnSchool.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnKing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });*/
     }
-    
+
     private void callProjectAPI(String keyword, String date) {
         projectAPI = new ProjectAPI();
         projectAPI.setCategoryID(categoryID);
@@ -255,7 +271,7 @@ public class FragmentNews extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                adapter.notifyDataSetChanged();
+                createButton();
             }
         });
         projectAPI.execute("");
@@ -289,10 +305,39 @@ public class FragmentNews extends Fragment {
         return date;
     }
 
-    public void goToDetail(int i) {
-        listView.performItemClick(
-                listView.getAdapter().getView(i, null, null),
-                i,
-                listView.getAdapter().getItemId(i));
+    private void createButton() {
+        for(int x=0; x<nameList.size(); x++) {
+            SukhumvitTextView btn = new SukhumvitTextView(getActivity());
+            btn.setLayoutParams(params);
+            btn.setPadding(dpTopx16, dpTopx16, dpTopx16, dpTopx16);
+            btn.setGravity(Gravity.CENTER);
+            btn.setTextColor(Color.WHITE);
+            btn.setText(nameList.get(x));
+            btn.setTag(x);
+            btn.setBackgroundResource(R.mipmap.bg_menu_impress);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("title", getText(R.string.fragment_jitarsa_txt_title).toString());
+                    bundle.putString("name", nameList.get((int)v.getTag()));
+                    bundle.putString("date", dateList.get((int)v.getTag()));
+                    bundle.putString("like", likeList.get((int)v.getTag()));
+                    bundle.putString("publicLink", publicLinkList.get((int)v.getTag()));
+                    bundle.putStringArrayList("imageList", imageMap.get(idList.get((int)v.getTag())));
+                    bundle.putStringArrayList("youtubeList", youtubeMap.get(idList.get((int)v.getTag())));
+                    bundle.putStringArrayList("descriptionList", descriptionMap.get(idList.get((int)v.getTag())));
+                    bundle.putIntegerArrayList("typeIDList", typeIDMap.get(idList.get((int)v.getTag())));
+                    bundle.putStringArrayList("typeList", typeMap.get(idList.get((int)v.getTag())));
+                    //displayFragment(FragmentSearch.newInstance(bundle));
+
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame_layout, FragmentActivityDetail.newInstance(bundle));
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                }
+            });
+            layout.addView(btn);
+        }
     }
 }

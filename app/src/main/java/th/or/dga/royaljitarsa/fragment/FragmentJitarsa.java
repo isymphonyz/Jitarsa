@@ -53,6 +53,7 @@ public class FragmentJitarsa extends Fragment {
     private ArrayList<String> placeList;
     private ArrayList<String> likeList;
     private ArrayList<String> shortDescriptionList;
+    private ArrayList<String> publicLinkList;
 
     private HashMap<String, ArrayList<String>> imageCoverMap;
     private HashMap<String, ArrayList<String>> imageMap;
@@ -107,6 +108,7 @@ public class FragmentJitarsa extends Fragment {
         placeList = new ArrayList<>();
         likeList = new ArrayList<>();
         shortDescriptionList = new ArrayList<>();
+        publicLinkList = new ArrayList<>();
 
         imageCoverMap = new HashMap<>();
         imageMap = new HashMap<>();
@@ -170,6 +172,7 @@ public class FragmentJitarsa extends Fragment {
                 bundle.putString("name", nameList.get(i));
                 bundle.putString("date", dateList.get(i));
                 bundle.putString("like", likeList.get(i));
+                bundle.putString("publicLink", publicLinkList.get(i));
                 bundle.putStringArrayList("imageList", imageMap.get(idList.get(i)));
                 bundle.putStringArrayList("youtubeList", youtubeMap.get(idList.get(i)));
                 bundle.putStringArrayList("descriptionList", descriptionMap.get(idList.get(i)));
@@ -231,6 +234,7 @@ public class FragmentJitarsa extends Fragment {
                             placeList.add(jArrayContent.optJSONObject(x).optString("place"));
                             likeList.add(jArrayContent.optJSONObject(x).optString("like_count"));
                             shortDescriptionList.add(jArrayContent.optJSONObject(x).optString("short_description"));
+                            publicLinkList.add(jArrayContent.optJSONObject(x).optString("public_link"));
 
                             ArrayList<String> imageCoverList = new ArrayList<>();
                             JSONArray jArrayImageCover = jArrayContent.optJSONObject(x).optJSONArray("image_cover");
@@ -285,6 +289,7 @@ public class FragmentJitarsa extends Fragment {
         placeList.clear();
         likeList.clear();
         shortDescriptionList.clear();
+        publicLinkList.clear();
 
         imageCoverMap.clear();
         imageMap.clear();

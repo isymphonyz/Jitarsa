@@ -75,8 +75,12 @@ public class HowToPlay extends AppCompatActivity {
         NUM_PAGES = imageList.size();
 
         extras = getIntent().getExtras();
-        isFromHome = extras.getBoolean("isFromHome");
-        isGallery = extras.getBoolean("isGallery");
+        try {
+            isFromHome = extras.getBoolean("isFromHome");
+            isGallery = extras.getBoolean("isGallery");
+        } catch(Exception e) {
+
+        }
     }
 
     private void initUI() {

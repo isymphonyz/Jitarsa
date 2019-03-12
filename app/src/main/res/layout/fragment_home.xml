@@ -51,11 +51,20 @@
             android:layout_below="@+id/layoutTypePost"
             android:background="@android:color/darker_gray"/>
 
+        <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="16dp"
+            android:textColor="@android:color/black"
+            android:text="@string/fragment_home_txt_title"/>
+
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/line"
+            android:layout_below="@+id/txtTitle"
             android:layout_margin="8dp"
             android:scrollbars="none"
             android:cacheColorHint="@android:color/transparent"

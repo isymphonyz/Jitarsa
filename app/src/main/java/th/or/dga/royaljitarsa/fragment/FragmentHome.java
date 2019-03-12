@@ -39,6 +39,7 @@ public class FragmentHome extends Fragment {
     private ProgressBar progressBar;
     private SukhumvitTextView txtAllPost;
     private SukhumvitTextView txtFriendPost;
+    private SukhumvitTextView txtTitle;
     private ListView listView;
     private FragmentHomeListAdapter adapter;
 
@@ -51,6 +52,7 @@ public class FragmentHome extends Fragment {
     private ArrayList<String> placeList;
     private ArrayList<String> likeList;
     private ArrayList<String> shortDescriptionList;
+    private ArrayList<String> publicLinkList;
 
     private HashMap<String, ArrayList<String>> imageCoverMap;
     private HashMap<String, ArrayList<String>> imageMap;
@@ -104,6 +106,7 @@ public class FragmentHome extends Fragment {
         placeList = new ArrayList<>();
         likeList = new ArrayList<>();
         shortDescriptionList = new ArrayList<>();
+        publicLinkList = new ArrayList<>();
 
         imageCoverMap = new HashMap<>();
         imageMap = new HashMap<>();
@@ -117,11 +120,14 @@ public class FragmentHome extends Fragment {
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         txtAllPost = (SukhumvitTextView) rootView.findViewById(R.id.txtAllPost);
         txtFriendPost = (SukhumvitTextView) rootView.findViewById(R.id.txtFriendPost);
+        txtTitle = (SukhumvitTextView) rootView.findViewById(R.id.txtTitle);
         listView = (ListView) rootView.findViewById(R.id.listView);
         adapter = new FragmentHomeListAdapter(getActivity());
     }
 
     private void setUI() {
+        txtTitle.setText(getText(R.string.fragment_home_txt_title));
+
         adapter.setFragment(this);
         adapter.setCategoryIDList(categoryIDList);
         adapter.setIDList(idList);
@@ -159,6 +165,7 @@ public class FragmentHome extends Fragment {
                 bundle.putString("name", nameList.get(i));
                 bundle.putString("date", dateList.get(i));
                 bundle.putString("like", likeList.get(i));
+                bundle.putString("publicLink", publicLinkList.get(i));
                 bundle.putStringArrayList("imageList", imageMap.get(idList.get(i)));
                 bundle.putStringArrayList("youtubeList", youtubeMap.get(idList.get(i)));
                 bundle.putStringArrayList("descriptionList", descriptionMap.get(idList.get(i)));
@@ -209,6 +216,7 @@ public class FragmentHome extends Fragment {
                             placeList.add(jArrayContent.optJSONObject(x).optString("place"));
                             likeList.add(jArrayContent.optJSONObject(x).optString("like_count"));
                             shortDescriptionList.add(jArrayContent.optJSONObject(x).optString("short_description"));
+                            publicLinkList.add(jArrayContent.optJSONObject(x).optString("public_link"));
 
                             ArrayList<String> imageCoverList = new ArrayList<>();
                             JSONArray jArrayImageCover = jArrayContent.optJSONObject(x).optJSONArray("image_cover");
@@ -263,6 +271,7 @@ public class FragmentHome extends Fragment {
         placeList.clear();
         likeList.clear();
         shortDescriptionList.clear();
+        publicLinkList.clear();
 
         imageCoverMap.clear();
         imageMap.clear();

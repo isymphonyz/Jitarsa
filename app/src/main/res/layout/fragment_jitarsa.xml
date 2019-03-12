@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LandingPage"
-    android:layoutDirection="ltr">
+    android:layoutDirection="ltr"
+    tools:context=".LandingPage">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,8 +16,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:textColor="@android:color/black"
-            android:text="@string/fragment_jitarsa_txt_title"/>
+            android:text="@string/fragment_jitarsa_txt_title"
+            android:textColor="@android:color/black" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -26,67 +26,86 @@
             android:layout_margin="8dp">
 
             <LinearLayout
-                android:id="@+id/layoutContent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txtTitle"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <RelativeLayout
+                <LinearLayout
+                    android:id="@+id/layoutContent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtTitle"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                            android:id="@+id/txtName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="8dp"
+                            android:text="@string/app_name"
+                            android:textColor="@color/colorPrimary" />
+
+                        <ImageView
+                            android:id="@+id/btnSave"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="8dp"
+                            android:adjustViewBounds="true"
+                            android:src="@mipmap/save" />
+
+                    </RelativeLayout>
 
                     <th.or.dga.royaljitarsa.customview.SukhumvitTextView
-                        android:id="@+id/txtName"
+                        android:id="@+id/txtDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:text="@string/app_name"
+                        android:textColor="@android:color/black" />
+
+                    <ImageView
+                        android:id="@+id/img"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/ic_launcher"
+                        android:visibility="gone" />
+
+                    <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                        android:id="@+id/txtDescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="8dp"
                         android:text="@string/app_name"
-                        android:textColor="@color/colorPrimary"/>
+                        android:textColor="@android:color/black"
+                        android:visibility="gone" />
 
-                    <ImageView
-                        android:id="@+id/btnSave"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_margin="8dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:adjustViewBounds="true"
-                        android:src="@mipmap/save"/>
+                </LinearLayout>
 
-                </RelativeLayout>
 
                 <th.or.dga.royaljitarsa.customview.SukhumvitTextView
-                    android:id="@+id/txtDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:textColor="@android:color/black"
-                    android:text="@string/app_name"/>
-
-                <ImageView
-                    android:id="@+id/img"
+                    android:id="@+id/btnPublicLink"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:adjustViewBounds="true"
-                    android:src="@mipmap/ic_launcher"
-                    android:visibility="gone"/>
-
-                <th.or.dga.royaljitarsa.customview.SukhumvitTextView
-                    android:id="@+id/txtDescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="@string/app_name"
+                    android:background="@drawable/radius_blue_corner_white_background"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/fragment_activity_detail_btn_go_to_website"
                     android:textColor="@android:color/black"
-                    android:visibility="gone"/>
-
+                    android:visibility="gone" />
             </LinearLayout>
 
         </ScrollView>

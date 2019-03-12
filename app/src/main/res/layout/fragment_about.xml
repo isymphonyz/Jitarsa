@@ -17,6 +17,15 @@
             android:layout_height="match_parent"
             android:descendantFocusability="afterDescendants">
 
+            <th.or.dga.royaljitarsa.customview.SukhumvitTextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="16dp"
+                android:textColor="@android:color/black"
+                android:text="@string/log_param_about"/>
+
             <LinearLayout
                 android:id="@+id/layout"
                 android:layout_width="match_parent"

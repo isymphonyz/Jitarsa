@@ -169,6 +169,7 @@ public class FragmentSetting extends Fragment {
     private void displayFragment(Fragment selectedFragment) {
         transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, selectedFragment);
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 }
